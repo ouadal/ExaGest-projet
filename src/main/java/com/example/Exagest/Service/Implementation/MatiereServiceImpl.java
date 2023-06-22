@@ -2,11 +2,13 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.MatiereService;
 import com.example.Exagest.entities.Matiere;
+import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.MatiereRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -19,21 +21,32 @@ public class MatiereServiceImpl implements MatiereService {
 
     @Override
     public Matiere addmatiere(Matiere matiere) {
-        return null;
+        return matiereRepository.save(matiere);
     }
 
     @Override
-    public Matiere editmatiere(Long id) {
-        return null;
+    public Matiere editmatiere(Long id,Matiere matiere) {
+        Optional<Matiere> optionalMatiere =matiereRepository.findById(id);
+        if(optionalMatiere.isEmpty()){
+            System.out.println("Matière modifié avec succès");
+        }
+        Matiere dbMatiere = optionalMatiere.get();
+        dbMatiere.setDateAjout(matiere.getDateAjout());
+        dbMatiere.setLibelleMat(matiere.getLibelleMat());
+        dbMatiere.setDateModife(matiere.getDateModife());
+        dbMatiere.setCodeMat(matiere.getCodeMat());
+        dbMatiere.setParametrageExam(matiere.getParametrageExam());
+        return matiereRepository.save(dbMatiere);
     }
 
     @Override
     public String deletematiere(Long id) {
-        return null;
+         matiereRepository.deleteById(id);
+         return "Matière supprimer avec succès";
     }
 
     @Override
     public List<Matiere> listmatiere() {
-        return null;
+        return matiereRepository.findAll();
     }
 }

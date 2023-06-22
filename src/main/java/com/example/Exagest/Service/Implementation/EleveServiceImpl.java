@@ -2,9 +2,11 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.EleveService;
 import com.example.Exagest.entities.Eleve;
+import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.EleveRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EleveServiceImpl implements EleveService {
     private final EleveRepository eleveRepository;
@@ -15,21 +17,34 @@ public class EleveServiceImpl implements EleveService {
 
     @Override
     public Eleve addeleve(Eleve eleve) {
-        return null;
+        return eleveRepository.save(eleve);
     }
 
     @Override
-    public Eleve editeleve(Long id) {
-        return null;
+    public Eleve editeleve(Long id,Eleve eleve) {
+        Optional<Eleve> optionalEleve = eleveRepository.findById(id);
+        if(optionalEleve.isEmpty()){
+            System.out.println("Eleve modifié avec succès");
+        }
+       Eleve dbEleve = optionalEleve.get();
+        dbEleve.setDateAjout(eleve.getDateAjout());
+        dbEleve.setContactParent(eleve.getContactParent());
+        dbEleve.setNom(eleve.getNom());
+        dbEleve.setDate_naissance(eleve.getDate_naissance());
+        dbEleve.setInscription(eleve.getInscription());
+        dbEleve.setPrenom(eleve.getPrenom());
+        dbEleve.setDateModife(eleve.getDateModife());
+        return eleveRepository.save(dbEleve);
     }
 
     @Override
     public String deleteeleve(Long id) {
-        return null;
+        eleveRepository.deleteById(id);
+        return "Eleve supprimer avec succès";
     }
 
     @Override
     public List<Eleve> listeleve() {
-        return null;
+        return eleveRepository.findAll();
     }
 }
