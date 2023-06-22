@@ -19,7 +19,7 @@ public class ParametrageExamenServiceImpl implements ParametrageExamenService{
     }
 
     @Override
-    public ParametrageExam editparamExam(Long id) {
+    public ParametrageExam editparamExam(Long id,ParametrageExam parametrageExam) {
         return null;
     }
 
