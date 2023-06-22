@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ParametrageExamenService {
     ParametrageExam addparamExam(ParametrageExam parametrageExam);
-    ParametrageExam editparamExam( Long id);
+    ParametrageExam editparamExam( Long id,ParametrageExam parametrageExam);
     String deleteparamExam(Long id);
     List<ParametrageExam> listparamExam();
 }

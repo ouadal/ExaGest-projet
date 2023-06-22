@@ -15,11 +15,11 @@ public class TypeMatServiceImpl implements TypeMatService {
 
     @Override
     public TypeMat addtypeMat(TypeMat typeMat) {
-        return null;
+        return typeMatRepository.save(typeMat);
     }
 
     @Override
-    public TypeMat edittypeMat(Long id) {
+    public TypeMat edittypeMat(Long id,TypeMat typeMat) {
         return null;
     }
 

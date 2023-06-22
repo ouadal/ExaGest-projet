@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PeriodeService {
    Periode addperiode(Periode periode);
-   Periode editperiode( Long id);
+   Periode editperiode( Long id,Periode periode);
     String deleteperiode(Long id);
     List<Periode> listperiode();
 }

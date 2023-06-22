@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CycleTypeExamenService {
    CycleTypeExamen addcycleTypeExam(CycleTypeExamen cycleTypeExamen);
-    CycleTypeExamen editcycleTypeExam( Long id);
+    CycleTypeExamen editcycleTypeExam( Long id,CycleTypeExamen cycleTypeExamen);
     String deletecycleTypeExam(Long id);
     List<CycleTypeExamen> listcycleTypeExam();
 }

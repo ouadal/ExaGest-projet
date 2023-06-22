@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TypeExamenService {
     TypeExamen addtypeExamen(TypeExamen typeExamen);
-    TypeExamen edittypeExamen( Long id);
+    TypeExamen edittypeExamen( Long id,TypeExamen typeExamen);
     String deletetypeExamen(Long id);
     List<TypeExamen> listtypeExamen();
 }

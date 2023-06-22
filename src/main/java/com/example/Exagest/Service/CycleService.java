@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CycleService {
     Cycle addcycle(Cycle cycle);
-   Cycle editcycle( Long id);
+   Cycle editcycle( Long id,Cycle cycle);
     String deletecycle(Long id);
     List<Cycle> listcycle();
 }

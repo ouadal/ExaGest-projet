@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MatiereService {
     Matiere addmatiere(Matiere matiere);
-    Matiere editmatiere( Long id);
+    Matiere editmatiere( Long id,Matiere matiere);
     String deletematiere(Long id);
     List<Matiere> listmatiere();
 }
