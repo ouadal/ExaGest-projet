@@ -9,4 +9,5 @@ public interface TypeExamenService {
     TypeExamen edittypeExamen( Long id,TypeExamen typeExamen);
     String deletetypeExamen(Long id);
     List<TypeExamen> listtypeExamen();
+    TypeExamen choisirTypeExamen();
 }

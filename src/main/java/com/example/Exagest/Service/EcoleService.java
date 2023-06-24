@@ -9,4 +9,5 @@ public interface EcoleService {
     Ecole editecole( Long id,Ecole ecole);
     String deleteecole(Long id);
     List<Ecole> listecole();
+
 }

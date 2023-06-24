@@ -10,4 +10,6 @@ public interface CycleService {
    Cycle editcycle( Long id,Cycle cycle);
     String deletecycle(Long id);
     List<Cycle> listcycle();
+    Cycle choisirCycle();
+
 }

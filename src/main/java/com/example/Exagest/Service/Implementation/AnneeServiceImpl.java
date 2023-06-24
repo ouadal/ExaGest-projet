@@ -39,13 +39,11 @@ private final AnneeRepository anneeRepository;
        dbAnnee.setDateModife(annee.getDateModife());
         return anneeRepository.save(dbAnnee);
     }
-
     @Override
     public String deleteAnnee(Long id) {
         anneeRepository.deleteById(id);
         return "Annee supprimé avec succès";
     }
-
     @Override
     public List<Annee> listAnnee() {
         return anneeRepository.findAll();
