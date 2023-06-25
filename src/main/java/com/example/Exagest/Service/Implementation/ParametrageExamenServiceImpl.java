@@ -2,7 +2,6 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.ParametrageExamenService;
 import com.example.Exagest.entities.ParametrageExam;
-import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.ParametrageExamRepository;
 
 import java.util.List;

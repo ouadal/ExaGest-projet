@@ -1,6 +1,8 @@
 package com.example.Exagest.entities;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -8,23 +10,29 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "Matiere")
+@Table(name = "paramMatiere")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Matiere implements Serializable {
+public class ParamMatiere implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_matiere")
+    @Column(name = "id_paramMatiere")
     private Long id;
     @Column(nullable = false,length = 50)
-    private String libelleMat;
+    private int nombreCredit;
     @Column(nullable = false,length = 50)
-    private String codeMat;
+    private boolean etat;
+    @Column(nullable = false,length = 50)
+    private int coefficient;
     @Column(nullable = false,length = 50)
     private LocalDate dateAjout;
     @Column(nullable = false,length = 50)
     private LocalDate dateModife;
     @ManyToOne
-    @JoinColumn(name = "idtypeMatiere")
-    private TypeMat typeMat;
+    @JoinColumn(name = "idexamen")
+    private Examen examen;
+    @ManyToOne
+    @JoinColumn(name = "idmatiere")
+    private Matiere matiere;
+
 }

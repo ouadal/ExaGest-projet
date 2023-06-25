@@ -22,5 +22,11 @@ public class CycleTypeExamen implements Serializable {
     private LocalDate dateModife;
     @Column(nullable = false,length = 50)
     private String libelleCycleTypeExam;
+    @ManyToOne
+    @JoinColumn(name = "idcycle")
+    private Cycle cycle;
+    @ManyToOne
+    @JoinColumn(name = "idtypeExamen")
+    private TypeExamen typeExamen;
 
 }

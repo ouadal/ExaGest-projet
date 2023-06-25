@@ -23,4 +23,7 @@ public class Moyenne implements Serializable {
     private LocalDate dateAjout;
     @Column(nullable = false,length = 50)
     private LocalDate dateModife;
+    @ManyToOne
+    @JoinColumn(name = "idnote")
+    private Note note;
 }

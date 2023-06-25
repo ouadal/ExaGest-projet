@@ -26,13 +26,13 @@ public class Examen implements Serializable {
     @JoinColumn(name = "idCycleTypeExam")
     private CycleTypeExamen cycleTypeExamen;
     @ManyToOne
-    @JoinColumn(name = "ideleve")
-    private Eleve eleve;
+    @JoinColumn(name = "idannee")
+    private Annee annee;
     @ManyToOne
-    @JoinColumn(name = "idparamMat")
-    private ParametrageExam parametrageExam;
+    @JoinColumn(name = "idecole")
+    private Ecole ecole;
     @ManyToOne
-    @JoinColumn(name = "idenrollement")
-    private Enrolement enrolement;
+    @JoinColumn(name = "idtypeExamen")
+    private TypeExamen typeExamen;
 
 }

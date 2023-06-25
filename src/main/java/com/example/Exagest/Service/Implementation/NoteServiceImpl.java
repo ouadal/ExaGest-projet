@@ -2,7 +2,6 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.NoteService;
 import com.example.Exagest.entities.Note;
-import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.NoteRepository;
 
 import java.util.List;

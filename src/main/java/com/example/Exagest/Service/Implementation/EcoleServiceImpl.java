@@ -2,7 +2,6 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.EcoleService;
 import com.example.Exagest.entities.Ecole;
-import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.EcoleRepository;
 
 import java.util.List;

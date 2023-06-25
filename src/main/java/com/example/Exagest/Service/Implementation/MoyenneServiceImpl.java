@@ -2,7 +2,6 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.MoyenneService;
 import com.example.Exagest.entities.Moyenne;
-import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.MoyenneRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

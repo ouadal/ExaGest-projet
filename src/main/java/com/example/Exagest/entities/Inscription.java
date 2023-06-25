@@ -26,6 +26,9 @@ public class Inscription implements Serializable {
     @Column(nullable = false,length = 50)
     private LocalDate dateModife;
     @ManyToOne
-    @JoinColumn(name = "idnote")
-    private Note note;
+    @JoinColumn(name = "idenrolement")
+    private Enrolement enrolement;
+    @ManyToOne
+    @JoinColumn(name = "ideleve")
+    private Eleve eleve;
 }

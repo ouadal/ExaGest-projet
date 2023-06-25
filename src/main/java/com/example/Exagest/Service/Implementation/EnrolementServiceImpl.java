@@ -2,7 +2,6 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.EnrolementService;
 import com.example.Exagest.entities.Enrolement;
-import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.EnrolementRepository;
 
 import java.util.List;

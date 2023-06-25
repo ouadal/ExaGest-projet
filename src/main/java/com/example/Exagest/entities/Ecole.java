@@ -34,7 +34,5 @@ public class Ecole implements Serializable {
     private LocalDate dateAjout;
     @Column(nullable = false,length = 50)
     private LocalDate dateModife;
-    @ManyToOne
-    @JoinColumn(name = "idexam")
-    private Examen examen;
+
 }

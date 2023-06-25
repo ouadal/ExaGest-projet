@@ -2,7 +2,6 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.InscriptionService;
 import com.example.Exagest.entities.Inscription;
-import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.InscriptionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

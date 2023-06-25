@@ -24,6 +24,6 @@ public class TypeExamen implements Serializable {
     @Column(nullable = false,length = 50)
     private LocalDate dateModife;
     @ManyToOne
-    @JoinColumn(name = "idCycleTypeExam")
-    private CycleTypeExamen cycleTypeExamen;
+    @JoinColumn(name = "idexamen")
+    private Examen examen;
 }

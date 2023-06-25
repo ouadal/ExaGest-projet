@@ -25,11 +25,5 @@ public class Annee implements Serializable {
     private Date anneeScolaire;
     @Column(nullable = false,length = 50)
     private String libelleAnnee;
-    @ManyToOne
-    @JoinColumn(name = "ideleve")
-    private Eleve eleve;
-    @ManyToOne
-    @JoinColumn(name = "idexamen")
-    private Examen examen;
 
 }

@@ -28,8 +28,11 @@ public class Note implements Serializable {
     private LocalDate dateModife;
     @ManyToOne
     @JoinColumn(name = "idparamMat")
-    private ParametrageExam parametrageExam;
+    private ParamMatiere paramMatiere;
     @ManyToOne
-    @JoinColumn(name = "idmoyenne")
-    private Moyenne moyenne;
+    @JoinColumn(name = "idsection")
+    private Section section;
+    @ManyToOne
+    @JoinColumn(name = "idinscription")
+    private Inscription inscription;
 }

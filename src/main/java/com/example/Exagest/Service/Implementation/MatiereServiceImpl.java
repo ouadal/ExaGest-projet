@@ -2,7 +2,6 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.MatiereService;
 import com.example.Exagest.entities.Matiere;
-import com.example.Exagest.entities.Periode;
 import com.example.Exagest.repository.MatiereRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

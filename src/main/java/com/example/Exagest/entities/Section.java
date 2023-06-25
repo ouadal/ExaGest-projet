@@ -1,7 +1,7 @@
 package com.example.Exagest.entities;
 import jakarta.persistence.*;
 import lombok.*;
-import java.io.Serial;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Periode implements Serializable {
+public class Section implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_periode")
     private Long id;

@@ -18,13 +18,13 @@ public class Eleve implements Serializable {
     private String Prenom;
     @Column(nullable = false)
     private Date date_naissance;
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false,length = 50,unique = true)
     private int contactParent;
     @Column(nullable = false,length = 50)
     private LocalDate dateAjout;
     @Column(nullable = false,length = 50)
     private LocalDate dateModife;
     @ManyToOne
-    @JoinColumn(name = "idinscription")
-    private Inscription inscription;
+    @JoinColumn(name = "idannee")
+    private Annee annee;
 }
