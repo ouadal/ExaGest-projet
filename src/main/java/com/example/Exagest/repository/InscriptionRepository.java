@@ -18,7 +18,7 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long> 
     @Query("SELECT i FROM Inscription i ORDER BY i.eleve.nom ")
     List<Inscription> listElev();
 
-    @Query("select i from Inscription i orderBy e.ecole.nomEcole ")
+    @Query("SELECT i FROM Inscription i ORDER BY i.ecole.nomEcole ")
     List<Inscription> listEcol();
 
 }

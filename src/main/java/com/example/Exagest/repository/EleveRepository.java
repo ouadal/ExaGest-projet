@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface EleveRepository extends JpaRepository<Eleve, Long>  {
-    @Query("SELECT e FROM Eleve e oORDER BY e.nom ")
+    @Query("SELECT e FROM Eleve e ORDER BY e.nom ")
     List<Eleve> listNom();
 }

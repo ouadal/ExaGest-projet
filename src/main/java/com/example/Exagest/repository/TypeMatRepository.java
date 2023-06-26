@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TypeMatRepository extends JpaRepository<TypeMat, Long>  {
-    @Query("SELECT t FROM typeMat t ORDER BY t.libele")
+    @Query("SELECT t FROM TypeMat t ORDER BY t.libele")
     List<TypeMat> listtypeMatLib();
 }

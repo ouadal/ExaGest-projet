@@ -31,7 +31,7 @@ public class SessionServiceImpl implements SessionService {
             System.out.println("Section modifié avec succès");
         }
         Session dbSession = optionalSession.get();
-        dbSession.setLibelle(session.getLibelle());
+        dbSession.setLibele(session.getLibele());
         return sessionRepository.save(dbSession);
 
     }

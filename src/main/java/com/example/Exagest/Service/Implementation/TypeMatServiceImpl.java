@@ -30,7 +30,7 @@ public class TypeMatServiceImpl implements TypeMatService {
             System.out.println("TypeMatiere modifié avec succès");
         }
         TypeMat dbTypeMat = optionalTypeMat.get();
-        dbTypeMat.setLibelle(typeMat.getLibelle());
+        dbTypeMat.setLibele(typeMat.getLibele());
         return typeMatRepository.save(dbTypeMat);
 
     }

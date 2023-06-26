@@ -11,6 +11,6 @@ public interface EnrolementRepository extends JpaRepository<Enrolement, Long>  {
     @Query("SELECT e FROM Enrolement e ORDER BY e.examen.libele ")
     List<Enrolement> listExamen();
 
-    @Query("select e from Enrolement e orderBy e.ecole.nomEcole ")
+    @Query("select e from Enrolement e ORDER BY e.ecole.nomEcole ")
     List<Enrolement> listEcol();
 }
