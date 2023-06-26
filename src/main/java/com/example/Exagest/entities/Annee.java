@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-@Table(name = "annee")
+@Table(name = "Annee")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Annee implements Serializable {

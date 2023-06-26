@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "cycleTypeExamen")
+@Table(name = "CycleTypeExamen")
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -18,12 +18,6 @@ public class CycleTypeExamen implements Serializable {
     @Column(name = "id_CycleTypeExamen")
     private Long id;
 
-    @Column(nullable = false)
-    private LocalDate addDate;
-
-    @Column(nullable = false)
-    private LocalDate updateDate;
-
     @ManyToOne
     @JoinColumn(name = "idcycle")
     private Cycle cycle;
@@ -31,6 +25,12 @@ public class CycleTypeExamen implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idtypeExamen")
     private TypeExamen typeExamen;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
 
 
 

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "attributionMat")
+@Table(name = "AttributionMat")
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -20,12 +20,6 @@ public class AttributionMatiere implements Serializable {
 
     @Column(name = "id_attributionMat")
     private Long id;
-
-    @Column(nullable = false)
-    private LocalDate updateDate;
-
-    @Column(nullable = false)
-    private LocalDate addDate;
 
     @Column(nullable = false,length = 100)
     private int coefficient;
@@ -41,6 +35,12 @@ public class AttributionMatiere implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idexamen")
     private Examen examen;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
 
 
 

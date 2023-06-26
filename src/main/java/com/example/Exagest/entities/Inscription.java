@@ -21,12 +21,6 @@ public class Inscription implements Serializable {
     @Column(nullable = false)
     private boolean statut;
 
-    @Column(nullable = false)
-    private LocalDate addDate;
-
-    @Column(nullable = false)
-    private LocalDate updateDate;
-
     @ManyToOne
     @JoinColumn(name = "idenrolement")
     private Enrolement enrolement;
@@ -42,4 +36,10 @@ public class Inscription implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idecole")
     private Ecole ecole;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
 }

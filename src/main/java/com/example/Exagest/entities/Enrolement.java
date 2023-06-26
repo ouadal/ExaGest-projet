@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-@Table(name = "enrolement")
+@Table(name = "Enrolement")
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -19,12 +19,6 @@ public class Enrolement implements Serializable {
     @Column(name = "id_enrolement")
     private Long id;
 
-    @Column(nullable = false)
-    private LocalDate addDate;
-
-    @Column(nullable = false)
-    private LocalDate updateDate;
-
     @ManyToOne
     @JoinColumn(name = "idexamen")
     private Examen examen;
@@ -33,9 +27,11 @@ public class Enrolement implements Serializable {
     @JoinColumn(name = "idecole")
     private Ecole ecole;
 
+    @Column(nullable = false)
+    private LocalDate addDate;
 
-
-
+    @Column(nullable = false)
+    private LocalDate updateDate;
 
 
 }

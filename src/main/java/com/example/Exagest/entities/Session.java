@@ -9,14 +9,14 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "section")
+@Table(name = "Session")
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class Session implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_section")
+    @Column(name = "id_session")
     private Long id;
 
     @Column(nullable = false,length = 100)

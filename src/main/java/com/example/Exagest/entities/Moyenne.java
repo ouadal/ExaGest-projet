@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "moyenne")
+@Table(name = "Moyenne")
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -17,12 +17,6 @@ public class Moyenne implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Moyenne")
     private Long id;
-
-    @Column(nullable = false)
-    private LocalDate updateDate;
-
-    @Column(nullable = false)
-    private LocalDate addDate;
 
     @ManyToOne
     @JoinColumn(name = "idinscription")
@@ -35,5 +29,11 @@ public class Moyenne implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idsession")
     private Session session;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
 
 }

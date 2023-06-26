@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "examen")
+@Table(name = "Examen")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -20,12 +20,6 @@ public class Examen implements Serializable {
 
     @Column(nullable = false,length = 100)
     private String libele;
-
-    @Column(nullable = false)
-    private LocalDate addDate;
-
-    @Column(nullable = false)
-    private LocalDate updateDate;
 
     @Column(nullable = false)
     private boolean statut;
@@ -41,6 +35,12 @@ public class Examen implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idecole")
     private Ecole ecole;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
 
  
 }

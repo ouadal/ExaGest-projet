@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Setter @Getter @ToString @Table(name = "eleve")
+@Setter @Getter @ToString @Table(name = "Eleve")
 @NoArgsConstructor @AllArgsConstructor
 public class Eleve implements Serializable {
     @Id
@@ -18,7 +18,7 @@ public class Eleve implements Serializable {
     private String nom;
 
     @Column(nullable = false,length = 100)
-    private String Prenom;
+    private String prenom;
     @Column(nullable = false)
     private Date date_naissance;
 

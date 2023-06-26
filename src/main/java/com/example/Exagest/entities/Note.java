@@ -17,18 +17,11 @@ public class Note implements Serializable {
     @Column(name = "id_note")
     private Long id;
 
-    @Column(length = 100,nullable = false)
-    private float noteExam;
-
     @Column(nullable = false)
     private boolean statut;
 
-    @Column(nullable = false)
-    private LocalDate addDate;
-
-
-    @Column(nullable = false)
-    private LocalDate updateDate;
+    @Column(length = 100,nullable = false)
+    private float noteExam;
 
     @ManyToOne
     @JoinColumn(name = "idinscription")
@@ -45,5 +38,12 @@ public class Note implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idexamen")
     private Examen examen;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
 
 }

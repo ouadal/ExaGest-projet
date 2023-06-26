@@ -23,13 +23,13 @@ public class Matiere implements Serializable {
     @Column(nullable = false,length = 100)
     private String codeMat;
 
+    @ManyToOne
+    @JoinColumn(name = "idtypeMatiere")
+    private TypeMat typeMat;
+
     @Column(nullable = false)
     private LocalDate addDate;
 
     @Column(nullable = false)
     private LocalDate updateDate;
-
-    @ManyToOne
-    @JoinColumn(name = "idtypeMatiere")
-    private TypeMat typeMat;
 }

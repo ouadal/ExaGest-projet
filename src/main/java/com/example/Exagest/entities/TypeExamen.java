@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "typeExamen")
+@Table(name = "TypeExamen")
 @NoArgsConstructor
 @AllArgsConstructor
 public class TypeExamen implements Serializable {

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "ecole")
+@Table(name = "Ecole")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ecole implements Serializable {
@@ -37,15 +37,15 @@ public class Ecole implements Serializable {
     @Column(nullable = false,length = 100)
     private String Matricule;
 
+    @ManyToOne
+    @JoinColumn(name = "idcycle")
+    private Cycle cycle;
+
     @Column(nullable = false)
     private LocalDate addDate;
 
     @Column(nullable = false)
     private LocalDate updateDate;
-
-    @ManyToOne
-    @JoinColumn(name = "idcycle")
-    private Cycle cycle;
 
 
 }

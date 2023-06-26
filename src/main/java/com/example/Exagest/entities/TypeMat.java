@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "typeMat")
+@Table(name = "TypeMat")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
