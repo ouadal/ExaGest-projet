@@ -4,9 +4,13 @@ import com.example.Exagest.Service.CycleService;
 import com.example.Exagest.entities.Cycle;
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.repository.CycleRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
+@Transactional
 
 public class CycleServiceImpl implements CycleService {
     private final CycleRepository cycleRepository;

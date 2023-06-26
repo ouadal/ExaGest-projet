@@ -54,8 +54,5 @@ public class MatiereServiceImpl implements MatiereService {
         return matiereRepository.listTypMat();
     }
 
-    @Override
-    public List<Matiere> listmatiere() {
-        return matiereRepository.findAll();
-    }
+
 }

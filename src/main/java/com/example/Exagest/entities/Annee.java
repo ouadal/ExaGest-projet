@@ -17,7 +17,6 @@ public class Annee implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_annee")
     private Long id;
-
     @Column(nullable = false)
     private LocalDate addDate;
 

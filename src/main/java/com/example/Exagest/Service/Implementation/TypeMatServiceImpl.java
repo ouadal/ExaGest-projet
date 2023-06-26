@@ -3,9 +3,13 @@ package com.example.Exagest.Service.Implementation;
 import com.example.Exagest.Service.TypeMatService;
 import com.example.Exagest.entities.TypeMat;
 import com.example.Exagest.repository.TypeMatRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
+@Transactional
 
 public class TypeMatServiceImpl implements TypeMatService {
     private final TypeMatRepository typeMatRepository;

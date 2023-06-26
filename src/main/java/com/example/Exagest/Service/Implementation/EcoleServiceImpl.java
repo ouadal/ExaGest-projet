@@ -3,9 +3,13 @@ package com.example.Exagest.Service.Implementation;
 import com.example.Exagest.Service.EcoleService;
 import com.example.Exagest.entities.Ecole;
 import com.example.Exagest.repository.EcoleRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
+@Transactional
 
 public class EcoleServiceImpl implements EcoleService {
     private final EcoleRepository ecoleRepository;

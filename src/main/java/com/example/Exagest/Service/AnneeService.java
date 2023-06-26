@@ -8,5 +8,5 @@ public interface AnneeService {
     Annee addAnnee(Annee annee);
     Annee editAnnee( Long id,Annee annee);
     String deleteAnnee(Long id);
-    List<Annee> listAnnee();
+    List<Annee> listannee();
 }

@@ -3,9 +3,13 @@ package com.example.Exagest.Service.Implementation;
 import com.example.Exagest.Service.NoteService;
 import com.example.Exagest.entities.Note;
 import com.example.Exagest.repository.NoteRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
+@Transactional
 
 public class NoteServiceImpl implements NoteService {
     private final NoteRepository noteRepository;

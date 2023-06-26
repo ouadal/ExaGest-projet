@@ -4,9 +4,13 @@ import com.example.Exagest.Service.TypeExamenService;
 import com.example.Exagest.entities.TypeExamen;
 import com.example.Exagest.entities.TypeMat;
 import com.example.Exagest.repository.TypeExamenRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
+@Transactional
 
 public class TypeExamenServiceImpl implements TypeExamenService {
     private final TypeExamenRepository typeExamenRepository;

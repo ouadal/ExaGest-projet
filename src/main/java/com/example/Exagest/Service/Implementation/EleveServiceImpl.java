@@ -3,9 +3,13 @@ package com.example.Exagest.Service.Implementation;
 import com.example.Exagest.Service.EleveService;
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.repository.EleveRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
+@Transactional
 
 public class EleveServiceImpl implements EleveService {
     private final EleveRepository eleveRepository;

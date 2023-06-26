@@ -3,9 +3,13 @@ package com.example.Exagest.Service.Implementation;
 import com.example.Exagest.Service.EnrolementService;
 import com.example.Exagest.entities.Enrolement;
 import com.example.Exagest.repository.EnrolementRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
+@Transactional
 
 public class EnrolementServiceImpl implements EnrolementService {
     private final EnrolementRepository enrolementRepository;

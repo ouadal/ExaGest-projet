@@ -39,7 +39,7 @@ private final AnneeRepository anneeRepository;
         return "Annee supprimé avec succès";
     }
     @Override
-    public List<Annee> listAnnee() {
-        return anneeRepository.findAll();
+    public List<Annee> listannee() {
+        return anneeRepository.listAnnee();
     }
 }
