@@ -26,10 +26,8 @@ public class EnrolementServiceImpl implements EnrolementService {
             System.out.println("Enrolement modifié avec succès");
         }
         Enrolement dbEnrolement = optionalEnrolement.get();
-        dbEnrolement.setDateAjout(enrolement.getDateAjout());
-        dbEnrolement.setDateEnrolement(enrolement.getDateEnrolement());
-        dbEnrolement.setDateModife(enrolement.getDateModife());
-        dbEnrolement.setInscription(enrolement.getInscription());
+        dbEnrolement.setExamen(enrolement.getExamen());
+        dbEnrolement.setEcole(enrolement.getEcole());
         return enrolementRepository.save(dbEnrolement);
     }
 
@@ -40,7 +38,13 @@ public class EnrolementServiceImpl implements EnrolementService {
     }
 
     @Override
-    public List<Enrolement> listenrolement() {
-        return enrolementRepository.findAll();
+    public List<Enrolement> listEcol() {
+        return enrolementRepository.listEcol();
     }
+
+    @Override
+    public List<Enrolement> listExamen() {
+        return enrolementRepository.listExamen();
+    }
+
 }

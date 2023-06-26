@@ -8,5 +8,6 @@ public interface MatiereService {
     Matiere addmatiere(Matiere matiere);
     Matiere editmatiere( Long id,Matiere matiere);
     String deletematiere(Long id);
-    List<Matiere> listmatiere();
+    List<Matiere> listMatLib();
+    List<Matiere> listTypMat();
 }

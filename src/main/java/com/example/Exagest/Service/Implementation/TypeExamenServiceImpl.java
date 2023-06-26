@@ -27,10 +27,7 @@ public class TypeExamenServiceImpl implements TypeExamenService {
             System.out.println("TypeExamen modifié avec succès");
         }
         TypeExamen dbTypeExamen = optionalTypeExamen.get();
-        dbTypeExamen.setDateAjout(typeExamen.getDateAjout());
-        dbTypeExamen.setCycleTypeExamen(typeExamen.getCycleTypeExamen());
-        dbTypeExamen.setDateModife(typeExamen.getDateModife());
-        dbTypeExamen.setLibelle_TypeExam(typeExamen.getLibelle_TypeExam());
+        dbTypeExamen.setLibele(typeExamen.getLibele());
         return typeExamenRepository.save(dbTypeExamen);
 
     }
@@ -42,7 +39,14 @@ public class TypeExamenServiceImpl implements TypeExamenService {
     }
 
     @Override
-    public List<TypeExamen> listtypeExamen() {
-        return typeExamenRepository.findAll();
+    public List<TypeExamen> listtypeExamLib() {
+        return typeExamenRepository.listtypeExamLib();
+    }
+
+
+
+    @Override
+    public TypeExamen choisirTypeExamen() {
+        return null;
     }
 }

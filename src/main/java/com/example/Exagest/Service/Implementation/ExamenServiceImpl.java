@@ -26,11 +26,10 @@ public class ExamenServiceImpl implements ExamenService {
             System.out.println("Examen modifié avec succès");
         }
         Examen dbExamen = optionalExamen.get();
-        dbExamen.setDateAjout(examen.getDateAjout());
+        dbExamen.setEcole(examen.getEcole());
+        dbExamen.setAnnee(examen.getAnnee());
+        dbExamen.setLibele(examen.getLibele());
         dbExamen.setCycleTypeExamen(examen.getCycleTypeExamen());
-        dbExamen.setEleve(examen.getEleve());
-        dbExamen.setEnrolement(examen.getEnrolement());
-        dbExamen.setParametrageExam(examen.getParametrageExam());
         dbExamen.setStatut(examen.isStatut());
         return examenRepository.save(dbExamen);
     }
@@ -42,7 +41,18 @@ public class ExamenServiceImpl implements ExamenService {
     }
 
     @Override
-    public List<Examen> listexamen() {
-        return examenRepository.findAll();
+    public List<Examen> listEcol() {
+        return examenRepository.listEcol();
     }
+
+    @Override
+    public List<Examen> listAnnee() {
+        return examenRepository.listAnnee();
+    }
+
+    @Override
+    public List<Examen> listExameLib() {
+        return examenRepository.listExameLib();
+    }
+
 }

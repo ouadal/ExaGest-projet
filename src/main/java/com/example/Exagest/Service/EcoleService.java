@@ -8,6 +8,7 @@ public interface EcoleService {
     Ecole addecole(Ecole ecole);
     Ecole editecole( Long id,Ecole ecole);
     String deleteecole(Long id);
-    List<Ecole> listecole();
+    List<Ecole> listEcolCycle();
+    List<Ecole> listNomEcol();
 
 }

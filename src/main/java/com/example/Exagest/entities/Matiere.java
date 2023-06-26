@@ -11,19 +11,24 @@ import java.time.LocalDate;
 @Table(name = "Matiere")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Matiere implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_matiere")
     private Long id;
-    @Column(nullable = false,length = 50)
-    private String libelleMat;
-    @Column(nullable = false,length = 50)
+
+    @Column(nullable = false,length = 100)
+    private String libele;
+
+    @Column(nullable = false,length = 100)
     private String codeMat;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateAjout;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateModife;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
     @ManyToOne
     @JoinColumn(name = "idtypeMatiere")
     private TypeMat typeMat;

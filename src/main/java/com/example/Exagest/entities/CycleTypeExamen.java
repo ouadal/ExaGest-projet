@@ -11,22 +11,28 @@ import java.time.LocalDate;
 @Table(name = "cycleTypeExamen")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+
 public class CycleTypeExamen implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_CycleTypeExamen")
     private Long id;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateAjout;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateModife;
-    @Column(nullable = false,length = 50)
-    private String libelleCycleTypeExam;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
     @ManyToOne
     @JoinColumn(name = "idcycle")
     private Cycle cycle;
+
     @ManyToOne
     @JoinColumn(name = "idtypeExamen")
     private TypeExamen typeExamen;
+
+
+
 
 }

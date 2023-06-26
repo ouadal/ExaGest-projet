@@ -1,6 +1,7 @@
 package com.example.Exagest.entities;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -8,24 +9,22 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table(name = "cycle")
+@Table(name = "section")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Cycle implements Serializable {
+
+public class Session implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_cycle")
+    @Column(name = "id_section")
     private Long id;
+
+    @Column(nullable = false,length = 100)
+    private String libelle;
 
     @Column(nullable = false)
     private LocalDate addDate;
 
     @Column(nullable = false)
-    private LocalDate updateDate;
-
-    @Column(nullable = false,length = 100)
-    private String libelle;
-
-
+    private LocalDate updateDdate;
 }

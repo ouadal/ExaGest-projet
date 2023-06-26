@@ -11,28 +11,41 @@ import java.time.LocalDate;
 @Table(name = "ecole")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Ecole implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_ecole")
     private Long id;
+
     @Column(nullable = false)
     private String NomEcole;
-    @Column(nullable = false)
+
+    @Column(nullable = false ,length = 100)
     private String Adresse;
-    @Column(nullable = false,length = 50)
+
+    @Column(nullable = false,length = 100)
     private int Telephone;
-    @Column(nullable = false)
+
+    @Column(nullable = false,length = 100,unique = true)
     private String Email;
+
     @Column(nullable = false)
     private String ficheStatut;
-    @Column(nullable = false,length = 50)
+
+    @Column(nullable = false)
     private boolean Statut;
-    @Column(nullable = false,length = 50)
+
+    @Column(nullable = false,length = 100)
     private String Matricule;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateAjout;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateModife;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
+    @ManyToOne
+    @JoinColumn(name = "idcycle")
+    private Cycle cycle;
+
 
 }

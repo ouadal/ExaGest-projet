@@ -1,45 +1,48 @@
 package com.example.Exagest.entities;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Setter
 @Getter
 @ToString
-@Table(name = "Inscription")
+@Table(name = "attributionMat")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inscription implements Serializable {
+
+public class AttributionMatiere implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_inscription")
+
+    @Column(name = "id_attributionMat")
     private Long id;
-
-    @Column(nullable = false)
-    private boolean Statut;
-
-    @Column(nullable = false)
-    private LocalDate addDate;
 
     @Column(nullable = false)
     private LocalDate updateDate;
 
-    @ManyToOne
-    @JoinColumn(name = "idenrolement")
-    private Enrolement enrolement;
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false,length = 100)
+    private int Coefficient;
 
     @ManyToOne
     @JoinColumn(name = "idannee")
     private Annee annee;
 
     @ManyToOne
-    @JoinColumn(name = "ideleve")
-    private Eleve eleve;
+    @JoinColumn(name = "idmatiere")
+    private Matiere matiere;
 
     @ManyToOne
-    @JoinColumn(name = "idecole")
-    private Ecole ecole;
+    @JoinColumn(name = "idexamen")
+    private Examen examen;
+
+
+
+
 }

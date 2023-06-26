@@ -7,7 +7,16 @@ import java.util.List;
 
 public interface NoteService {
     Note addnote(Note note);
+
     Note editnote( Long id,Note note);
+
     String deletenote(Long id);
+
     List<Note> listnote();
+
+    List<Note> listSess();
+
+    List<Note> listAttriuMat();
+
+    List<Note> listInsc();
 }

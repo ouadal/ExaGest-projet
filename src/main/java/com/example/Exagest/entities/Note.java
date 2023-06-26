@@ -11,28 +11,39 @@ import java.time.LocalDate;
 @Table(name = "Note")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+
 public class Note implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_note")
     private Long id;
-    @Column(length = 50,nullable = false)
+
+    @Column(length = 100,nullable = false)
     private float noteExam;
-    @Column(nullable = false,length = 50)
+
+    @Column(nullable = false)
     private boolean Statut;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateAjout;
-    @Column(nullable = false,length = 50)
-    private int coefficient;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateModife;
-    @ManyToOne
-    @JoinColumn(name = "idparamMat")
-    private ParamMatiere paramMatiere;
-    @ManyToOne
-    @JoinColumn(name = "idsection")
-    private Section section;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
     @ManyToOne
     @JoinColumn(name = "idinscription")
     private Inscription inscription;
+
+    @ManyToOne
+    @JoinColumn(name = "idattribution")
+    private AttributionMatiere attributionMatiere;
+
+    @ManyToOne
+    @JoinColumn(name = "idsession")
+    private Session session;
+
+    @ManyToOne
+    @JoinColumn(name = "idexamen")
+    private Examen examen;
+
 }

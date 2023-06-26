@@ -13,26 +13,34 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class Examen implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_Examen")
     private Long id;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateAjout;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateModife;
-    @Column(nullable = false,length = 50)
+
+    @Column(nullable = false,length = 100)
+    private String libele;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
+    @Column(nullable = false)
     private boolean Statut;
+
     @ManyToOne
     @JoinColumn(name = "idCycleTypeExam")
     private CycleTypeExamen cycleTypeExamen;
+
     @ManyToOne
     @JoinColumn(name = "idannee")
     private Annee annee;
+
     @ManyToOne
     @JoinColumn(name = "idecole")
     private Ecole ecole;
-    @ManyToOne
-    @JoinColumn(name = "idtypeExamen")
-    private TypeExamen typeExamen;
 
+ 
 }

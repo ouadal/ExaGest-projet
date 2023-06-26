@@ -8,5 +8,12 @@ public interface ExamenService {
     Examen addexamen(Examen examen);
     Examen editexamen( Long id,Examen examen);
     String deleteexamen(Long id);
-    List<Examen> listexamen();
+    List<Examen> listEcol();
+
+    List<Examen> listAnnee();
+
+    List<Examen> listExameLib();
+
+
+
 }

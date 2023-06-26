@@ -8,5 +8,9 @@ public interface MoyenneService {
     Moyenne addmoyenne(Moyenne moyenne);
     Moyenne editmoyenne( Long id,Moyenne moyenne);
     String deletemoyenne(Long id);
-    List<Moyenne> listmoyenne();
+    List<Moyenne> listIns();
+
+    List<Moyenne> listExam();
+
+    List<Moyenne> listSess();
 }

@@ -30,11 +30,11 @@ public class MatiereServiceImpl implements MatiereService {
             System.out.println("Matière modifié avec succès");
         }
         Matiere dbMatiere = optionalMatiere.get();
-        dbMatiere.setDateAjout(matiere.getDateAjout());
-        dbMatiere.setLibelleMat(matiere.getLibelleMat());
-        dbMatiere.setDateModife(matiere.getDateModife());
+
+        dbMatiere.setLibele(matiere.getLibele());
+
         dbMatiere.setCodeMat(matiere.getCodeMat());
-        dbMatiere.setParametrageExam(matiere.getParametrageExam());
+
         return matiereRepository.save(dbMatiere);
     }
 
@@ -42,6 +42,16 @@ public class MatiereServiceImpl implements MatiereService {
     public String deletematiere(Long id) {
          matiereRepository.deleteById(id);
          return "Matière supprimer avec succès";
+    }
+
+    @Override
+    public List<Matiere> listMatLib() {
+        return matiereRepository.listMatLib();
+    }
+
+    @Override
+    public List<Matiere> listTypMat() {
+        return matiereRepository.listTypMat();
     }
 
     @Override

@@ -13,14 +13,19 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class TypeMat implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_TypeMat")
     private Long id;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateAjout;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateModife;
-    @ManyToOne
-    @JoinColumn(name = "idmatiere")
-    private Matiere matiere;
+
+    @Column(nullable = false,length = 100)
+    private String libelle;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
+
 }

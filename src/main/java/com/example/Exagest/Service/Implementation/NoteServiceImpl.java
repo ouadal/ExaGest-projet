@@ -26,12 +26,11 @@ public class NoteServiceImpl implements NoteService {
             System.out.println("Note modifié avec succès");
         }
         Note dbNote = optionalNote.get();
-        dbNote.setDateAjout(note.getDateAjout());
         dbNote.setNoteExam(note.getNoteExam());
-        dbNote.setCoefficient(note.getCoefficient());
-        dbNote.setMoyenne(note.getMoyenne());
-        dbNote.setParametrageExam(note.getParametrageExam());
-        dbNote.setDateModife(note.getDateModife());
+        dbNote.setExamen(note.getExamen());
+        dbNote.setInscription(note.getInscription());
+        dbNote.setAttributionMatiere(note.getAttributionMatiere());
+        dbNote.setSession(note.getSession());
         dbNote.setStatut(note.isStatut());
         return noteRepository.save(dbNote);
     }
@@ -45,5 +44,20 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public List<Note> listnote() {
         return noteRepository.findAll();
+    }
+
+    @Override
+    public List<Note> listSess() {
+        return noteRepository.listSess();
+    }
+
+    @Override
+    public List<Note> listAttriuMat() {
+        return noteRepository.listAttriuMat();
+    }
+
+    @Override
+    public List<Note> listInsc() {
+        return noteRepository.listInsc();
     }
 }

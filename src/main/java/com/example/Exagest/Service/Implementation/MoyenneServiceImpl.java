@@ -25,14 +25,14 @@ public class MoyenneServiceImpl implements MoyenneService {
 
     @Override
     public Moyenne editmoyenne(Long id,Moyenne moyenne) {
-          Optional<Moyenne> optionalMoyenne =moyenneRepository.findById(id);
+          Optional<Moyenne> optionalMoyenne = moyenneRepository.findById(id);
         if(optionalMoyenne.isEmpty()){
             System.out.println("Moyenne modifié avec succès");
         }
-        Moyenne dbMoyenne= optionalMoyenne.get();
-        dbMoyenne.setDateAjout(moyenne.getDateAjout());
-        dbMoyenne.setLibelleMoy(moyenne.getLibelleMoy());
-        dbMoyenne.setDateModife(moyenne.getDateModife());
+        Moyenne dbMoyenne = optionalMoyenne.get();
+        dbMoyenne.setExamen(moyenne.getExamen());
+        dbMoyenne.setSession(moyenne.getSession());
+        dbMoyenne.setInscription(moyenne.getInscription());
         return moyenneRepository.save(dbMoyenne);
     }
 
@@ -43,7 +43,18 @@ public class MoyenneServiceImpl implements MoyenneService {
     }
 
     @Override
-    public List<Moyenne> listmoyenne() {
-        return moyenneRepository.findAll();
+    public List<Moyenne> listIns() {
+        return moyenneRepository.listIns();
     }
+
+    @Override
+    public List<Moyenne> listExam() {
+        return moyenneRepository.listExam();
+    }
+
+    @Override
+    public List<Moyenne> listSess() {
+        return moyenneRepository.listSess();
+    }
+
 }

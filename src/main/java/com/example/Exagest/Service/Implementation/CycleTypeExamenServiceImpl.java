@@ -27,9 +27,8 @@ public class CycleTypeExamenServiceImpl implements CycleTypeExamenService {
             System.out.println("CycleTypeExamen modifié avec succès");
         }
         CycleTypeExamen dbCycleTypeExamen= optionalCycleTypeExamen.get();
-        dbCycleTypeExamen.setDateAjout(cycleTypeExamen.getDateAjout());
-        dbCycleTypeExamen.setLibelleCycleTypeExam(cycleTypeExamen.getLibelleCycleTypeExam());
-        dbCycleTypeExamen.setDateModife(cycleTypeExamen.getDateModife());
+        dbCycleTypeExamen.setTypeExamen(cycleTypeExamen.getTypeExamen());
+        dbCycleTypeExamen.setCycle(cycleTypeExamen.getCycle());
         return cycleTypeExamenRepository.save(dbCycleTypeExamen);
     }
 

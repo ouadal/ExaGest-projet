@@ -30,11 +30,10 @@ public class InscriptionServiceImpl implements InscriptionService {
             System.out.println("Inscription modifié avec succès");
         }
         Inscription dbInscription = optionalInscription.get();
-        dbInscription.setDateAjout(inscription.getDateAjout());
-        dbInscription.setNote(inscription.getNote());
-        dbInscription.setDateModife(inscription.getDateModife());
         dbInscription.setStatut(inscription.isStatut());
-        dbInscription.setDateEnrole(inscription.getDateEnrole());
+        dbInscription.setAnnee(inscription.getAnnee());
+        dbInscription.setEleve(inscription.getEleve());
+        dbInscription.setEnrolement(inscription.getEnrolement());
         return inscriptionRepository.save(dbInscription);
     }
 
@@ -45,7 +44,25 @@ public class InscriptionServiceImpl implements InscriptionService {
     }
 
     @Override
-    public List<Inscription> listinscription() {
-        return inscriptionRepository.findAll();
+    public List<Inscription> listEcol() {
+        return inscriptionRepository.listEcol();
     }
+
+    @Override
+    public List<Inscription> listElev() {
+        return inscriptionRepository.listElev();
+    }
+
+    @Override
+    public List<Inscription> listAnn() {
+        return inscriptionRepository.listAnn();
+    }
+
+    @Override
+    public List<Inscription> listEnrol() {
+        return inscriptionRepository.listEnrol();
+    }
+
+
+
 }

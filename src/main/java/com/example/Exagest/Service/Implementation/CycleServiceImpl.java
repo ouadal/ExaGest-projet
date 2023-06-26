@@ -27,11 +27,7 @@ public class CycleServiceImpl implements CycleService {
             System.out.println("Cycle modifié avec succès");
         }
         Cycle dbCycle = optionalCycle.get();
-        dbCycle.setDateAjout(cycle.getDateAjout());
-        dbCycle.setLibelleCycle(cycle.getLibelleCycle());
-        dbCycle.setCycleTypeExamen(cycle.getCycleTypeExamen());
-        dbCycle.setTypeExamen(cycle.getTypeExamen());
-        dbCycle.setDateModife(cycle.getDateModife());
+        dbCycle.setLibelle(cycle.getLibelle());
         return cycleRepository.save(dbCycle);
     }
 
@@ -43,6 +39,12 @@ public class CycleServiceImpl implements CycleService {
 
     @Override
     public List<Cycle> listcycle() {
-        return cycleRepository.findAll();
+        return cycleRepository.listcycle();
+    }
+
+
+    @Override
+    public Cycle choisirCycle() {
+        return null;
     }
 }

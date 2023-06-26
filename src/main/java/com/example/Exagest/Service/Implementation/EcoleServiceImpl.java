@@ -26,16 +26,15 @@ public class EcoleServiceImpl implements EcoleService {
             System.out.println("Ecole modifié avec succès");
         }
         Ecole dbEcole = optionalEcole.get();
-        dbEcole.setDateAjout(ecole.getDateAjout());
+        dbEcole.setCycle(ecole.getCycle());
         dbEcole.setEmail(ecole.getEmail());
         dbEcole.setNomEcole(ecole.getNomEcole());
         dbEcole.setAdresse(ecole.getAdresse());
-        dbEcole.setExamen(ecole.getExamen());
         dbEcole.setFicheStatut(ecole.getFicheStatut());
         dbEcole.setMatricule(String.format("%08d", dbEcole.getId()));
         dbEcole.setStatut(ecole.isStatut());
         dbEcole.setTelephone(ecole.getTelephone());
-        dbEcole.setDateModife(ecole.getDateModife());
+
         return ecoleRepository.save(dbEcole);    }
 
     @Override
@@ -45,7 +44,13 @@ public class EcoleServiceImpl implements EcoleService {
     }
 
     @Override
-    public List<Ecole> listecole() {
-        return ecoleRepository.findAll();
+    public List<Ecole> listEcolCycle() {
+        return ecoleRepository.listEcolCycle();
     }
+
+    @Override
+    public List<Ecole> listNomEcol() {
+        return ecoleRepository.listNomEcol();
+    }
+
 }

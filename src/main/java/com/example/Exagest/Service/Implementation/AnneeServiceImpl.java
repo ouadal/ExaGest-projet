@@ -31,12 +31,6 @@ private final AnneeRepository anneeRepository;
             System.out.println("Annee modifié avec succès");
         }
         Annee dbAnnee = optionalAnnee.get();
-        dbAnnee.setDateAjout(annee.getDateAjout());
-       dbAnnee.setAnneeScolaire(annee.getAnneeScolaire());
-       dbAnnee.setLibelleAnnee(annee.getLibelleAnnee());
-       dbAnnee.setEleve(annee.getEleve());
-       dbAnnee.setExamen(annee.getExamen());
-       dbAnnee.setDateModife(annee.getDateModife());
         return anneeRepository.save(dbAnnee);
     }
     @Override

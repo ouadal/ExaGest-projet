@@ -12,18 +12,17 @@ import java.util.Date;
 @Table(name = "annee")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Annee implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_annee")
     private Long id;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateAjout;
-    @Column(nullable = false,length = 50)
-    private LocalDate dateModife;
-    @Column(nullable = false,length = 50)
-    private Date anneeScolaire;
-    @Column(nullable = false,length = 50)
-    private String libelleAnnee;
+
+    @Column(nullable = false)
+    private LocalDate addDate;
+
+    @Column(nullable = false)
+    private LocalDate updateDate;
+
 
 }

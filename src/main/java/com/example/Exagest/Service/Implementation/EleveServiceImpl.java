@@ -26,13 +26,12 @@ public class EleveServiceImpl implements EleveService {
             System.out.println("Eleve modifié avec succès");
         }
        Eleve dbEleve = optionalEleve.get();
-        dbEleve.setDateAjout(eleve.getDateAjout());
+
         dbEleve.setContactParent(eleve.getContactParent());
         dbEleve.setNom(eleve.getNom());
         dbEleve.setDate_naissance(eleve.getDate_naissance());
-        dbEleve.setInscription(eleve.getInscription());
         dbEleve.setPrenom(eleve.getPrenom());
-        dbEleve.setDateModife(eleve.getDateModife());
+
         return eleveRepository.save(dbEleve);
     }
 
@@ -43,7 +42,9 @@ public class EleveServiceImpl implements EleveService {
     }
 
     @Override
-    public List<Eleve> listeleve() {
-        return eleveRepository.findAll();
+    public List<Eleve> listNom() {
+        return eleveRepository.listNom();
     }
+
+
 }

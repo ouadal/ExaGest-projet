@@ -26,9 +26,7 @@ public class TypeMatServiceImpl implements TypeMatService {
             System.out.println("TypeMatiere modifié avec succès");
         }
         TypeMat dbTypeMat = optionalTypeMat.get();
-        dbTypeMat.setDateAjout(typeMat.getDateAjout());
-        dbTypeMat.setMatiere(typeMat.getMatiere());
-        dbTypeMat.setDateModife(typeMat.getDateModife());
+        dbTypeMat.setLibelle(typeMat.getLibelle());
         return typeMatRepository.save(dbTypeMat);
 
     }
@@ -40,7 +38,10 @@ public class TypeMatServiceImpl implements TypeMatService {
     }
 
     @Override
-    public List<TypeMat> listtypeMat() {
-        return typeMatRepository.findAll();
+    public List<TypeMat> listtypeMatLib() {
+        return typeMatRepository.listtypeMatLib();
     }
+
+
+
 }
