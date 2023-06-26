@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor @AllArgsConstructor
 public class Eleve implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_Eleve")
     private Long id;
 

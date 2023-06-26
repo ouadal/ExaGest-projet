@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Data
 public class TypeMat implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_TypeMat")
     private Long id;
 

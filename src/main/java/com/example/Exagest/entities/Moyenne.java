@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class Moyenne implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Moyenne")
     private Long id;
 

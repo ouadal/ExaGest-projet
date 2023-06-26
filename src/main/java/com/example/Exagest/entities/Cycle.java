@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Data
 public class Cycle implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cycle")
     private Long id;
 

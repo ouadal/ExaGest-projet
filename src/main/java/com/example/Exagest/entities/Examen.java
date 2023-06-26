@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Data
 public class Examen implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_Examen")
     private Long id;
 

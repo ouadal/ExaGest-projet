@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class TypeExamen implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_TypeExamen")
     private Long id;
 

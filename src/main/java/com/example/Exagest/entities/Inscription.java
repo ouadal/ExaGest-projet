@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Inscription implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inscription")
     private Long id;
 
