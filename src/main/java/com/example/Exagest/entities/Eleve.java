@@ -15,7 +15,7 @@ public class Eleve implements Serializable {
     private Long id;
 
     @Column(nullable = false,length = 100)
-    private String Nom;
+    private String nom;
 
     @Column(nullable = false,length = 100)
     private String Prenom;

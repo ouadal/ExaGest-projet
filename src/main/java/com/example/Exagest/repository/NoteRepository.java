@@ -9,15 +9,15 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface NoteRepository extends JpaRepository<Note, Long>  {
-    @Query("select n from Note n orderBy n.inscription.id ")
+    @Query("SELECT n FROM Note n ORDER BY n.inscription.id ASC")
     List<Note> listInsc();
 
-    @Query("select n from Note n orderBy n.attributionMatiere.id ")
+    @Query("SELECT n FROM Note n ORDER BY n.attributionMatiere.id ASC ")
     List<Note> listAttriuMat();
 
-    @Query("select n from Note n orderBy n.inscription.id ")
+    @Query("SELECT n FROM Note n ORDER BY n.inscription.id ASC ")
     List<Note> listSess();
 
-    @Query("select n from Note n orderBy n.examen.id ")
+    @Query("SELECT  n FROM Note n ORDER BY n.examen.libele")
     List<Note> listExam();
 }

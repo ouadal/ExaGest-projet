@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CycleRepository extends JpaRepository<Cycle, Long>  {
-    @Query("select c from Cycle c orderBy c.libelle ")
+    @Query("SELECT c FROM Cycle c ORDER BY c.libele ")
     List<Cycle> listcycle();
 }

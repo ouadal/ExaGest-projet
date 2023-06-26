@@ -10,9 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MatiereRepository extends JpaRepository<Matiere, Long>  {
-    @Query("select m from Matiere m orderBy m.libele ")
+    @Query("SELECT m FROM Matiere m ORDER BY m.libele ")
     List<Matiere> listMatLib();
 
-    @Query("select m from Matiere m orderBy m.typeMat.id ")
+    @Query("SELECT m FROM Matiere m ORDER BY m.typeMat.libele ")
     List<Matiere> listTypMat();
 }

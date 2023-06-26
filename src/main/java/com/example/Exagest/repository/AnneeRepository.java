@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AnneeRepository extends JpaRepository<Annee , Long> {
-    @Query("select a from Annee a orderBy a.id ")
+    @Query("SELECT a FROM Annee a ORDER BY a.id ASC")
     List<Annee> listAnnee();
 }

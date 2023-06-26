@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TypeExamenRepository extends JpaRepository<TypeExamen, Long>  {
-    @Query("select t from typeExamen t orderBy t.libele")
+    @Query("SELECT t FROM typeExamen t ORDER BY t.libele")
     List<TypeExamen> listtypeExamLib();
 }

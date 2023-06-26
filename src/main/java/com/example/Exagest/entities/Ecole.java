@@ -17,16 +17,16 @@ public class Ecole implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    private String NomEcole;
+    private String nomEcole;
 
     @Column(nullable = false ,length = 100)
-    private String Adresse;
+    private String adresse;
 
     @Column(nullable = false,length = 100)
-    private int Telephone;
+    private int telephone;
 
     @Column(nullable = false,length = 100,unique = true)
-    private String Email;
+    private String email;
 
     @Column(nullable = false)
     private String ficheStatut;

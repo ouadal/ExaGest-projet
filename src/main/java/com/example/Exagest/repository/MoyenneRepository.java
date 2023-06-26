@@ -9,13 +9,13 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MoyenneRepository extends JpaRepository<Moyenne, Long>  {
-    @Query("select m from Moyenne m orderBy m.inscription.id ")
+    @Query("SELECT m FROM Moyenne m ORDER BY m.inscription.id ASC")
     List<Moyenne> listIns();
 
-    @Query("select m from Moyenne m orderBy m.examen.id ")
+    @Query("SELECT m FROM Moyenne m ORDER BY m.examen.libele ")
     List<Moyenne> listExam();
 
-    @Query("select m from Moyenne m orderBy m.session.id ")
+    @Query("select m from Moyenne m orderBy m.session.libele ")
     List<Moyenne> listSess();
 
 }

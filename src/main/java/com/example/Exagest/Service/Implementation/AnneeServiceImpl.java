@@ -38,8 +38,11 @@ private final AnneeRepository anneeRepository;
         anneeRepository.deleteById(id);
         return "Annee supprimé avec succès";
     }
+
     @Override
-    public List<Annee> listannee() {
+    public List<Annee> listAnne() {
         return anneeRepository.listAnnee();
     }
+
+
 }

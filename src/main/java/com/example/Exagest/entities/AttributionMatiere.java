@@ -28,7 +28,7 @@ public class AttributionMatiere implements Serializable {
     private LocalDate addDate;
 
     @Column(nullable = false,length = 100)
-    private int Coefficient;
+    private int coefficient;
 
     @ManyToOne
     @JoinColumn(name = "idannee")

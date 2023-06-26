@@ -19,7 +19,7 @@ public class Inscription implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    private boolean Statut;
+    private boolean statut;
 
     @Column(nullable = false)
     private LocalDate addDate;

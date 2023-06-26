@@ -28,7 +28,7 @@ public class Examen implements Serializable {
     private LocalDate updateDate;
 
     @Column(nullable = false)
-    private boolean Statut;
+    private boolean statut;
 
     @ManyToOne
     @JoinColumn(name = "idCycleTypeExam")

@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AttributionMatiereRepository extends JpaRepository<AttributionMatiere,Long > {
-    @Query("select a from AttributionMatiere a orderBy a.annee.id ")
+    @Query("SELECT a FROM AttributionMatiere a ORDER BY a.annee.id ASC ")
     List<AttributionMatiere> listattributionMatAnne();
 
-    @Query("select a from AttributionMatiere a orderBy a.examen.id ")
+    @Query("SELECT a FROM AttributionMatiere a ORDER BY a.examen.libele ")
     List<AttributionMatiere> listattributionMatExam();
 
-    @Query("select a from AttributionMatiere a orderBy a.matiere.id ")
+    @Query("SELECT a FROM AttributionMatiere a ORDER BY a.matiere.libele ")
     List<AttributionMatiere> listattributionMatMatiere();
 }

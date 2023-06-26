@@ -25,7 +25,7 @@ public class Cycle implements Serializable {
     private LocalDate updateDate;
 
     @Column(nullable = false,length = 100)
-    private String libelle;
+    private String libele;
 
 
 }

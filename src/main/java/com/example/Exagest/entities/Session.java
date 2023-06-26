@@ -20,7 +20,7 @@ public class Session implements Serializable {
     private Long id;
 
     @Column(nullable = false,length = 100)
-    private String libelle;
+    private String libele;
 
     @Column(nullable = false)
     private LocalDate addDate;

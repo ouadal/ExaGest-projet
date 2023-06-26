@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface EnrolementRepository extends JpaRepository<Enrolement, Long>  {
-    @Query("select e from Enrolement e orderBy e.examen.id ")
+    @Query("SELECT e FROM Enrolement e ORDER BY e.examen.libele ")
     List<Enrolement> listExamen();
 
-    @Query("select e from Enrolement e orderBy e.ecole.id ")
+    @Query("select e from Enrolement e orderBy e.ecole.nomEcole ")
     List<Enrolement> listEcol();
 }

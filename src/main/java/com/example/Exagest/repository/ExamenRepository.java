@@ -9,13 +9,13 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ExamenRepository extends JpaRepository<Examen, Long>  {
-    @Query("select e from Examen e orderBy e.libele ")
+    @Query("SELECT e FROM Examen e ORDER BY e.libele ")
     List<Examen> listExameLib();
 
-    @Query("select e from Examen e orderBy e.annee.id ")
+    @Query("SELECT e FROM Examen e ORDER BY e.annee.id ")
     List<Examen> listAnnee();
 
-    @Query("select e from Examen e orderBy e.ecole.id ")
+    @Query("SELECT e FROM Examen e ORDER BY e.ecole.nomEcole ")
     List<Examen> listEcol();
 
 

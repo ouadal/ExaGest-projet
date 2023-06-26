@@ -9,16 +9,16 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface InscriptionRepository extends JpaRepository<Inscription, Long>  {
-    @Query("select i from Inscription i orderBy i.enrolement.id ")
+    @Query("SELECT i FROM Inscription i ORDER BY i.enrolement.id ASC")
     List<Inscription> listEnrol();
 
-    @Query("select i from Inscription i orderBy i.annee.id ")
+    @Query("SELECT i FROM Inscription i ORDER BY i.annee.id ASC")
     List<Inscription> listAnn();
 
-    @Query("select i from Inscription i orderBy i.eleve.id ")
+    @Query("SELECT i FROM Inscription i ORDER BY i.eleve.nom ")
     List<Inscription> listElev();
 
-    @Query("select i from Inscription i orderBy e.ecole.id ")
+    @Query("select i from Inscription i orderBy e.ecole.nomEcole ")
     List<Inscription> listEcol();
 
 }

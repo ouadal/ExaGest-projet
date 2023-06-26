@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface SessionRepository extends JpaRepository<Session, Long>  {
-    @Query("select s from Session s orderBy s.libele ")
+    @Query("SELECT s FROM Session s ORDER BY s.libele ")
     List<Session> listSess();
 }

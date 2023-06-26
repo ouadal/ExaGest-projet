@@ -21,7 +21,7 @@ public class Note implements Serializable {
     private float noteExam;
 
     @Column(nullable = false)
-    private boolean Statut;
+    private boolean statut;
 
     @Column(nullable = false)
     private LocalDate addDate;

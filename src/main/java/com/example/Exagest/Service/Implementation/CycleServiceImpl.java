@@ -31,7 +31,7 @@ public class CycleServiceImpl implements CycleService {
             System.out.println("Cycle modifié avec succès");
         }
         Cycle dbCycle = optionalCycle.get();
-        dbCycle.setLibelle(cycle.getLibelle());
+        dbCycle.setLibele(cycle.getLibele());
         return cycleRepository.save(dbCycle);
     }
 
