@@ -1,7 +1,9 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.InscriptionService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Inscription;
+import com.example.Exagest.repository.AnneeRepository;
 import com.example.Exagest.repository.InscriptionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -14,14 +16,19 @@ import java.util.Optional;
 @Transactional
 public class InscriptionServiceImpl implements InscriptionService {
     private final InscriptionRepository inscriptionRepository;
+    private final AnneeRepository anneeRepository;
 
-    public InscriptionServiceImpl(InscriptionRepository inscriptionRepository) {
+    public InscriptionServiceImpl(InscriptionRepository inscriptionRepository, AnneeRepository anneeRepository) {
         this.inscriptionRepository = inscriptionRepository;
+        this.anneeRepository = anneeRepository;
     }
 
     @Override
     public Inscription addinscription(Inscription inscription) {
-        return inscriptionRepository.save(inscription);
+        Inscription i = inscriptionRepository.save(inscription);
+        Annee a = anneeRepository.getCurrentYear();
+        i.setAnnee(a);
+        return inscriptionRepository.save(i);
     }
 
     @Override

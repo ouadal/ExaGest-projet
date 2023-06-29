@@ -1,7 +1,9 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.ExamenService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Examen;
+import com.example.Exagest.repository.AnneeRepository;
 import com.example.Exagest.repository.ExamenRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -13,13 +15,18 @@ import java.util.Optional;
 
 public class ExamenServiceImpl implements ExamenService {
     private final ExamenRepository examenRepository;
+    private final AnneeRepository anneeRepository;
 
-    public ExamenServiceImpl(ExamenRepository examenRepository) {
+    public ExamenServiceImpl(ExamenRepository examenRepository, AnneeRepository anneeRepository) {
         this.examenRepository = examenRepository;
+        this.anneeRepository = anneeRepository;
     }
 
     @Override
     public Examen addexamen(Examen examen) {
+        Examen e = examenRepository.save(examen);
+        Annee a = anneeRepository.getCurrentYear();
+        e.setAnnee(a);
         return examenRepository.save(examen);
     }
 

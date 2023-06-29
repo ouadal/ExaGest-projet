@@ -20,7 +20,9 @@ public class EcoleServiceImpl implements EcoleService {
 
     @Override
     public Ecole addecole(Ecole ecole) {
-        return ecoleRepository.save(ecole);
+        Ecole e = ecoleRepository.save(ecole);
+        e.setMatricule(String.format("%08d",e.getId()));
+        return ecoleRepository.save(e);
     }
 
     @Override
@@ -35,7 +37,6 @@ public class EcoleServiceImpl implements EcoleService {
         dbEcole.setNomEcole(ecole.getNomEcole());
         dbEcole.setAdresse(ecole.getAdresse());
         dbEcole.setFicheStatut(ecole.getFicheStatut());
-        dbEcole.setMatricule(String.format("%08d", dbEcole.getId()));
         dbEcole.setStatut(ecole.isStatut());
         dbEcole.setTelephone(ecole.getTelephone());
 

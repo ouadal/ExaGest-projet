@@ -10,4 +10,8 @@ import java.util.List;
 public interface AnneeRepository extends JpaRepository<Annee , Long> {
     @Query("SELECT a FROM Annee a ORDER BY a.id ASC")
     List<Annee> listAnnee();
+
+    @Query("SELECT a FROM Annee a WHERE a.etat=true")
+    Annee getCurrentYear();
+
 }
