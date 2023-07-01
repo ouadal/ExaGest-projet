@@ -6,6 +6,7 @@ import com.example.Exagest.repository.TypeMatRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -20,6 +21,7 @@ public class TypeMatServiceImpl implements TypeMatService {
 
     @Override
     public TypeMat addtypeMat(TypeMat typeMat) {
+        typeMat.setAddDate(LocalDate.now());
         return typeMatRepository.save(typeMat);
     }
 
@@ -30,6 +32,7 @@ public class TypeMatServiceImpl implements TypeMatService {
             System.out.println("TypeMatiere modifié avec succès");
         }
         TypeMat dbTypeMat = optionalTypeMat.get();
+        dbTypeMat.setUpdateDate(LocalDate.now());
         dbTypeMat.setLibele(typeMat.getLibele());
         return typeMatRepository.save(dbTypeMat);
 

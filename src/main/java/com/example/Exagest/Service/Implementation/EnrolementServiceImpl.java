@@ -6,6 +6,7 @@ import com.example.Exagest.repository.EnrolementRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -20,6 +21,7 @@ public class EnrolementServiceImpl implements EnrolementService {
 
     @Override
     public Enrolement addenrolement(Enrolement enrolement) {
+        enrolement.setAddDate(LocalDate.now());
         return enrolementRepository.save(enrolement);
     }
 
@@ -30,6 +32,7 @@ public class EnrolementServiceImpl implements EnrolementService {
             System.out.println("Enrolement modifié avec succès");
         }
         Enrolement dbEnrolement = optionalEnrolement.get();
+        dbEnrolement.setUpdateDate(LocalDate.now());
         dbEnrolement.setExamen(enrolement.getExamen());
         dbEnrolement.setEcole(enrolement.getEcole());
         return enrolementRepository.save(dbEnrolement);

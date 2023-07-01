@@ -6,6 +6,7 @@ import com.example.Exagest.repository.NoteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -20,6 +21,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Note addnote(Note note) {
+        note.setAddDate(LocalDate.now());
         return noteRepository.save(note);
     }
 
@@ -30,6 +32,7 @@ public class NoteServiceImpl implements NoteService {
             System.out.println("Note modifié avec succès");
         }
         Note dbNote = optionalNote.get();
+        dbNote.setUpdateDate(LocalDate.now());
         dbNote.setNoteExam(note.getNoteExam());
         dbNote.setExamen(note.getExamen());
         dbNote.setInscription(note.getInscription());

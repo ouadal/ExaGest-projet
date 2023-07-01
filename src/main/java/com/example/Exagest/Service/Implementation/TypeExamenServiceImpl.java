@@ -7,6 +7,7 @@ import com.example.Exagest.repository.TypeExamenRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -21,6 +22,7 @@ public class TypeExamenServiceImpl implements TypeExamenService {
 
     @Override
     public TypeExamen addtypeExamen(TypeExamen typeExamen) {
+        typeExamen.setAddDate(LocalDate.now());
         return typeExamenRepository.save(typeExamen);
     }
 
@@ -31,6 +33,7 @@ public class TypeExamenServiceImpl implements TypeExamenService {
             System.out.println("TypeExamen modifié avec succès");
         }
         TypeExamen dbTypeExamen = optionalTypeExamen.get();
+        dbTypeExamen.setUpdateDate(LocalDate.now());
         dbTypeExamen.setLibele(typeExamen.getLibele());
         return typeExamenRepository.save(dbTypeExamen);
 

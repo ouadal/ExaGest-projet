@@ -8,6 +8,7 @@ import com.example.Exagest.repository.ExamenRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -27,7 +28,8 @@ public class ExamenServiceImpl implements ExamenService {
         Examen e = examenRepository.save(examen);
         Annee a = anneeRepository.getCurrentYear();
         e.setAnnee(a);
-        return examenRepository.save(examen);
+        e.setAddDate(LocalDate.now());
+        return examenRepository.save(e);
     }
 
     @Override
@@ -37,6 +39,7 @@ public class ExamenServiceImpl implements ExamenService {
             System.out.println("Examen modifié avec succès");
         }
         Examen dbExamen = optionalExamen.get();
+        dbExamen.setUpdateDate(LocalDate.now());
         dbExamen.setEcole(examen.getEcole());
         dbExamen.setAnnee(examen.getAnnee());
         dbExamen.setLibele(examen.getLibele());

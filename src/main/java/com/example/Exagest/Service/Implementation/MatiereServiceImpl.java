@@ -6,6 +6,7 @@ import com.example.Exagest.repository.MatiereRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class MatiereServiceImpl implements MatiereService {
 
     @Override
     public Matiere addmatiere(Matiere matiere) {
+        matiere.setAddDate(LocalDate.now());
         return matiereRepository.save(matiere);
     }
 
@@ -30,6 +32,7 @@ public class MatiereServiceImpl implements MatiereService {
             System.out.println("Matière modifié avec succès");
         }
         Matiere dbMatiere = optionalMatiere.get();
+        dbMatiere.setUpdateDate(LocalDate.now());
 
         dbMatiere.setLibele(matiere.getLibele());
 

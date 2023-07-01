@@ -6,6 +6,7 @@ import com.example.Exagest.repository.MoyenneRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class MoyenneServiceImpl implements MoyenneService {
 
     @Override
     public Moyenne addmoyenne(Moyenne moyenne) {
+        moyenne.setAddDate(LocalDate.now());
         return moyenneRepository.save(moyenne);
     }
 
@@ -30,6 +32,7 @@ public class MoyenneServiceImpl implements MoyenneService {
             System.out.println("Moyenne modifié avec succès");
         }
         Moyenne dbMoyenne = optionalMoyenne.get();
+        dbMoyenne.setUpdateDate(LocalDate.now());
         dbMoyenne.setExamen(moyenne.getExamen());
         dbMoyenne.setSession(moyenne.getSession());
         dbMoyenne.setInscription(moyenne.getInscription());

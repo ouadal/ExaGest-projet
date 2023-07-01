@@ -7,6 +7,7 @@ import com.example.Exagest.repository.CycleTypeExamenRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -21,6 +22,7 @@ public class CycleTypeExamenServiceImpl implements CycleTypeExamenService {
 
     @Override
     public CycleTypeExamen addcycleTypeExam(CycleTypeExamen cycleTypeExamen) {
+        cycleTypeExamen.setAddDate(LocalDate.now());
         return cycleTypeExamenRepository.save(cycleTypeExamen);
     }
 
@@ -33,6 +35,7 @@ public class CycleTypeExamenServiceImpl implements CycleTypeExamenService {
         CycleTypeExamen dbCycleTypeExamen= optionalCycleTypeExamen.get();
         dbCycleTypeExamen.setTypeExamen(cycleTypeExamen.getTypeExamen());
         dbCycleTypeExamen.setCycle(cycleTypeExamen.getCycle());
+        dbCycleTypeExamen.setUpdateDate(LocalDate.now());
         return cycleTypeExamenRepository.save(dbCycleTypeExamen);
     }
 

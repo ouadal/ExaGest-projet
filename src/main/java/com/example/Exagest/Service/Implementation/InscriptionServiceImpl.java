@@ -8,6 +8,7 @@ import com.example.Exagest.repository.InscriptionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,7 @@ public class InscriptionServiceImpl implements InscriptionService {
         Inscription i = inscriptionRepository.save(inscription);
         Annee a = anneeRepository.getCurrentYear();
         i.setAnnee(a);
+        i.setAddDate(LocalDate.now());
         return inscriptionRepository.save(i);
     }
 
@@ -38,6 +40,7 @@ public class InscriptionServiceImpl implements InscriptionService {
             System.out.println("Inscription modifié avec succès");
         }
         Inscription dbInscription = optionalInscription.get();
+        dbInscription.setUpdateDate(LocalDate.now());
         dbInscription.setStatut(inscription.isStatut());
         dbInscription.setAnnee(inscription.getAnnee());
         dbInscription.setEleve(inscription.getEleve());

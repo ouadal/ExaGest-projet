@@ -7,6 +7,7 @@ import com.example.Exagest.repository.AnneeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ private final AnneeRepository anneeRepository;
 
     @Override
     public Annee addAnnee(Annee annee) {
+        annee.setAddDate(LocalDate.now());
         return anneeRepository.save(annee);
     }
 
@@ -31,6 +33,7 @@ private final AnneeRepository anneeRepository;
             System.out.println("Annee modifié avec succès");
         }
         Annee dbAnnee = optionalAnnee.get();
+        dbAnnee.setUpdateDate(LocalDate.now());
         return anneeRepository.save(dbAnnee);
     }
     @Override

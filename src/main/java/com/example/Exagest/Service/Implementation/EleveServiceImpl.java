@@ -6,6 +6,7 @@ import com.example.Exagest.repository.EleveRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -20,6 +21,7 @@ public class EleveServiceImpl implements EleveService {
 
     @Override
     public Eleve addeleve(Eleve eleve) {
+        eleve.setAddDate(LocalDate.now());
         return eleveRepository.save(eleve);
     }
 
@@ -30,7 +32,7 @@ public class EleveServiceImpl implements EleveService {
             System.out.println("Eleve modifié avec succès");
         }
        Eleve dbEleve = optionalEleve.get();
-
+        dbEleve.setUpdateDate(LocalDate.now());
         dbEleve.setContactParent(eleve.getContactParent());
         dbEleve.setNom(eleve.getNom());
         dbEleve.setDate_naissance(eleve.getDate_naissance());

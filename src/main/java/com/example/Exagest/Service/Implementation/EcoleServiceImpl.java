@@ -6,6 +6,7 @@ import com.example.Exagest.repository.EcoleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -22,6 +23,7 @@ public class EcoleServiceImpl implements EcoleService {
     public Ecole addecole(Ecole ecole) {
         Ecole e = ecoleRepository.save(ecole);
         e.setMatricule(String.format("%08d",e.getId()));
+        e.setAddDate(LocalDate.now());
         return ecoleRepository.save(e);
     }
 
@@ -32,6 +34,7 @@ public class EcoleServiceImpl implements EcoleService {
             System.out.println("Ecole modifié avec succès");
         }
         Ecole dbEcole = optionalEcole.get();
+        dbEcole.setUpdateDate(LocalDate.now());
         dbEcole.setCycle(ecole.getCycle());
         dbEcole.setEmail(ecole.getEmail());
         dbEcole.setNomEcole(ecole.getNomEcole());
