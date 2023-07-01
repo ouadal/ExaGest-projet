@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Random;
 
 @Entity
 @Setter
@@ -46,6 +47,13 @@ public class Ecole implements Serializable {
 
     @Column(nullable = true)
     private LocalDate updateDate;
+
+public String generateMatricule(int length) {
+    String format = "%0" + length + "d";
+    Random random = new Random();
+    int randomNumber = random.nextInt((int) Math.pow(10, length));
+    return String.format(format, randomNumber);
+    }
 
 
 }

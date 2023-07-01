@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+
 @Service
 @Transactional
 
@@ -21,9 +23,10 @@ public class EcoleServiceImpl implements EcoleService {
 
     @Override
     public Ecole addecole(Ecole ecole) {
+        ecole.setAddDate(LocalDate.now());
+       ecole.setMatricule(generateMatricule(8));
         Ecole e = ecoleRepository.save(ecole);
-        e.setMatricule(String.format("%08d",e.getId()));
-        e.setAddDate(LocalDate.now());
+        //e.setMatricule(String.format("%08d",e.getId()));//
         return ecoleRepository.save(e);
     }
 
@@ -60,5 +63,12 @@ public class EcoleServiceImpl implements EcoleService {
     public List<Ecole> listNomEcol() {
         return ecoleRepository.listNomEcol();
     }
+
+    //public String generateMatricule(int length) {
+        //String format = "%0" + length + "d";
+        //Random random = new Random();
+        //int randomNumber = random.nextInt((int) Math.pow(10, length));
+        //return String.format(format, randomNumber);
+    //}//
 
 }

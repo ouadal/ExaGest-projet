@@ -11,4 +11,6 @@ public interface EcoleService {
     List<Ecole> listEcolCycle();
     List<Ecole> listNomEcol();
 
+    public String generateMatricule(int length);
+
 }

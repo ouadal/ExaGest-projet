@@ -29,7 +29,7 @@ public class CycleController {
 
 
     @GetMapping("/getAllCycle")
-    List<Cycle> tousCycle(@RequestBody Cycle cycle){
+    List<Cycle> tousCycle(){
         return cycleService.listcycle();
     }
 
