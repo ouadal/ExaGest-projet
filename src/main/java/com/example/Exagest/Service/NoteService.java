@@ -12,8 +12,6 @@ public interface NoteService {
 
     String deletenote(Long id);
 
-    List<Note> listnote();
-
     List<Note> listSess();
 
     List<Note> listAttriuMat();

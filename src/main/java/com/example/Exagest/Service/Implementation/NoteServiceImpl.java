@@ -45,10 +45,6 @@ public class NoteServiceImpl implements NoteService {
         return "Note supprimer avec succès";
     }
 
-    @Override
-    public List<Note> listnote() {
-        return noteRepository.findAll();
-    }
 
     @Override
     public List<Note> listSess() {
