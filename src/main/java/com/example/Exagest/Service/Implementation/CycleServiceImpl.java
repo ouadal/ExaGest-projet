@@ -7,6 +7,7 @@ import com.example.Exagest.repository.CycleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -21,6 +22,7 @@ public class CycleServiceImpl implements CycleService {
 
     @Override
     public Cycle addcycle(Cycle cycle) {
+        cycle.setAddDate(LocalDate.now());
         return cycleRepository.save(cycle);
     }
 
@@ -32,6 +34,7 @@ public class CycleServiceImpl implements CycleService {
         }
         Cycle dbCycle = optionalCycle.get();
         dbCycle.setLibele(cycle.getLibele());
+        dbCycle.setUpdateDate(LocalDate.now());
         return cycleRepository.save(dbCycle);
     }
 

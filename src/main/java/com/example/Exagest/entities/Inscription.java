@@ -40,6 +40,6 @@ public class Inscription implements Serializable {
     @Column(nullable = false)
     private LocalDate addDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate updateDate;
 }

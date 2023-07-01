@@ -36,7 +36,7 @@ public class AttributionMatiere implements Serializable {
     @JoinColumn(name = "idexamen")
     private Examen examen;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate updateDate;
 
     @Column(nullable = false)

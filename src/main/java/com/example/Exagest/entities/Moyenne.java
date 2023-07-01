@@ -30,7 +30,7 @@ public class Moyenne implements Serializable {
     @JoinColumn(name = "idsession")
     private Session session;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate updateDate;
 
     @Column(nullable = false)
