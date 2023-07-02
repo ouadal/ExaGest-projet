@@ -30,7 +30,7 @@ public class TypeExamenController {
     }
 
     @GetMapping("/getAllInscrEcol")
-    List<TypeExamen> tousEco(@RequestBody TypeExamen typeExamen){
+    List<TypeExamen> tousEco(){
         return typeExamenService.listtypeExamLib();
     }
 

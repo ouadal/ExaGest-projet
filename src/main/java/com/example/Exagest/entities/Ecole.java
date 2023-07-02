@@ -24,7 +24,7 @@ public class Ecole implements Serializable {
     private String adresse;
 
     @Column(nullable = false,length = 100)
-    private int telephone;
+    private String telephone;
 
     @Column(nullable = false,length = 100,unique = true)
     private String email;
@@ -37,7 +37,7 @@ public class Ecole implements Serializable {
 
     @Column(nullable = false,length = 100)
     private String Matricule;
-
+    // okay
     @ManyToOne
     @JoinColumn(name = "idcycle")
     private Cycle cycle;
@@ -48,12 +48,12 @@ public class Ecole implements Serializable {
     @Column(nullable = true)
     private LocalDate updateDate;
 
-public String generateMatricule(int length) {
-    String format = "%0" + length + "d";
-    Random random = new Random();
-    int randomNumber = random.nextInt((int) Math.pow(10, length));
-    return String.format(format, randomNumber);
-    }
+//public String generateMatricule(int length) {
+//    String format = "%0" + length + "d";
+//    Random random = new Random();
+//    int randomNumber = random.nextInt((int) Math.pow(10, length));
+//    return String.format(format, randomNumber);
+//    }
 
 
 }

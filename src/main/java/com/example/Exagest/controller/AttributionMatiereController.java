@@ -27,7 +27,7 @@ public class AttributionMatiereController {
     }
 
     @GetMapping("/getAllAttriMatAnn")
-    List<AttributionMatiere> attrmat(@RequestBody AttributionMatiere attributionMatiere){
+    List<AttributionMatiere> attrmat(){
         return attributionMatiereService.listattributionMatAnne();
     }
 

@@ -26,12 +26,12 @@ public class EcoleController {
     }
 
     @GetMapping("/getAllEcolCycle")
-    List<Ecole> EcoCyc(@RequestBody Ecole ecole){
+    List<Ecole> EcoCyc(){
         return ecoleService.listEcolCycle();
     }
 
     @GetMapping("/getAllEcolNom")
-    List<Ecole> EcoNom(@RequestBody Ecole ecole){
+    List<Ecole> EcoNom(){
         return ecoleService.listNomEcol();
     }
 

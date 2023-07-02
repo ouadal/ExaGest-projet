@@ -28,7 +28,7 @@ public class SessionController {
     }
 
     @GetMapping("/getAllSess")
-    List<Session> tousSess(@RequestBody Session session){
+    List<Session> tousSess(){
         return sessionService.listSess();
     }
 

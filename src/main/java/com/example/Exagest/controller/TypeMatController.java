@@ -29,7 +29,7 @@ public class TypeMatController {
     }
 
     @GetMapping("/getAllTypeMat")
-    List<TypeMat> typMot(@RequestBody TypeMat typeMat){
+    List<TypeMat> typMot(){
         return typeMatService.listtypeMatLib();
     }
 

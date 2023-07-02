@@ -26,7 +26,7 @@ public class AnneeController {
     }
 
     @GetMapping("/getAllAnn")
-    List<Annee> tousEco(@RequestBody Annee annee){
+    List<Annee> tousEco(){
         return anneeService.listAnne();
     }
 
