@@ -22,18 +22,18 @@ public class EnrolementController {
         return enrolementService.addenrolement(enrolement);
     }
 
-    @PutMapping("/editInscription/{id}")
+    @PutMapping("/editenrol/{id}")
     Enrolement modifEnrol(@PathVariable("id") Long id, @RequestBody Enrolement enrolement){
         return enrolementService.editenrolement(id,enrolement);
     }
 
     @GetMapping("/getAllEnrolEcol")
-    List<Enrolement> EnrolEco(@RequestBody Enrolement enrolement){
+    List<Enrolement> EnrolEco(){
         return enrolementService.listEcol();
     }
 
     @GetMapping("/getAllEnrolExam")
-    List<Enrolement> EnrolExam(@RequestBody Enrolement enrolement){
+    List<Enrolement> EnrolExam(){
         return enrolementService.listExamen();
     }
 
@@ -41,6 +41,6 @@ public class EnrolementController {
     @DeleteMapping("/suppEnrol/{id}")
     String suppEnrol(@PathVariable("id") Long id){
         enrolementService.deleteenrolement(id);
-        return "Inscription supprimer avec succès";
+        return "enrolement supprimer avec succès";
     }
 }

@@ -29,12 +29,12 @@ public class MatiereController {
     }
 
     @GetMapping("/getAllMatierelib")
-    List<Matiere> matLib(@RequestBody Matiere matiere){
+    List<Matiere> matLib(){
         return matiereService.listMatLib();
     }
 
     @GetMapping("/getAllMatiereTypMat")
-    List<Matiere> typMat(@RequestBody Matiere matiere){
+    List<Matiere> typMat(){
         return matiereService.listTypMat();
     }
 

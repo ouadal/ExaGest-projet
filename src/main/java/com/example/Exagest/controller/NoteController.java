@@ -30,18 +30,18 @@ public class NoteController {
     }
 
     @GetMapping("/getAllNotSess")
-    List<Note> NotSess(@RequestBody Note note){
+    List<Note> NotSess(){
         return noteService.listSess();
     }
 
     @GetMapping("/getAllNotAttMat")
-    List<Note> NotAttrMat(@RequestBody Note note){
+    List<Note> NotAttrMat(){
         return noteService.listAttriuMat();
     }
 
 
     @GetMapping("/getAllNotInsc")
-    List<Note> NotInsc(@RequestBody Note note){
+    List<Note> NotInsc(){
         return noteService.listInsc();
     }
 

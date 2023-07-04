@@ -42,5 +42,17 @@ public class Examen implements Serializable {
     @Column(nullable = true)
     private LocalDate updateDate;
 
- 
+    @Override
+    public String toString() {
+        return "Examen{" +
+                "id=" + id +
+                ", libele='" + libele + '\'' +
+                ", statut=" + statut +
+                ", cycleTypeExamen=" + cycleTypeExamen +
+                ", annee=" + annee +
+                ", ecole=" + ecole +
+                ", addDate=" + addDate +
+                ", updateDate=" + updateDate +
+                '}';
+    }
 }

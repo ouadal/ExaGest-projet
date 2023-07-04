@@ -33,24 +33,24 @@ public class InscriptionController {
 ////                compteRepository.findById(id).get();
 //    }
     @GetMapping("/getAllInscrEcol")
-    List<Inscription> tousEco(@RequestBody Inscription inscription){
+    List<Inscription> tousEco(){
         return inscriptionService.listEcol();
     }
 
     @GetMapping("/getAllInscrElev")
-    List<Inscription> tousElev(@RequestBody Inscription inscription){
+    List<Inscription> tousElev(){
         return inscriptionService.listElev();
     }
 
 
     @GetMapping("/getAllInscrAnn")
-    List<Inscription> tousAnn(@RequestBody Inscription inscription){
+    List<Inscription> tousAnn(){
         return inscriptionService.listAnn();
     }
 
 
     @GetMapping("/getAllInscrEnrol")
-    List<Inscription> tousEnrol(@RequestBody Inscription inscription){
+    List<Inscription> tousEnrol(){
         return inscriptionService.listEnrol();
     }
 

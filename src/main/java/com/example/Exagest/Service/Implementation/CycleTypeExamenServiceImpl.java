@@ -1,9 +1,10 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.CycleTypeExamenService;
+import com.example.Exagest.entities.Cycle;
 import com.example.Exagest.entities.CycleTypeExamen;
-import com.example.Exagest.entities.Eleve;
-import com.example.Exagest.repository.CycleTypeExamenRepository;
+import com.example.Exagest.entities.TypeExamen;
+import com.example.Exagest.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +17,31 @@ import java.util.Optional;
 public class CycleTypeExamenServiceImpl implements CycleTypeExamenService {
     private final CycleTypeExamenRepository cycleTypeExamenRepository;
 
-    public CycleTypeExamenServiceImpl(CycleTypeExamenRepository cycleTypeExamenRepository) {
+  private final TypeExamenRepository typeExamenRepository;
+
+private final CycleRepository cycleRepository;
+
+    public CycleTypeExamenServiceImpl(CycleTypeExamenRepository cycleTypeExamenRepository, TypeExamenRepository typeExamenRepository, AnneeRepository anneeRepository, CycleRepository cycleRepository) {
         this.cycleTypeExamenRepository = cycleTypeExamenRepository;
+        this.typeExamenRepository = typeExamenRepository;
+        this.cycleRepository = cycleRepository;
+
+
     }
 
     @Override
     public CycleTypeExamen addcycleTypeExam(CycleTypeExamen cycleTypeExamen) {
         cycleTypeExamen.setAddDate(LocalDate.now());
-        return cycleTypeExamenRepository.save(cycleTypeExamen);
+        Optional<TypeExamen> te = typeExamenRepository.findById(cycleTypeExamen.getTypeExamen().getId());
+        Optional<Cycle> cy = cycleRepository.findById(cycleTypeExamen.getCycle().getId());
+        if (te.isPresent() && cy.isPresent()){
+            cycleTypeExamen.setCycle(cy.get());
+            cycleTypeExamen.setTypeExamen(te.get());
+            return cycleTypeExamenRepository.save(cycleTypeExamen);
+        }
+        return null;
     }
+
 
     @Override
     public CycleTypeExamen editcycleTypeExam(Long id,CycleTypeExamen cycleTypeExamen) {

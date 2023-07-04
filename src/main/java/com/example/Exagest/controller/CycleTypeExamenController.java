@@ -29,7 +29,7 @@ public class CycleTypeExamenController {
     }
 
     @GetMapping("/getAllCycle")
-    List<CycleTypeExamen> tousEco(@RequestBody CycleTypeExamen cycleTypeExamen){
+    List<CycleTypeExamen> tousEco(){
         return cycleTypeExamenService.listcycleTypeExam();
     }
 

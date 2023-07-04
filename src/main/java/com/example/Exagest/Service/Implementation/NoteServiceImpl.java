@@ -1,8 +1,8 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.NoteService;
-import com.example.Exagest.entities.Note;
-import com.example.Exagest.repository.NoteRepository;
+import com.example.Exagest.entities.*;
+import com.example.Exagest.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +14,35 @@ import java.util.Optional;
 
 public class NoteServiceImpl implements NoteService {
     private final NoteRepository noteRepository;
+    private final SessionRepository sessionRepository;
+    private final ExamenRepository examenRepository;
+    private final AttributionMatiereRepository attributionMatiereRepository;
 
-    public NoteServiceImpl(NoteRepository noteRepository) {
+    private final InscriptionRepository inscriptionRepository;
+
+    public NoteServiceImpl(NoteRepository noteRepository, SessionRepository sessionRepository, ExamenRepository examenRepository, AttributionMatiereRepository attributionMatiereRepository, InscriptionRepository inscriptionRepository) {
         this.noteRepository = noteRepository;
+        this.sessionRepository = sessionRepository;
+        this.examenRepository = examenRepository;
+        this.attributionMatiereRepository = attributionMatiereRepository;
+        this.inscriptionRepository = inscriptionRepository;
     }
 
     @Override
     public Note addnote(Note note) {
         note.setAddDate(LocalDate.now());
+        Optional<Inscription> in = inscriptionRepository.findById(note.getInscription().getId());
+        Optional<Session> se = sessionRepository.findById(note.getSession().getId());
+        Optional<AttributionMatiere> att = attributionMatiereRepository.findById(note.getAttributionMatiere().getId());
+        Optional<Examen> ex = examenRepository.findById(note.getExamen().getId());
+        if (in.isPresent() && se.isPresent() && att.isPresent() && ex.isPresent()){
+            note.setExamen(ex.get());
+            note.setSession(se.get());
+            note.setInscription(in.get());
+            note.setAttributionMatiere(att.get());
+
+            return noteRepository.save(note);
+        }
         return noteRepository.save(note);
     }
 

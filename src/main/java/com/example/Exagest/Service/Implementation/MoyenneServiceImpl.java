@@ -1,8 +1,11 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.MoyenneService;
-import com.example.Exagest.entities.Moyenne;
+import com.example.Exagest.entities.*;
+import com.example.Exagest.repository.ExamenRepository;
+import com.example.Exagest.repository.InscriptionRepository;
 import com.example.Exagest.repository.MoyenneRepository;
+import com.example.Exagest.repository.SessionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +18,32 @@ import java.util.Optional;
 public class MoyenneServiceImpl implements MoyenneService {
     private final MoyenneRepository moyenneRepository;
 
-    public MoyenneServiceImpl(MoyenneRepository moyenneRepository) {
+    private final InscriptionRepository inscriptionRepository;
+
+    private final ExamenRepository examenRepository;
+
+    private final SessionRepository sessionRepository;
+
+    public MoyenneServiceImpl(MoyenneRepository moyenneRepository, InscriptionRepository inscriptionRepository, ExamenRepository examenRepository, SessionRepository sessionRepository) {
         this.moyenneRepository = moyenneRepository;
+        this.inscriptionRepository = inscriptionRepository;
+        this.examenRepository = examenRepository;
+        this.sessionRepository = sessionRepository;
     }
 
     @Override
     public Moyenne addmoyenne(Moyenne moyenne) {
         moyenne.setAddDate(LocalDate.now());
-        return moyenneRepository.save(moyenne);
+        Optional<Inscription> in = inscriptionRepository.findById(moyenne.getInscription().getId());
+        Optional<Session> se = sessionRepository.findById(moyenne.getSession().getId());
+        Optional<Examen> ex = examenRepository.findById(moyenne.getExamen().getId());
+        if (in.isPresent() && se.isPresent() && in.isPresent() && ex.isPresent()) {
+            moyenne.setExamen(ex.get());
+            moyenne.setSession(se.get());
+            moyenne.setInscription(in.get());
+            return moyenneRepository.save(moyenne);
+        }
+        return moyenne;
     }
 
     @Override

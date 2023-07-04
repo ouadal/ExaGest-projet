@@ -2,7 +2,9 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.MatiereService;
 import com.example.Exagest.entities.Matiere;
+import com.example.Exagest.entities.TypeMat;
 import com.example.Exagest.repository.MatiereRepository;
+import com.example.Exagest.repository.TypeMatRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +16,23 @@ import java.util.Optional;
 @Transactional
 public class MatiereServiceImpl implements MatiereService {
     private final MatiereRepository matiereRepository;
+    private final TypeMatRepository typeMatRepository;
 
-    public MatiereServiceImpl(MatiereRepository matiereRepository) {
+    public MatiereServiceImpl(MatiereRepository matiereRepository, TypeMatRepository typeMatRepository) {
         this.matiereRepository = matiereRepository;
+        this.typeMatRepository = typeMatRepository;
     }
 
     @Override
     public Matiere addmatiere(Matiere matiere) {
         matiere.setAddDate(LocalDate.now());
-        return matiereRepository.save(matiere);
+         Optional<TypeMat> tm = typeMatRepository.findById(matiere.getTypeMat().getId());
+         if (tm.isPresent()){
+             matiere.setTypeMat(tm.get());
+             return matiereRepository.save(matiere);
+         }
+         return null;
+
     }
 
     @Override

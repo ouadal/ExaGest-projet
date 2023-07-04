@@ -16,7 +16,7 @@ public class ExamenController {
         this.examenService = examenService;
     }
 
-    @PostMapping("/creeInscription")
+    @PostMapping("/creeExam")
     Examen ajouterInsc(@RequestBody Examen examen){
         return examenService.addexamen(examen);
     }
@@ -28,18 +28,18 @@ public class ExamenController {
     }
 
     @GetMapping("/getAllExamEcol")
-    List<Examen> ExamEco(@RequestBody Examen examen){
+    List<Examen> ExamEco(){
         return examenService.listEcol();
     }
 
     @GetMapping("/getAllExamAnn")
-    List<Examen> ExamAnn(@RequestBody Examen examen){
+    List<Examen> ExamAnn(){
         return examenService.listAnnee();
     }
 
 
     @GetMapping("/getAllExamLib")
-    List<Examen> ExamLib(@RequestBody Examen examen){
+    List<Examen> ExamLib(){
         return examenService.listExameLib();
     }
 

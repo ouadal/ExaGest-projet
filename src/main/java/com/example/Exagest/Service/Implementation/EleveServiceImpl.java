@@ -52,5 +52,10 @@ public class EleveServiceImpl implements EleveService {
         return eleveRepository.listNom();
     }
 
+    @Override
+    public List<Eleve> listElevMat(Long id) {
+        return eleveRepository.listElevMat(id);
+    }
+
 
 }

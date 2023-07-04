@@ -32,13 +32,13 @@ public class AttributionMatiereController {
     }
 
     @GetMapping("/getAllAttriMatExam")
-    List<AttributionMatiere> attriexam(@RequestBody AttributionMatiere attributionMatiere){
+    List<AttributionMatiere> attriexam(){
         return attributionMatiereService.listattributionMatExam();
     }
 
 
     @GetMapping("/getAllAttriMatMatie")
-    List<AttributionMatiere> attrimat(@RequestBody AttributionMatiere attributionMatiere){
+    List<AttributionMatiere> attrimat(){
         return attributionMatiereService.listattributionMatMatiere();
     }
 

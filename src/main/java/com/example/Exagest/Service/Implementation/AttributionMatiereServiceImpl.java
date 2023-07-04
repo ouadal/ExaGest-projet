@@ -1,11 +1,11 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.AttributionMatiereService;
-import com.example.Exagest.entities.Annee;
-import com.example.Exagest.entities.AttributionMatiere;
-import com.example.Exagest.entities.Cycle;
+import com.example.Exagest.entities.*;
 import com.example.Exagest.repository.AnneeRepository;
 import com.example.Exagest.repository.AttributionMatiereRepository;
+import com.example.Exagest.repository.ExamenRepository;
+import com.example.Exagest.repository.MatiereRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +20,15 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
     private final AttributionMatiereRepository attributionMatiereRepository;
     private final AnneeRepository anneeRepository;
 
-    public AttributionMatiereServiceImpl(AttributionMatiereRepository attributionMatiereRepository, AnneeRepository anneeRepository) {
+    private final MatiereRepository matiereRepository;
+
+    private final ExamenRepository examenRepository;
+
+    public AttributionMatiereServiceImpl(AttributionMatiereRepository attributionMatiereRepository, AnneeRepository anneeRepository, MatiereRepository matiereRepository, ExamenRepository examenRepository) {
         this.attributionMatiereRepository = attributionMatiereRepository;
         this.anneeRepository = anneeRepository;
+        this.matiereRepository = matiereRepository;
+        this.examenRepository = examenRepository;
     }
 
     @Override
@@ -30,7 +36,30 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
 
         Annee a = anneeRepository.getCurrentYear();
         attributionMatiere.setAddDate(LocalDate.now());
+        Optional<Matiere> mat = matiereRepository.findById(attributionMatiere.getMatiere().getId());
+//        if (mat.isPresent()){
+//            attributionMatiere.setMatiere(mat.get());
+//            return attributionMatiereRepository.save(attributionMatiere);
+//        }
+        Optional<Annee> an = anneeRepository.findById(attributionMatiere.getAnnee().getId());
+//        if (an.isPresent()){
+//            attributionMatiere.setAnnee(an.get());
+//            return attributionMatiereRepository.save(attributionMatiere);
+//        }
+        Optional<Examen> ex = examenRepository.findById(attributionMatiere.getExamen().getId());
+//        if (ex.isPresent()){
+//            attributionMatiere.setExamen(ex.get());
+//            return attributionMatiereRepository.save(attributionMatiere);
+//        }
 
+
+        if(mat.isPresent() && an.isPresent() && ex.isPresent()){
+            attributionMatiere.setMatiere(mat.get());
+            attributionMatiere.setAnnee(an.get());
+            attributionMatiere.setExamen(ex.get());
+            return attributionMatiereRepository.save(attributionMatiere);
+
+        }
 
         return attributionMatiereRepository.save(attributionMatiere);
     }

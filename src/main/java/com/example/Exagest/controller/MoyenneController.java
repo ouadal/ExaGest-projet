@@ -28,24 +28,24 @@ public class MoyenneController {
         return moyenneService.editmoyenne(id,moyenne);
     }
     @GetMapping("/getAllMoyEcol")
-    List<Moyenne> tousEco(@RequestBody Moyenne moyenne){
+    List<Moyenne> tousEco(){
         return moyenneService.listSess();
     }
 
     @GetMapping("/getAllMoyInsc")
-    List<Moyenne> MoyInsc(@RequestBody Moyenne moyenne){
+    List<Moyenne> MoyInsc(){
         return moyenneService.listIns();
     }
 
 
     @GetMapping("/getAllMoyExam")
-    List<Moyenne> MoyExam(@RequestBody Moyenne moyenne){
+    List<Moyenne> MoyExam(){
         return moyenneService.listExam();
     }
 
 
     @GetMapping("/getAllMoySess")
-    List<Moyenne> MoySess(@RequestBody Moyenne moyenne){
+    List<Moyenne> MoySess(){
         return moyenneService.listSess();
     }
 

@@ -22,7 +22,7 @@ public class EleveController {
     Eleve ajouterElev(@RequestBody Eleve eleve){
         return eleveService.addeleve(eleve);
     }
-    @PutMapping("/editInscription/{id}")
+    @PutMapping("/editEleve/{id}")
     Eleve modifElev(@PathVariable("id") Long id, @RequestBody Eleve eleve){
         return eleveService.editeleve(id,eleve);
     }
@@ -30,6 +30,11 @@ public class EleveController {
     @GetMapping("/getAllElev")
     List<Eleve> tousElev(@RequestBody Eleve eleve){
         return eleveService.listNom();
+    }
+
+    @GetMapping("/getAllElevMat")
+    List<Eleve> tousElevMat(@RequestParam("id") Long id){
+        return eleveService.listElevMat(id);
     }
 
 

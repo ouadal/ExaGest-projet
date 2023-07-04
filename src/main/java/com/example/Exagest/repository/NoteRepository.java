@@ -20,4 +20,5 @@ public interface NoteRepository extends JpaRepository<Note, Long>  {
 
     @Query("SELECT  n FROM Note n ORDER BY n.examen.libele")
     List<Note> listExam();
+
 }
