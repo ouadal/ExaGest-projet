@@ -84,4 +84,37 @@ public class NoteServiceImpl implements NoteService {
     public List<Note> listInsc() {
         return noteRepository.listInsc();
     }
+
+    @Override
+    public List<Note> listeNotElePerAnnSessExam(String anneeID, String sessionID, String examID)
+    {
+        return noteRepository.listeNotElePerAnnSessExam(anneeID,sessionID, examID);
+    }
+
+
+
+    @Override
+    public List<Note>  genererNoteParDefaut(Long idExamen , Long idSession) {
+        List<AttributionMatiere> listAttriMat = attributionMatiereRepository.listAttMAtPereExam(idExamen);
+        if (listAttriMat.isEmpty()) {
+            System.out.println("vide");
+        }
+        Optional<Session> session = sessionRepository.findById(idSession);
+        for (int i = 0; i < listAttriMat.size(); i++) {
+            AttributionMatiere attributionMatiere = listAttriMat.get(i);
+            List<Inscription> listInsc = inscriptionRepository.listInscPerExam(idExamen);
+            for (int j = 0; j < listInsc.size(); j++) {
+                Inscription inscription = listInsc.get(j);
+                Note note = new Note(null, false, 0, inscription, attributionMatiere, session.get(), attributionMatiere.getExamen(), LocalDate.now(), null);
+//                note.setAttributionMatiere(attributionMatiere);
+//                note.setInscription(inscription);
+//                note.setSession(session.orElse(null));
+//                note.setExamen(new Examen());
+                // Complétez ici avec d'autres attributs de l'objet Note, le cas échéant
+                noteRepository.save(note);
+            }
+        }
+
+        return noteRepository.listNotePerExam(idExamen);
+    }
 }

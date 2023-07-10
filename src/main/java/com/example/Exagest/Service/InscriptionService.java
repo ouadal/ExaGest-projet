@@ -1,11 +1,13 @@
 package com.example.Exagest.Service;
 
+import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Inscription;
+import com.example.Exagest.requests.InscriptionRequestModel;
 
 import java.util.List;
 
 public interface InscriptionService {
-   Inscription addinscription(Inscription inscription);
+   Inscription addinscription(InscriptionRequestModel inscriptionRM);
     Inscription editinscriptionn( Long id,Inscription inscription);
     String deleteinscription(Long id);
     List<Inscription> listEcol();
@@ -15,6 +17,8 @@ public interface InscriptionService {
     List<Inscription> listAnn();
 
     List<Inscription> listEnrol();
+
+ List<Inscription> listInscPerExam(Long id);
 
 
 }

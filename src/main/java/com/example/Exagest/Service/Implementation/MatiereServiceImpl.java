@@ -1,14 +1,18 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.MatiereService;
+import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Matiere;
 import com.example.Exagest.entities.TypeMat;
+import com.example.Exagest.repository.EleveRepository;
 import com.example.Exagest.repository.MatiereRepository;
 import com.example.Exagest.repository.TypeMatRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.lang.management.LockInfo;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +22,12 @@ public class MatiereServiceImpl implements MatiereService {
     private final MatiereRepository matiereRepository;
     private final TypeMatRepository typeMatRepository;
 
-    public MatiereServiceImpl(MatiereRepository matiereRepository, TypeMatRepository typeMatRepository) {
+    private final EleveRepository eleveRepository;
+
+    public MatiereServiceImpl(MatiereRepository matiereRepository, TypeMatRepository typeMatRepository, EleveRepository eleveRepository) {
         this.matiereRepository = matiereRepository;
         this.typeMatRepository = typeMatRepository;
+        this.eleveRepository = eleveRepository;
     }
 
     @Override
@@ -52,7 +59,7 @@ public class MatiereServiceImpl implements MatiereService {
     }
 
     @Override
-    public String deletematiere(Long id) {
+    public String deleteMatiere(Long id) {
          matiereRepository.deleteById(id);
          return "Matière supprimer avec succès";
     }
@@ -65,6 +72,18 @@ public class MatiereServiceImpl implements MatiereService {
     @Override
     public List<Matiere> listTypMat() {
         return matiereRepository.listTypMat();
+    }
+
+    @Override
+    public HashMap<String, List<Eleve>> matPerElv() {
+
+        var data = new HashMap<String , List<Eleve>>();
+        var matieres = matiereRepository.listMatLib();
+        for (var matiere : matieres) {
+            data.put(matiere.getLibele(), eleveRepository.listElevMat(matiere.getId()));
+        }
+
+        return  data;
     }
 
 

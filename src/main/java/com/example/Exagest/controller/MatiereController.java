@@ -1,11 +1,11 @@
 package com.example.Exagest.controller;
 
-import com.example.Exagest.Service.InscriptionService;
 import com.example.Exagest.Service.MatiereService;
-import com.example.Exagest.entities.Inscription;
+import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Matiere;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -38,10 +38,15 @@ public class MatiereController {
         return matiereService.listTypMat();
     }
 
+    @GetMapping("/getMatPerElev")
+    HashMap<String, List<Eleve>> matPerElv(){
+        return matiereService.matPerElv();
+    }
+
 
     @DeleteMapping("/suppMat/{id}")
     String suppInsc(@PathVariable("id") Long id){
-        matiereService.deletematiere(id);
+        matiereService.deleteMatiere(id);
         return "Matiere supprimer avec succès";
     }
 }

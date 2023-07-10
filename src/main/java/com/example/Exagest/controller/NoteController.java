@@ -45,6 +45,17 @@ public class NoteController {
         return noteService.listInsc();
     }
 
+    @GetMapping("/getAllNoGen")
+    List<Note> listeNotElePerAnnSessExam(@RequestParam("anneeID") String anneeID, @RequestParam String sessionID, @RequestParam String examID){
+        return noteService.listeNotElePerAnnSessExam(anneeID, sessionID, examID);
+    }
+
+    @GetMapping("/getNotePerExam/{idExamen}/{idSession}")
+    List<Note> genNotPerExam(@PathVariable("idExamen") Long idExamen,@PathVariable("idSession") Long idSession){
+        return noteService.genererNoteParDefaut(idExamen,idSession);
+    }
+
+
 
 
 

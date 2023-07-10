@@ -3,6 +3,7 @@ package com.example.Exagest.Service.Implementation;
 import com.example.Exagest.Service.InscriptionService;
 import com.example.Exagest.entities.*;
 import com.example.Exagest.repository.*;
+import com.example.Exagest.requests.InscriptionRequestModel;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -32,23 +33,34 @@ public class InscriptionServiceImpl implements InscriptionService {
     }
 
     @Override
-    public Inscription addinscription(Inscription inscription) {
-
+    public Inscription addinscription(  InscriptionRequestModel inscriptionRM) {
+        Inscription inscription = new Inscription();
+        Eleve eleve = new Eleve();
         Annee a = anneeRepository.getCurrentYear();
+
         inscription.setAnnee(a);
         inscription.setAddDate(LocalDate.now());
-        Optional<Ecole> el = ecoleRepository.findById(inscription.getEcole().getId());
-        Optional<Annee> an = anneeRepository.findById(inscription.getAnnee().getId());
-        Optional<Enrolement> en = enrolementRepository.findById(inscription.getEnrolement().getId());
-        Optional<Eleve> ev = eleveRepository.findById(inscription.getEleve().getId());
+
+        eleve.setUpdateDate(null);
+        eleve.setAddDate(LocalDate.now());
+        eleve.setNom(inscriptionRM.getNom());
+        eleve.setPrenom(inscriptionRM.getPrenom());
+        eleve.setContactParent(inscriptionRM.getContactParent());
+        eleve.setDate_naissance(inscriptionRM.getDate_naissance());
+
+        Eleve eleveSaved = eleveRepository.save(eleve);
+
+        Optional<Ecole> el = ecoleRepository.findById(inscriptionRM.getIdEcole());
+        //Optional<Annee> an = anneeRepository.findById(inscription.getAnnee().getId());
+        Optional<Enrolement> en = enrolementRepository.findById(inscriptionRM.getIdEnrolement());
+        //Optional<Eleve> ev = eleveRepository.findById(inscription.getEleve().getId());
 //        System.out.println(el.isPresent());
 //        System.out.println(an.isPresent());
 //        System.out.println(ex.isPresent());
-        if (el.isPresent() && an.isPresent() && ev.isPresent() && en.isPresent()) {
-            inscription.setAnnee(an.get());
+        if (el.isPresent()  && en.isPresent()) {
             inscription.setEcole(el.get());
-            inscription.setEleve(ev.get());
             inscription.setEnrolement(en.get());
+            inscription.setEleve(eleveSaved);
             return inscriptionRepository.save(inscription);
         }
         return inscription;
@@ -95,6 +107,10 @@ public class InscriptionServiceImpl implements InscriptionService {
         return inscriptionRepository.listEnrol();
     }
 
+    @Override
+    public List<Inscription> listInscPerExam(Long id) {
+        return inscriptionRepository.listInscPerExam(id);
+    }
 
 
 }

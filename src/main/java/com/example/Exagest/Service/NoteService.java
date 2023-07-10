@@ -17,4 +17,10 @@ public interface NoteService {
     List<Note> listAttriuMat();
 
     List<Note> listInsc();
+
+    List<Note> listeNotElePerAnnSessExam(String anneeID, String sessionID,String examID);
+
+    public List<Note>  genererNoteParDefaut(Long idExamen , Long idSession) ;
+
+
 }

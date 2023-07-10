@@ -4,6 +4,8 @@ import com.example.Exagest.Service.AttributionMatiereService;
 import com.example.Exagest.Service.InscriptionService;
 import com.example.Exagest.entities.AttributionMatiere;
 import com.example.Exagest.entities.Inscription;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,16 +33,23 @@ public class AttributionMatiereController {
         return attributionMatiereService.listattributionMatAnne();
     }
 
-    @GetMapping("/getAllAttriMatExam")
-    List<AttributionMatiere> attriexam(){
-        return attributionMatiereService.listattributionMatExam();
+    @GetMapping("/getAllAttPerExam/{id}")
+    List<AttributionMatiere> attrMatPerEx( @PathVariable("id") Long idEx){
+        return attributionMatiereService.listattributionMatExam(idEx);
     }
+
+//    @GetMapping("/getAllAttriMatExam")
+//    List<AttributionMatiere> attriexam(){
+//        return attributionMatiereService.listattributionMatExam();
+//    }
 
 
     @GetMapping("/getAllAttriMatMatie")
     List<AttributionMatiere> attrimat(){
         return attributionMatiereService.listattributionMatMatiere();
     }
+
+
 
 
 

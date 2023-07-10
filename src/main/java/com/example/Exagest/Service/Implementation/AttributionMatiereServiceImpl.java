@@ -2,10 +2,7 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.AttributionMatiereService;
 import com.example.Exagest.entities.*;
-import com.example.Exagest.repository.AnneeRepository;
-import com.example.Exagest.repository.AttributionMatiereRepository;
-import com.example.Exagest.repository.ExamenRepository;
-import com.example.Exagest.repository.MatiereRepository;
+import com.example.Exagest.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +21,27 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
 
     private final ExamenRepository examenRepository;
 
-    public AttributionMatiereServiceImpl(AttributionMatiereRepository attributionMatiereRepository, AnneeRepository anneeRepository, MatiereRepository matiereRepository, ExamenRepository examenRepository) {
+    private final SessionRepository sessionRepository;
+
+    private final InscriptionRepository inscriptionRepository;
+
+    private final EcoleRepository ecoleRepository;
+
+    private final CycleTypeExamenRepository cycleTypeExamenRepository;
+
+    private final NoteRepository noteRepository;
+
+
+    public AttributionMatiereServiceImpl(AttributionMatiereRepository attributionMatiereRepository, AnneeRepository anneeRepository, MatiereRepository matiereRepository, ExamenRepository examenRepository, SessionRepository sessionRepository, InscriptionRepository inscriptionRepository, EcoleRepository ecoleRepository, CycleTypeExamenRepository cycleTypeExamenRepository, NoteRepository noteRepository) {
         this.attributionMatiereRepository = attributionMatiereRepository;
         this.anneeRepository = anneeRepository;
         this.matiereRepository = matiereRepository;
         this.examenRepository = examenRepository;
+        this.sessionRepository = sessionRepository;
+        this.inscriptionRepository = inscriptionRepository;
+        this.ecoleRepository = ecoleRepository;
+        this.cycleTypeExamenRepository = cycleTypeExamenRepository;
+        this.noteRepository = noteRepository;
     }
 
     @Override
@@ -91,13 +104,20 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
     }
 
     @Override
-    public List<AttributionMatiere> listattributionMatExam() {
-        return attributionMatiereRepository.listattributionMatExam();
+    public List<AttributionMatiere> listattributionMatExam(Long id) {
+        return attributionMatiereRepository.listAttMAtPereExam(id);
     }
 
     @Override
     public List<AttributionMatiere> listattributionMatMatiere() {
         return attributionMatiereRepository.listattributionMatMatiere();
     }
+
+
+
+
+
+
+
 
 }

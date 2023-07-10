@@ -15,4 +15,6 @@ public interface MatiereRepository extends JpaRepository<Matiere, Long>  {
 
     @Query("SELECT m FROM Matiere m ORDER BY m.typeMat.libele ")
     List<Matiere> listTypMat();
+
+
 }

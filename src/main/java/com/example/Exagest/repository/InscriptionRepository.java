@@ -5,6 +5,7 @@ import com.example.Exagest.entities.Examen;
 import com.example.Exagest.entities.Inscription;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -20,5 +21,10 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long> 
 
     @Query("SELECT i FROM Inscription i ORDER BY i.ecole.nomEcole ")
     List<Inscription> listEcol();
+
+    @Query("SELECT i FROM Inscription i WHERE i.enrolement.examen.id = :idEx ")
+    List<Inscription> listInscPerExam(@Param("idEx") Long id);
+
+
 
 }

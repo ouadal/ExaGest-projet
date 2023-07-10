@@ -21,4 +21,9 @@ public interface NoteRepository extends JpaRepository<Note, Long>  {
     @Query("SELECT  n FROM Note n ORDER BY n.examen.libele")
     List<Note> listExam();
 
+    @Query("SELECT n FROM Note n  WHERE n.inscription.annee.id =?1 and n.session.id =?2 and n.examen.id=?3 ")
+    List<Note> listeNotElePerAnnSessExam(String anneeID, String sessionID,String examID);
+
+    @Query("SELECT n FROM Note n  WHERE n.examen.id=?1 ")
+    List<Note> listNotePerExam(Long idExamen);
 }

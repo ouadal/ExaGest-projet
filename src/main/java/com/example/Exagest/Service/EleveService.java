@@ -1,5 +1,6 @@
 package com.example.Exagest.Service;
 
+import com.example.Exagest.entities.AttributionMatiere;
 import com.example.Exagest.entities.Eleve;
 import org.springframework.data.repository.query.Param;
 
@@ -15,4 +16,6 @@ public interface EleveService {
     List<Eleve> listNom();
 
     List<Eleve> listElevMat(@Param("id") Long id);
+
+
 }

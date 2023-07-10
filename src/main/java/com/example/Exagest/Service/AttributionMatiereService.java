@@ -14,9 +14,11 @@ public interface AttributionMatiereService {
 
     List<AttributionMatiere> listattributionMatAnne();
 
-    List<AttributionMatiere> listattributionMatExam();
+    List<AttributionMatiere> listattributionMatExam(Long id);
 
     List<AttributionMatiere> listattributionMatMatiere();
+
+
 
 
 }
