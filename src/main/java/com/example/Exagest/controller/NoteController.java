@@ -50,9 +50,16 @@ public class NoteController {
         return noteService.listeNotElePerAnnSessExam(anneeID, sessionID, examID);
     }
 
+
     @GetMapping("/getNotePerExam/{idExamen}/{idSession}")
     List<Note> genNotPerExam(@PathVariable("idExamen") Long idExamen,@PathVariable("idSession") Long idSession){
         return noteService.genererNoteParDefaut(idExamen,idSession);
+    }
+
+
+    @GetMapping("/getNotElevPerExamSession")
+    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
     }
 
 

@@ -4,6 +4,7 @@ import com.example.Exagest.Service.EleveService;
 import com.example.Exagest.Service.InscriptionService;
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Inscription;
+import com.example.Exagest.requests.InscriptionRequestModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class EleveController {
     }
 
     @PostMapping("/creeEleve")
-    Eleve ajouterElev(@RequestBody Eleve eleve){
-        return eleveService.addeleve(eleve);
+    Eleve ajouterInsc(@RequestBody InscriptionRequestModel inscriptionRM){
+        return eleveService.addeleve(inscriptionRM);
     }
     @PutMapping("/editEleve/{id}")
     Eleve modifElev(@PathVariable("id") Long id, @RequestBody Eleve eleve){

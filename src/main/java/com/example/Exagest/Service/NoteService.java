@@ -22,5 +22,8 @@ public interface NoteService {
 
     public List<Note>  genererNoteParDefaut(Long idExamen , Long idSession) ;
 
+    List<Note> listNoteElevPerExamenSession( Long idExamen, Long idInscription, Long idSession);
 
+
+    void calculerMoyenne(Long idExamen, Long idInscription, Long idSession);
 }

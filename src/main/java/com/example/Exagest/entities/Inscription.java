@@ -37,7 +37,7 @@ public class Inscription implements Serializable {
     @JoinColumn(name = "idecole")
     private Ecole ecole;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate addDate;
 
     @Column(nullable = true)

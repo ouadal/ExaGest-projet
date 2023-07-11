@@ -75,6 +75,8 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.listSess();
     }
 
+
+
     @Override
     public List<Note> listAttriuMat() {
         return noteRepository.listAttriuMat();
@@ -85,10 +87,19 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.listInsc();
     }
 
+
     @Override
     public List<Note> listeNotElePerAnnSessExam(String anneeID, String sessionID, String examID)
     {
         return noteRepository.listeNotElePerAnnSessExam(anneeID,sessionID, examID);
+    }
+
+
+
+    @Override
+    public List<Note> listNoteElevPerExamenSession(Long idExamen, Long idInscription, Long idSession)
+    {
+        return noteRepository.listNoteElevPerExamenSession(idExamen,  idInscription, idSession);
     }
 
 
@@ -106,15 +117,51 @@ public class NoteServiceImpl implements NoteService {
             for (int j = 0; j < listInsc.size(); j++) {
                 Inscription inscription = listInsc.get(j);
                 Note note = new Note(null, false, 0, inscription, attributionMatiere, session.get(), attributionMatiere.getExamen(), LocalDate.now(), null);
-//                note.setAttributionMatiere(attributionMatiere);
-//                note.setInscription(inscription);
-//                note.setSession(session.orElse(null));
-//                note.setExamen(new Examen());
-                // Complétez ici avec d'autres attributs de l'objet Note, le cas échéant
                 noteRepository.save(note);
             }
         }
 
         return noteRepository.listNotePerExam(idExamen);
+    }
+
+    @Override
+    public void calculerMoyenne(Long idExamen, Long idInscription, Long idSession){
+        Optional<Session> session = sessionRepository.findById(idSession);
+        Optional<Examen> examen = examenRepository.findById(idExamen);
+        Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
+        if(session.isPresent() && examen.isPresent() && inscription.isPresent()){
+            List<Note> notes = noteRepository.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+            double sommeNote = 0;
+            double sommeCoeff = 0;
+            for (Note note : notes) {
+                sommeCoeff += note.getAttributionMatiere().getCoefficient();
+                sommeNote += (note.getNoteExam() * note.getAttributionMatiere().getCoefficient());
+            }
+
+            if (sommeCoeff != 0) {
+                double moyenne = sommeNote / sommeCoeff;
+                System.out.println("La moyenne est : " + moyenne);
+            } else {
+                throw new ArithmeticException("Division by zero error: sum of coefficients is zero.");
+            }
+        } else {
+            // Gérez le cas où l'une des entités n'existe pas dans la base de données
+            throw new IllegalArgumentException("Invalid session, exam, or inscription ID.");
+        }
+
+//        if (sommeCoeff != 0) {
+//            double moyenne = sommeNote / sommeCoeff;
+//            // Faites quelque chose avec la moyenne calculée
+//            System.out.println("La moyenne est : " + moyenne);
+//        } else {
+//            // Gérez le cas où sommeCoeff est égal à zéro (pour éviter une division par zéro)
+//            System.err.println("Erreur : La somme des coefficients est nulle. Impossible de calculer la moyenne.");
+//        }
+//    } else {
+//        // Gérez le cas où l'une des entités n'existe pas dans la base de données
+//        System.err.println("Erreur : La session, l'examen ou l'inscription n'existe pas dans la base de données.");
+//    }
+
+
     }
 }

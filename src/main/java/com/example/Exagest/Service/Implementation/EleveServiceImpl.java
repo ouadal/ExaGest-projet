@@ -1,14 +1,8 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.EleveService;
-import com.example.Exagest.entities.Annee;
-import com.example.Exagest.entities.Ecole;
-import com.example.Exagest.entities.Eleve;
-import com.example.Exagest.entities.Enrolement;
-import com.example.Exagest.repository.AnneeRepository;
-import com.example.Exagest.repository.EcoleRepository;
-import com.example.Exagest.repository.EleveRepository;
-import com.example.Exagest.repository.InscriptionRepository;
+import com.example.Exagest.entities.*;
+import com.example.Exagest.repository.*;
 import com.example.Exagest.requests.InscriptionRequestModel;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -28,17 +22,25 @@ public class EleveServiceImpl implements EleveService {
 
     private final EcoleRepository ecoleRepository;
 
-    public EleveServiceImpl(EleveRepository eleveRepository, AnneeRepository anneeRepository, InscriptionRepository inscriptionRepository, EcoleRepository ecoleRepository) {
+    private final EnrolementRepository enrolementRepository;
+
+    public EleveServiceImpl(EleveRepository eleveRepository, AnneeRepository anneeRepository, InscriptionRepository inscriptionRepository, EcoleRepository ecoleRepository, EnrolementRepository enrolementRepository) {
         this.eleveRepository = eleveRepository;
         this.anneeRepository = anneeRepository;
         this.inscriptionRepository = inscriptionRepository;
         this.ecoleRepository = ecoleRepository;
+        this.enrolementRepository = enrolementRepository;
     }
 
     @Override
-    public Eleve addeleve(InscriptionRequestModel inscriptionRequestModel) {
+    public Eleve addeleve(InscriptionRequestModel inscriptionRM) {
         Eleve eleve1 = new Eleve();
+        Inscription inscription = new Inscription();
         Annee a = anneeRepository.getCurrentYear();
+
+        inscription.setAnnee(a);
+
+
 
         eleve1.setUpdateDate(null);
         eleve1.setAddDate(LocalDate.now());
@@ -47,12 +49,13 @@ public class EleveServiceImpl implements EleveService {
         eleve1.setContactParent(inscriptionRM.getContactParent());
         eleve1.setDate_naissance(inscriptionRM.getDate_naissance());
 
-        eleve1 = eleveRepository.save(eleve);
+         Eleve eleveSaved = eleveRepository.save(eleve1);
 
 
         Optional<Ecole> el = ecoleRepository.findById(inscriptionRM.getIdEcole());
         //Optional<Annee> an = anneeRepository.findById(inscription.getAnnee().getId());
         Optional<Enrolement> en = enrolementRepository.findById(inscriptionRM.getIdEnrolement());
+
         //Optional<Eleve> ev = eleveRepository.findById(inscription.getEleve().getId());
 //        System.out.println(el.isPresent());
 //        System.out.println(an.isPresent());
@@ -61,9 +64,10 @@ public class EleveServiceImpl implements EleveService {
             inscription.setEcole(el.get());
             inscription.setEnrolement(en.get());
             inscription.setEleve(eleveSaved);
-            return inscriptionRepository.save(inscription);
+            return inscriptionRepository.save(inscription).getEleve();
         }
-        return inscription;        return eleveRepository.save(eleve);
+
+        return eleveSaved;
     }
 
     @Override
