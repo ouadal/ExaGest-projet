@@ -1,9 +1,10 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.NoteService;
-import com.example.Exagest.entities.Inscription;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Note;
-import org.aspectj.weaver.ast.Not;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,56 +20,103 @@ public class NoteController {
 
 
     @PostMapping("/creeNote")
-    Note ajouterNot(@RequestBody Note note){
-        return noteService.addnote(note);
+    public ResponseEntity<Note> creeNote(@RequestBody Note note ) {
+//        Note add(@RequestBody Annee annee){
+//            return anneeService.addAnnee(annee);
+//        }
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(noteService.addnote(note));
+        } catch (Exception e) {
+            System.out.println(" erreur  lors de la creation " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 
     @PutMapping("/editNote/{id}")
-    Note modifNot(@PathVariable("id") Long id, @RequestBody Note note){
-        return noteService.editnote(id,note);
+//    Note modifNot(@PathVariable("id") Long id, @RequestBody Note note){
+//        return noteService.editnote(id,note);
+//    }
+    public ResponseEntity<Note> modifierNote(@RequestBody Note note, @PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(noteService.editnote(note, id));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping("/getAllNotSess")
-    List<Note> NotSess(){
-        return noteService.listSess();
+//    List<Note> NotSess(){
+//        return noteService.listSess();
+//    }
+    public ResponseEntity<List<Note>>  toutesLesNotesParSession(){
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.listSess());
     }
 
     @GetMapping("/getAllNotAttMat")
-    List<Note> NotAttrMat(){
-        return noteService.listAttriuMat();
+//    List<Note> NotAttrMat(){
+//        return noteService.listAttriuMat();
+//    }
+    public ResponseEntity<List<Note>>  toutesLesNotesParAttriMat(){
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.listAttriuMat());
     }
 
 
     @GetMapping("/getAllNotInsc")
-    List<Note> NotInsc(){
-        return noteService.listInsc();
+//    List<Note> NotInsc(){
+//        return noteService.listInsc();
+//    }
+    public ResponseEntity<List<Note>>  toutesLesNotesParInscription(){
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.listInsc());
     }
 
+
+
     @GetMapping("/getAllNoGen")
-    List<Note> listeNotElePerAnnSessExam(@RequestParam("anneeID") String anneeID, @RequestParam String sessionID, @RequestParam String examID){
-        return noteService.listeNotElePerAnnSessExam(anneeID, sessionID, examID);
+//    List<Note> listeNotElePerAnnSessExam(@RequestParam("anneeID") String anneeID, @RequestParam String sessionID, @RequestParam String examID){
+//        return noteService.listeNotElePerAnnSessExam(anneeID, sessionID, examID);
+//    }
+    public ResponseEntity<List<Note>> listeNotElePerAnnSessExam(@RequestParam("anneeID") String anneeID, @RequestParam String sessionID, @RequestParam String examID){
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.listeNotElePerAnnSessExam(anneeID, sessionID, examID));
     }
+
+
+
+
 
 
     @GetMapping("/getNotePerExam/{idExamen}/{idSession}")
-    List<Note> genNotPerExam(@PathVariable("idExamen") Long idExamen,@PathVariable("idSession") Long idSession){
-        return noteService.genererNoteParDefaut(idExamen,idSession);
+//    List<Note> genNotPerExam(@PathVariable("idExamen") Long idExamen,@PathVariable("idSession") Long idSession){
+//        return noteService.genererNoteParDefaut(idExamen,idSession);
+//    }
+    public ResponseEntity<List<Note>>  genererNotePerExamen(@PathVariable("idExamen") Long idExamen,@PathVariable("idSession") Long idSession){
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.genererNoteParDefaut(idExamen,idSession));
     }
+
 
 
     @GetMapping("/getNotElevPerExamSession")
-    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
-        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+//    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+//        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+//    }
+    public ResponseEntity< List<Note>> notElevParExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
+            return ResponseEntity.status(HttpStatus.OK).body(noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession));
+
+
     }
+
 
 
 
 
 
     @DeleteMapping("/suppNot/{id}")
-    String suppNot(@PathVariable("id") Long id){
-        noteService.deletenote(id);
-        return "Note supprimer avec succès";
+    public ResponseEntity<String> supprimerNote(@PathVariable("id") Long id) {
+        try {
+            noteService.deletenote(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Note supprimée avec succès");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

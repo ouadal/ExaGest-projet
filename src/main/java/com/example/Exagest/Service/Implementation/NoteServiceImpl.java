@@ -1,5 +1,6 @@
 package com.example.Exagest.Service.Implementation;
 
+import com.example.Exagest.Exceptions.EntityNotFoundException;
 import com.example.Exagest.Service.NoteService;
 import com.example.Exagest.entities.*;
 import com.example.Exagest.repository.*;
@@ -47,20 +48,24 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public Note editnote(Long id,Note note) {
+    public Note editnote(Note note,Long id) {
         Optional<Note> optionalNote =noteRepository.findById(id);
         if(optionalNote.isEmpty()){
-            System.out.println("Note modifié avec succès");
+            throw new EntityNotFoundException("Aucune note  retrouvée avec l'id"+id);
         }
-        Note dbNote = optionalNote.get();
-        dbNote.setUpdateDate(LocalDate.now());
-        dbNote.setNoteExam(note.getNoteExam());
-        dbNote.setExamen(note.getExamen());
-        dbNote.setInscription(note.getInscription());
-        dbNote.setAttributionMatiere(note.getAttributionMatiere());
-        dbNote.setSession(note.getSession());
-        dbNote.setStatut(note.isStatut());
-        return noteRepository.save(dbNote);
+        else {
+            Note dbNote = optionalNote.get();
+            dbNote.setUpdateDate(LocalDate.now());
+            dbNote.setNoteExam(note.getNoteExam());
+            dbNote.setExamen(note.getExamen());
+            dbNote.setInscription(note.getInscription());
+            dbNote.setAttributionMatiere(note.getAttributionMatiere());
+            dbNote.setSession(note.getSession());
+            dbNote.setStatut(note.isStatut());
+
+            return noteRepository.save(dbNote);
+        }
+
     }
 
     @Override
