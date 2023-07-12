@@ -2,6 +2,7 @@ package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.NoteService;
 import com.example.Exagest.entities.Annee;
+import com.example.Exagest.entities.AttributionMatiere;
 import com.example.Exagest.entities.Note;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,17 +34,26 @@ public class NoteController {
     }
 
 
+
+
+
     @PutMapping("/editNote/{id}")
 //    Note modifNot(@PathVariable("id") Long id, @RequestBody Note note){
 //        return noteService.editnote(id,note);
 //    }
-    public ResponseEntity<Note> modifierNote(@RequestBody Note note, @PathVariable("id") Long id) {
+    public ResponseEntity<Note> modifierNot(@RequestBody Note note, @PathVariable("id") Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(noteService.editnote(note, id));
+            return ResponseEntity.status(HttpStatus.OK).body(noteService.editnote(note,id));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+
+
+
+
+
 
     @GetMapping("/getAllNotSess")
 //    List<Note> NotSess(){
@@ -52,6 +62,11 @@ public class NoteController {
     public ResponseEntity<List<Note>>  toutesLesNotesParSession(){
         return ResponseEntity.status(HttpStatus.OK).body(noteService.listSess());
     }
+
+
+
+
+
 
     @GetMapping("/getAllNotAttMat")
 //    List<Note> NotAttrMat(){
@@ -62,6 +77,9 @@ public class NoteController {
     }
 
 
+
+
+
     @GetMapping("/getAllNotInsc")
 //    List<Note> NotInsc(){
 //        return noteService.listInsc();
@@ -69,6 +87,9 @@ public class NoteController {
     public ResponseEntity<List<Note>>  toutesLesNotesParInscription(){
         return ResponseEntity.status(HttpStatus.OK).body(noteService.listInsc());
     }
+
+
+
 
 
 
@@ -95,6 +116,10 @@ public class NoteController {
 
 
 
+
+
+
+
     @GetMapping("/getNotElevPerExamSession")
 //    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
 //        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
@@ -104,6 +129,25 @@ public class NoteController {
 
 
     }
+
+
+
+
+
+
+    @GetMapping("/calculerMoyenne")
+//    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+//        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+//    }
+    public ResponseEntity<String> calculemoyenne(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
+        try {
+            noteService.calculerMoyenne(idExamen,  idInscription, idSession);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("moyenne calculé avec succès");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 
 
 

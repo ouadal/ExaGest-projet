@@ -3,6 +3,9 @@ package com.example.Exagest.controller;
 import com.example.Exagest.Service.MatiereService;
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Matiere;
+import com.example.Exagest.entities.Note;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -19,34 +22,83 @@ public class MatiereController {
     }
 
     @PostMapping("/creeMatiere")
-    Matiere ajouterMat(@RequestBody Matiere matiere){
-        return matiereService.addmatiere(matiere);
+    public ResponseEntity<Matiere> creeMat(@RequestBody Matiere matiere ) {
+
+//        Matiere ajouterMat(@RequestBody Matiere matiere){
+//        return matiereService.addmatiere(matiere);
+//    }
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(matiereService.addmatiere(matiere));
+        } catch (Exception e) {
+            System.out.println(" erreur  lors de la creation " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
+
+
+
+
+
+
+
+
+
     @PutMapping("/editMatiere/{id}")
-    Matiere modifInsc(@PathVariable("id") Long id, @RequestBody Matiere matiere){
-
-        return matiereService.editmatiere(id,matiere);
+//    Matiere modifInsc(@PathVariable("id") Long id, @RequestBody Matiere matiere){
+//
+//        return matiereService.editmatiere(id,matiere);
+//    }
+    public ResponseEntity<Matiere> modifInsc(@PathVariable("id") Long id, @RequestBody Matiere matiere) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(matiereService.editmatiere(id,matiere));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
-    @GetMapping("/getAllMatierelib")
-    List<Matiere> matLib(){
-        return matiereService.listMatLib();
-    }
 
-    @GetMapping("/getAllMatiereTypMat")
-    List<Matiere> typMat(){
-        return matiereService.listTypMat();
-    }
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/getMatPerElev")
-    HashMap<String, List<Eleve>> matPerElv(){
-        return matiereService.matPerElv();
+//    HashMap<String, List<Eleve>> matPerElv(){
+//        return matiereService.matPerElv();
+//    }
+
+    public ResponseEntity< HashMap<String, List<Eleve>>>   matPerElv(){
+        return ResponseEntity.status(HttpStatus.OK).body(matiereService.matPerElv());
     }
+
+
+
+
+
+
+
+
 
 
     @DeleteMapping("/suppMat/{id}")
-    String suppInsc(@PathVariable("id") Long id){
-        matiereService.deleteMatiere(id);
-        return "Matiere supprimer avec succès";
+//    String suppInsc(@PathVariable("id") Long id){
+//        matiereService.deleteMatiere(id);
+//        return "Matiere supprimer avec succès";
+//    }
+//}
+    public ResponseEntity<String> suppInsc(@PathVariable("id") Long id) {
+        try {
+            matiereService.deleteMatiere(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Matiere supprimée avec succès");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

@@ -4,7 +4,10 @@ import com.example.Exagest.Service.EleveService;
 import com.example.Exagest.Service.InscriptionService;
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Inscription;
+import com.example.Exagest.entities.Note;
 import com.example.Exagest.requests.InscriptionRequestModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,28 +23,92 @@ public class EleveController {
     }
 
     @PostMapping("/creeEleve")
-    Eleve ajouterInsc(@RequestBody InscriptionRequestModel inscriptionRM){
-        return eleveService.addeleve(inscriptionRM);
+    public ResponseEntity<Eleve> ajouterInsc(@RequestBody InscriptionRequestModel inscriptionRM) {
+
+//    Eleve ajouterInsc(@RequestBody InscriptionRequestModel inscriptionRM){
+//        return eleveService.addeleve(inscriptionRM);
+//    }
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(eleveService.addeleve(inscriptionRM));
+        } catch (Exception e) {
+            System.out.println(" erreur  lors de la creation " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
+
+
+
+
+
+
+
+
     @PutMapping("/editEleve/{id}")
-    Eleve modifElev(@PathVariable("id") Long id, @RequestBody Eleve eleve){
-        return eleveService.editeleve(id,eleve);
+//    Eleve modifElev(@PathVariable("id") Long id, @RequestBody Eleve eleve){
+//        return eleveService.editeleve(id,eleve);
+//    }
+
+    public ResponseEntity<Eleve> modifElev(@PathVariable("id") Long id, @RequestBody Eleve eleve) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(eleveService.editeleve(id,eleve));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
+
+
+
+
+
+
+
 
     @GetMapping("/getAllElev")
-    List<Eleve> tousElev(@RequestBody Eleve eleve){
-        return eleveService.listNom();
+//    List<Eleve> tousElev(@RequestBody Eleve eleve){
+//        return eleveService.listNom();
+//    }
+    public ResponseEntity<List<Eleve>>  tousElev(@RequestBody Eleve eleve){
+        return ResponseEntity.status(HttpStatus.OK).body(eleveService.listNom());
     }
 
+
+
+
+
+
+
+
+
     @GetMapping("/getAllElevMat")
-    List<Eleve> tousElevMat(@RequestParam("id") Long id){
-        return eleveService.listElevMat(id);
+//    List<Eleve> tousElevMat(@RequestParam("id") Long id){
+//        return eleveService.listElevMat(id);
+//    }
+    public ResponseEntity<List<Eleve>>  tousElevMat(@RequestParam("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(eleveService.listElevMat(id));
     }
+
+
+
+
+
+
+
+
 
 
     @DeleteMapping("/suppElev/{id}")
-    String suppElev(@PathVariable("id") Long id){
-        eleveService.deleteeleve(id);
-        return "Inscription supprimer avec succès";
+//    String suppElev(@PathVariable("id") Long id){
+//        eleveService.deleteeleve(id);
+//        return "Inscription supprimer avec succès";
+//    }
+//}
+
+    public ResponseEntity<String> supprimerElev(@PathVariable("id") Long id) {
+        try {
+            eleveService.deleteeleve(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eleve supprimée avec succès");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

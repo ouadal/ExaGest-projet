@@ -3,6 +3,9 @@ package com.example.Exagest.controller;
 import com.example.Exagest.Service.ExamenService;
 import com.example.Exagest.entities.Examen;
 import com.example.Exagest.entities.Inscription;
+import com.example.Exagest.entities.Note;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,37 +20,78 @@ public class ExamenController {
     }
 
     @PostMapping("/creeExam")
-    Examen ajouterInsc(@RequestBody Examen examen){
-        return examenService.addexamen(examen);
+    public ResponseEntity<Examen> creeExam(@RequestBody Examen examen ) {
+
+
+//    Examen ajouterInsc(@RequestBody Examen examen){
+//        return examenService.addexamen(examen);
+//    }
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body( examenService.addexamen(examen));
+        } catch (Exception e) {
+            System.out.println(" erreur  lors de la creation " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
+
+
+
+
+
 
     @PutMapping("/editexam/{id}")
-    Examen modifexam(@PathVariable("id") Long id, @RequestBody Examen examen){
-
-        return examenService.editexamen(id,examen);
+//    Examen modifexam(@PathVariable("id") Long id, @RequestBody Examen examen){
+//
+//        return examenService.editexamen(id,examen);
+//    }
+    public ResponseEntity<Examen> modifierExam(@PathVariable("id") Long id, @RequestBody Examen examen) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(examenService.editexamen(id,examen));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
+
+
+
+
 
     @GetMapping("/getAllExamEcol")
-    List<Examen> ExamEco(){
-        return examenService.listEcol();
-    }
-
-    @GetMapping("/getAllExamAnn")
-    List<Examen> ExamAnn(){
-        return examenService.listAnnee();
-    }
+//    List<Examen> ExamEco(){
+//        return examenService.listEcol();
+//    }
 
 
-    @GetMapping("/getAllExamLib")
-    List<Examen> ExamLib(){
-        return examenService.listExameLib();
+
+    public ResponseEntity<List<Examen>>  toutesLesNExam(){
+        return ResponseEntity.status(HttpStatus.OK).body(examenService.listEcol());
     }
+
+
+
+
+
+
+
+
+
 
 
 
     @DeleteMapping("/suppExam/{id}")
-    String suppExam(@PathVariable("id") Long id){
-        examenService.deleteexamen(id);
-        return "Examen supprimer avec succès";
+//    String suppExam(@PathVariable("id") Long id){
+//        examenService.deleteexamen(id);
+//        return "Examen supprimer avec succès";
+//    }
+//}
+
+
+    public ResponseEntity<String> supprimerExam(@PathVariable("id") Long id) {
+        try {
+            examenService.deleteexamen(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Examen supprimée avec succès");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

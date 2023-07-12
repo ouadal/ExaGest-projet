@@ -3,6 +3,9 @@ package com.example.Exagest.controller;
 import com.example.Exagest.Service.EnrolementService;
 import com.example.Exagest.entities.Enrolement;
 import com.example.Exagest.entities.Inscription;
+import com.example.Exagest.entities.Note;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,29 +21,73 @@ public class EnrolementController {
 
 
     @PostMapping("/creeEnrolement")
-    Enrolement ajouterEnrol(@RequestBody Enrolement enrolement){
-        return enrolementService.addenrolement(enrolement);
+    public ResponseEntity<Enrolement> creeEnrol(@RequestBody Enrolement enrolement ) {
+
+    //Enrolement ajouterEnrol(@RequestBody Enrolement enrolement){
+//        return enrolementService.addenrolement(enrolement);
+//    }
+
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(enrolementService.addenrolement(enrolement));
+        } catch (Exception e) {
+            System.out.println(" erreur  lors de la creation " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
+
+
+
+
+
+
+
 
     @PutMapping("/editenrol/{id}")
-    Enrolement modifEnrol(@PathVariable("id") Long id, @RequestBody Enrolement enrolement){
-        return enrolementService.editenrolement(id,enrolement);
+//    Enrolement modifEnrol(@PathVariable("id") Long id, @RequestBody Enrolement enrolement){
+//        return enrolementService.editenrolement(id,enrolement);
+//    }
+    public ResponseEntity<Enrolement> modifierEnrol(@PathVariable("id") Long id, @RequestBody Enrolement enrolement) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(enrolementService.editenrolement(id,enrolement));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
+
+
+
+
+
+
 
     @GetMapping("/getAllEnrolEcol")
-    List<Enrolement> EnrolEco(){
-        return enrolementService.listEcol();
+//    List<Enrolement> EnrolEco(){
+//        return enrolementService.listEcol();
+//    }
+    public ResponseEntity<List<Enrolement>>  toutesLesEnrol(){
+        return ResponseEntity.status(HttpStatus.OK).body(enrolementService.listEcol());
     }
 
-    @GetMapping("/getAllEnrolExam")
-    List<Enrolement> EnrolExam(){
-        return enrolementService.listExamen();
-    }
+
+
+
+
+
 
 
     @DeleteMapping("/suppEnrol/{id}")
-    String suppEnrol(@PathVariable("id") Long id){
-        enrolementService.deleteenrolement(id);
-        return "enrolement supprimer avec succès";
+//    String suppEnrol(@PathVariable("id") Long id){
+//        enrolementService.deleteenrolement(id);
+//        return "enrolement supprimer avec succès";
+//    }
+//}
+
+    public ResponseEntity<String> supprimerEnrol(@PathVariable("id") Long id) {
+        try {
+            enrolementService.deleteenrolement(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Enrolement supprimée avec succès");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
