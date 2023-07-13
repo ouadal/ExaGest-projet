@@ -48,7 +48,7 @@ public class CycleTypeExamenController {
 //    }
     public ResponseEntity<CycleTypeExamen> modifierCycTypExa(@RequestBody CycleTypeExamen cycleTypeExamen, @PathVariable("id") Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(cycleTypeExamenService.editcycleTypeExam(id,cycleTypeExamen)));
+            return ResponseEntity.status(HttpStatus.OK).body(cycleTypeExamenService.editcycleTypeExam(id,cycleTypeExamen));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

@@ -18,6 +18,11 @@ public class Moyenne implements Serializable {
     @Column(name = "Id_Moyenne")
     private Long id;
 
+
+    @Column(nullable = false,length = 100)
+    private double moyenneTotale;
+
+
     @ManyToOne
     @JoinColumn(name = "idinscription")
     private Inscription inscription;

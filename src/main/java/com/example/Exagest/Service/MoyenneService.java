@@ -16,4 +16,9 @@ public interface MoyenneService {
     List<Moyenne> listExam();
 
     List<Moyenne> listSess();
+
+    List<Moyenne> moyennePerExamLorsSessforAllEcol(Long idExamen,Long idSession);
+
+
+    List<Moyenne> moyennePerExamLorsSessforUneEcol(Long idExamen,Long idSession,Long idEcole);
 }

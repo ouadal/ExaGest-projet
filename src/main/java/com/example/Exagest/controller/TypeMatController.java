@@ -29,7 +29,7 @@ public class TypeMatController {
 //        return typeMatService.addtypeMat(typeMat);
 //    }
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(nypeMatService.addtypeMat(typeMat));
+            return ResponseEntity.status(HttpStatus.CREATED).body(typeMatService.addtypeMat(typeMat));
         } catch (Exception e) {
             System.out.println(" erreur  lors de la creation " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

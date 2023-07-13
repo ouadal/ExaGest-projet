@@ -81,4 +81,14 @@ public class MoyenneServiceImpl implements MoyenneService {
         return moyenneRepository.listSess();
     }
 
+    @Override
+    public List<Moyenne> moyennePerExamLorsSessforAllEcol(Long idExamen, Long idSession) {
+        return moyenneRepository.moyennePerExamLorsSessforAllEcol(idExamen,idSession);
+    }
+
+    @Override
+    public List<Moyenne> moyennePerExamLorsSessforUneEcol(Long idExamen, Long idSession, Long idEcole) {
+        return moyenneRepository.moyennePerExamLorsSessforUneEcol(idExamen,idSession,idEcole);
+    }
+
 }

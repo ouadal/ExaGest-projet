@@ -76,6 +76,30 @@ public class MoyenneController {
 
 
 
+    @GetMapping("/getMoyForAllEcolRang")
+
+
+    public ResponseEntity<List<Moyenne>> moyenAllForEcolRangee(@RequestParam("idExamen") Long idExamen, @RequestParam Long idsession){
+        return ResponseEntity.status(HttpStatus.OK).body(moyenneService.moyennePerExamLorsSessforAllEcol(idExamen, idsession));
+    }
+
+
+
+
+
+    @GetMapping("/getMoyForUneEcolRang")
+
+
+    public ResponseEntity<List<Moyenne>> moyenUneForEcolRangee(@RequestParam("idExamen") Long idExamen, @RequestParam Long idsession ,@RequestParam Long idEcole ){
+        return ResponseEntity.status(HttpStatus.OK).body(moyenneService.moyennePerExamLorsSessforUneEcol(idExamen, idsession,idEcole));
+    }
+
+
+
+
+
+
+
 
 
 
