@@ -52,7 +52,7 @@ public class EleveServiceImpl implements EleveService {
          Eleve eleveSaved = eleveRepository.save(eleve1);
 
 
-        Optional<Ecole> el = ecoleRepository.findById(inscriptionRM.getIdEcole());
+        //Optional<Ecole> el = ecoleRepository.findById(inscriptionRM.getIdEcole());
         //Optional<Annee> an = anneeRepository.findById(inscription.getAnnee().getId());
         Optional<Enrolement> en = enrolementRepository.findById(inscriptionRM.getIdEnrolement());
 
@@ -60,8 +60,9 @@ public class EleveServiceImpl implements EleveService {
 //        System.out.println(el.isPresent());
 //        System.out.println(an.isPresent());
 //        System.out.println(ex.isPresent());
-        if (el.isPresent()  && en.isPresent()) {
-            inscription.setEcole(el.get());
+        if (en.isPresent()) {
+            Ecole el = en.get().getEcole();
+            inscription.setEcole(el);
             inscription.setEnrolement(en.get());
             inscription.setEleve(eleveSaved);
             return inscriptionRepository.save(inscription).getEleve();

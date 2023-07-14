@@ -50,15 +50,16 @@ public class InscriptionServiceImpl implements InscriptionService {
 
         Eleve eleveSaved = eleveRepository.save(eleve);
 
-        Optional<Ecole> el = ecoleRepository.findById(inscriptionRM.getIdEcole());
+        //Optional<Ecole> el = ecoleRepository.findById(inscriptionRM.getIdEcole());
         //Optional<Annee> an = anneeRepository.findById(inscription.getAnnee().getId());
         Optional<Enrolement> en = enrolementRepository.findById(inscriptionRM.getIdEnrolement());
         //Optional<Eleve> ev = eleveRepository.findById(inscription.getEleve().getId());
 //        System.out.println(el.isPresent());
 //        System.out.println(an.isPresent());
 //        System.out.println(ex.isPresent());
-        if (el.isPresent()  && en.isPresent()) {
-            inscription.setEcole(el.get());
+        if (en.isPresent()) {
+            Ecole el = en.get().getEcole();
+            inscription.setEcole(el);
             inscription.setEnrolement(en.get());
             inscription.setEleve(eleveSaved);
             return inscriptionRepository.save(inscription);

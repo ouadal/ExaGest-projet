@@ -4,6 +4,7 @@ import com.example.Exagest.Exceptions.EntityNotFoundException;
 import com.example.Exagest.Service.NoteService;
 import com.example.Exagest.entities.*;
 import com.example.Exagest.repository.*;
+import com.example.Exagest.requests.NoteUpdate;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -55,14 +56,12 @@ public class NoteServiceImpl implements NoteService {
         }
         else {
             Note dbNote = optionalNote.get();
-            dbNote.setUpdateDate(LocalDate.now());
+//            dbNote.setUpdateDate(LocalDate.now());
             dbNote.setNoteExam(note.getNoteExam());
-            dbNote.setExamen(note.getExamen());
-            dbNote.setInscription(note.getInscription());
-            dbNote.setAttributionMatiere(note.getAttributionMatiere());
-            dbNote.setSession(note.getSession());
-            dbNote.setStatut(note.isStatut());
-
+//            dbNote.setExamen(note.getExamen());
+//            dbNote.setAttributionMatiere(note.getAttributionMatiere());
+//            dbNote.setSession(note.getSession());
+//            dbNote.setStatut(note.isStatut());
             return noteRepository.save(dbNote);
         }
 
@@ -107,14 +106,29 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.listNoteElevPerExamenSession(idExamen,  idInscription, idSession);
     }
 
+    @Override
+    public List<Note> mettreAjourLesNote(List<NoteUpdate> listNotes) {
+        Long idSession = 0L;
+        Long idExamen = 0L;
+        for(NoteUpdate noteUpdate : listNotes){
+            Note note = editnote(new Note(null,false,noteUpdate.getNoteExam(),null,null,null,null,null,null), noteUpdate.getId());
+            idExamen = note.getExamen().getId();
+            idSession = note.getSession().getId();
+        }
+        return noteRepository.listNotePerExam(idExamen ,idSession);
+    }
 
 
     @Override
     public List<Note>  genererNoteParDefaut(Long idExamen , Long idSession) {
         List<AttributionMatiere> listAttriMat = attributionMatiereRepository.listAttMAtPereExam(idExamen);
         if (listAttriMat.isEmpty()) {
+            System.out.println("***********************************");
             System.out.println("vide");
+            System.out.println("***********************************");
         }
+        System.out.println("vide");
+        System.out.println(listAttriMat.size());
         Optional<Session> session = sessionRepository.findById(idSession);
         for (int i = 0; i < listAttriMat.size(); i++) {
             AttributionMatiere attributionMatiere = listAttriMat.get(i);
@@ -126,33 +140,35 @@ public class NoteServiceImpl implements NoteService {
             }
         }
 
-        return noteRepository.listNotePerExam(idExamen);
+        return noteRepository.listNotePerExam(idExamen,idSession);
     }
 
-    @Override
-    public void calculerMoyenne(Long idExamen, Long idInscription, Long idSession){
-        Optional<Session> session = sessionRepository.findById(idSession);
-        Optional<Examen> examen = examenRepository.findById(idExamen);
-        Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
-        if(session.isPresent() && examen.isPresent() && inscription.isPresent()){
-            List<Note> notes = noteRepository.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
-            double sommeNote = 0;
-            double sommeCoeff = 0;
-            for (Note note : notes) {
-                sommeCoeff += note.getAttributionMatiere().getCoefficient();
-                sommeNote += (note.getNoteExam() * note.getAttributionMatiere().getCoefficient());
-            }
 
-            if (sommeCoeff != 0) {
-                double moyenne = sommeNote / sommeCoeff;
-                System.out.println("La moyenne est : " + moyenne);
-            } else {
-                throw new ArithmeticException("Division by zero error: sum of coefficients is zero.");
-            }
-        } else {
-            // Gérez le cas où l'une des entités n'existe pas dans la base de données
-            throw new IllegalArgumentException("Invalid session, exam, or inscription ID.");
-        }
+
+//    @Override
+//    public void calculerMoyenne(Long idExamen, Long idInscription, Long idSession){
+//        Optional<Session> session = sessionRepository.findById(idSession);
+//        Optional<Examen> examen = examenRepository.findById(idExamen);
+//        Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
+//        if(session.isPresent() && examen.isPresent() && inscription.isPresent()){
+//            List<Note> notes = noteRepository.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+//            double sommeNote = 0;
+//            double sommeCoeff = 0;
+//            for (Note note : notes) {
+//                sommeCoeff += note.getAttributionMatiere().getCoefficient();
+//                sommeNote += (note.getNoteExam() * note.getAttributionMatiere().getCoefficient());
+//            }
+//
+//            if (sommeCoeff != 0) {
+//                double moyenne = sommeNote / sommeCoeff;
+//                System.out.println("La moyenne est : " + moyenne);
+//            } else {
+//                throw new ArithmeticException("Division by zero error: sum of coefficients is zero.");
+//            }
+//        } else {
+//            // Gérez le cas où l'une des entités n'existe pas dans la base de données
+//            throw new IllegalArgumentException("Invalid session, exam, or inscription ID.");
+//        }
 
 //        if (sommeCoeff != 0) {
 //            double moyenne = sommeNote / sommeCoeff;
@@ -169,4 +185,4 @@ public class NoteServiceImpl implements NoteService {
 
 
     }
-}
+//}

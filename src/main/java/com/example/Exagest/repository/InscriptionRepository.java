@@ -22,7 +22,7 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long> 
     @Query("SELECT i FROM Inscription i ORDER BY i.ecole.nomEcole ")
     List<Inscription> listEcol();
 
-    @Query("SELECT i FROM Inscription i WHERE i.enrolement.examen.id = :idEx ")
+    @Query("SELECT i FROM Inscription i WHERE i.enrolement.examen.id = :idEx")
     List<Inscription> listInscPerExam(@Param("idEx") Long id);
 
 

@@ -18,10 +18,10 @@ public interface MoyenneRepository extends JpaRepository<Moyenne, Long>  {
     @Query("select m from Moyenne m ORDER BY m.session.libele ")
     List<Moyenne> listSess();
 
-    @Query("SELECT m FROM Moyenne m WHERE m.examen.id =?1 AND m.session.id=?2 ORDER BY m.moyenneTotale")
+    @Query("SELECT DISTINCT m FROM Moyenne m WHERE m.examen.id =?1 AND m.session.id=?2 ORDER BY m.moyenneTotale DESC")
     List<Moyenne> moyennePerExamLorsSessforAllEcol(Long idExamen,Long idSession);
 
-    @Query("SELECT m FROM Moyenne m WHERE m.examen.id =?1 AND m.session.id =?2 AND m.inscription.ecole.id = ?3 ORDER BY m.moyenneTotale")
+    @Query("SELECT DISTINCT m FROM Moyenne m WHERE m.examen.id =?1 AND m.session.id =?2 AND m.inscription.ecole.id = ?3 ORDER BY m.moyenneTotale DESC")
     List<Moyenne> moyennePerExamLorsSessforUneEcol(Long idExamen,Long idSession,Long idEcole);
 
 }

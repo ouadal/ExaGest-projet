@@ -27,7 +27,7 @@ public class InscriptionRequestModel {
 
 
 
-    private Long idEcole;
+    //private Long idEcole;
 
 
 

@@ -24,8 +24,8 @@ public interface NoteRepository extends JpaRepository<Note, Long>  {
     @Query("SELECT n FROM Note n  WHERE n.inscription.annee.id =?1 and n.session.id =?2 and n.examen.id=?3 ")
     List<Note> listeNotElePerAnnSessExam(String anneeID, String sessionID,String examID);
 
-    @Query("SELECT DISTINCT n FROM Note n  WHERE n.examen.id=?1 ")
-    List<Note> listNotePerExam(Long idExamen);
+    @Query("SELECT DISTINCT n FROM Note n  WHERE n.examen.id=?1 AND n.session.id = ?2")
+    List<Note> listNotePerExam(Long idExamen,Long idSession);
 
     @Query("SELECT n FROM Note n WHERE n.examen.id =?1 AND n.inscription.id =?2 AND n.session.id=?3 ")
     List<Note> listNoteElevPerExamenSession( Long idExamen, Long idInscription, Long idSession);

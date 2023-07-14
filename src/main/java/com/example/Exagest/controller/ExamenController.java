@@ -4,6 +4,7 @@ import com.example.Exagest.Service.ExamenService;
 import com.example.Exagest.entities.Examen;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
+import com.example.Exagest.requests.EnrolementRequestModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,14 +21,14 @@ public class ExamenController {
     }
 
     @PostMapping("/creeExam")
-    public ResponseEntity<Examen> creeExam(@RequestBody Examen examen ) {
+    public ResponseEntity<Examen> creeExam(@RequestBody EnrolementRequestModel enrolementRequestModel ) {
 
 
 //    Examen ajouterInsc(@RequestBody Examen examen){
 //        return examenService.addexamen(examen);
 //    }
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body( examenService.addexamen(examen));
+            return ResponseEntity.status(HttpStatus.CREATED).body( examenService.addexamen(enrolementRequestModel));
         } catch (Exception e) {
             System.out.println(" erreur  lors de la creation " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

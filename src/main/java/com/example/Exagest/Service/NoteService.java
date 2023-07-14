@@ -1,6 +1,7 @@
 package com.example.Exagest.Service;
 
 import com.example.Exagest.entities.Note;
+import com.example.Exagest.requests.NoteUpdate;
 import org.aspectj.weaver.ast.Not;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public interface NoteService {
 
     List<Note> listNoteElevPerExamenSession( Long idExamen, Long idInscription, Long idSession);
 
+    //void calculerMoyenne(Long idExamen, Long idInscription, Long idSession);
 
-    void calculerMoyenne(Long idExamen, Long idInscription, Long idSession);
+    List<Note> mettreAjourLesNote(List<NoteUpdate> listNotes);
 }

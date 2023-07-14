@@ -1,14 +1,9 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.ExamenService;
-import com.example.Exagest.entities.Annee;
-import com.example.Exagest.entities.CycleTypeExamen;
-import com.example.Exagest.entities.Ecole;
-import com.example.Exagest.entities.Examen;
-import com.example.Exagest.repository.AnneeRepository;
-import com.example.Exagest.repository.CycleTypeExamenRepository;
-import com.example.Exagest.repository.EcoleRepository;
-import com.example.Exagest.repository.ExamenRepository;
+import com.example.Exagest.entities.*;
+import com.example.Exagest.repository.*;
+import com.example.Exagest.requests.EnrolementRequestModel;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -24,37 +19,58 @@ public class ExamenServiceImpl implements ExamenService {
 
     private final EcoleRepository ecoleRepository;
 
+    private final EnrolementRepository enrolementRepository;
+
     private final CycleTypeExamenRepository cycleTypeExamenRepository;
 
-    public ExamenServiceImpl(ExamenRepository examenRepository, AnneeRepository anneeRepository, EcoleRepository ecoleRepository, CycleTypeExamenRepository cycleTypeExamenRepository) {
+    public ExamenServiceImpl(ExamenRepository examenRepository, AnneeRepository anneeRepository, EcoleRepository ecoleRepository, EnrolementRepository enrolementRepository, CycleTypeExamenRepository cycleTypeExamenRepository) {
         this.examenRepository = examenRepository;
         this.anneeRepository = anneeRepository;
         this.ecoleRepository = ecoleRepository;
+        this.enrolementRepository = enrolementRepository;
         this.cycleTypeExamenRepository = cycleTypeExamenRepository;
     }
 
     @Override
-    public Examen addexamen(Examen examen) {
-        System.out.println("ppppppppppppppppppppp DEBUT");
-        System.out.println(examen);
+    public Examen addexamen(EnrolementRequestModel enrolementRequestModel) {
+
+        Examen examen1 = new Examen();
+        Enrolement enrolement = new Enrolement();
+
         Annee a = anneeRepository.getCurrentYear();
-        examen.setAnnee(a);
-        examen.setAddDate(LocalDate.now());
-        Optional<Ecole> el = ecoleRepository.findById(examen.getEcole().getId());
-        Optional<Annee> an = anneeRepository.findById(examen.getAnnee().getId());
-        Optional<CycleTypeExamen> ex = cycleTypeExamenRepository.findById(examen.getCycleTypeExamen().getId());
-        System.out.println(el.isPresent());
-        System.out.println(an.isPresent());
-        System.out.println(ex.isPresent());
-        if (el.isPresent() && an.isPresent() && ex.isPresent()){
-            examen.setAnnee(an.get());
-            examen.setEcole(el.get());
-            examen.setCycleTypeExamen(ex.get());
-//            System.out.println("ppppppppppppppppppppp FIN");
-//            System.out.println(examen);
-            return examenRepository.save(examen);
+        Optional<CycleTypeExamen> ctex = cycleTypeExamenRepository.findById(enrolementRequestModel.getIdCycleTypeExamen());
+        Optional<Ecole> el = ecoleRepository.findById(enrolementRequestModel.getIdEcole());
+        ctex.ifPresent(examen1::setCycleTypeExamen);
+
+        el.ifPresent(examen1::setEcole);
+
+        examen1.setAnnee(a);
+        examen1.setAddDate(LocalDate.now());
+        examen1.setLibele(enrolementRequestModel.getLibele());
+        examen1.setStatut(enrolementRequestModel.isStatut());
+
+
+        Examen examenSaved  = examenRepository.save(examen1);
+
+        System.out.println(examenSaved.getId());
+        System.out.println(enrolementRequestModel.getIdEcole());
+
+        Optional<Examen> ex = examenRepository.findById(examenSaved.getId());
+
+
+
+
+        if (el.isPresent() && ex.isPresent()){
+
+            enrolement.setExamen(ex.get());
+            enrolement.setEcole(el.get());
+            enrolement.setExamen(examenSaved);
+            enrolement.setUpdateDate(null);
+            enrolement.setAddDate(LocalDate.now());
+
+            return enrolementRepository.save(enrolement).getExamen() ;
         }
-        return examen;
+        return examenSaved;
     }
 
     @Override

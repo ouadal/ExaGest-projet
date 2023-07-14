@@ -97,6 +97,36 @@ public class MoyenneController {
 
 
 
+    @GetMapping("/genererMoyenne")
+
+
+    public void moyenUneForEcolRangee(@RequestParam("idExamen") Long idExamen, @RequestParam Long idsession  ){
+        moyenneService.genererMoyenne(idExamen, idsession);
+    }
+
+
+
+
+
+
+
+
+    @GetMapping("/calculerMoyenne")
+//    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+//        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+//    }
+    public ResponseEntity<String> calculemoyenne(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
+        try {
+            moyenneService.calculerMoyenne(idExamen,  idInscription, idSession);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("moyenne calculé avec succès");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+
+
+
 
 
 

@@ -2,10 +2,8 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.MoyenneService;
 import com.example.Exagest.entities.*;
-import com.example.Exagest.repository.ExamenRepository;
-import com.example.Exagest.repository.InscriptionRepository;
-import com.example.Exagest.repository.MoyenneRepository;
-import com.example.Exagest.repository.SessionRepository;
+import com.example.Exagest.repository.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +22,14 @@ public class MoyenneServiceImpl implements MoyenneService {
 
     private final SessionRepository sessionRepository;
 
-    public MoyenneServiceImpl(MoyenneRepository moyenneRepository, InscriptionRepository inscriptionRepository, ExamenRepository examenRepository, SessionRepository sessionRepository) {
+    private final NoteRepository noteRepository;
+
+    public MoyenneServiceImpl(MoyenneRepository moyenneRepository, InscriptionRepository inscriptionRepository, ExamenRepository examenRepository, SessionRepository sessionRepository, NoteRepository noteRepository) {
         this.moyenneRepository = moyenneRepository;
         this.inscriptionRepository = inscriptionRepository;
         this.examenRepository = examenRepository;
         this.sessionRepository = sessionRepository;
+        this.noteRepository = noteRepository;
     }
 
     @Override
@@ -47,9 +48,9 @@ public class MoyenneServiceImpl implements MoyenneService {
     }
 
     @Override
-    public Moyenne editmoyenne(Long id,Moyenne moyenne) {
-          Optional<Moyenne> optionalMoyenne = moyenneRepository.findById(id);
-        if(optionalMoyenne.isEmpty()){
+    public Moyenne editmoyenne(Long id, Moyenne moyenne) {
+        Optional<Moyenne> optionalMoyenne = moyenneRepository.findById(id);
+        if (optionalMoyenne.isEmpty()) {
             System.out.println("Moyenne modifié avec succès");
         }
         Moyenne dbMoyenne = optionalMoyenne.get();
@@ -83,12 +84,51 @@ public class MoyenneServiceImpl implements MoyenneService {
 
     @Override
     public List<Moyenne> moyennePerExamLorsSessforAllEcol(Long idExamen, Long idSession) {
-        return moyenneRepository.moyennePerExamLorsSessforAllEcol(idExamen,idSession);
+        return moyenneRepository.moyennePerExamLorsSessforAllEcol(idExamen, idSession);
     }
 
     @Override
     public List<Moyenne> moyennePerExamLorsSessforUneEcol(Long idExamen, Long idSession, Long idEcole) {
-        return moyenneRepository.moyennePerExamLorsSessforUneEcol(idExamen,idSession,idEcole);
+        return moyenneRepository.moyennePerExamLorsSessforUneEcol(idExamen, idSession, idEcole);
+    }
+
+
+    @Override
+    public void calculerMoyenne(Long idExamen, Long idInscription, Long idSession) {
+        Optional<Session> session = sessionRepository.findById(idSession);
+        Optional<Examen> examen = examenRepository.findById(idExamen);
+        Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
+        if (session.isPresent() && examen.isPresent() && inscription.isPresent()) {
+            List<Note> notes = noteRepository.listNoteElevPerExamenSession(idExamen, idInscription, idSession);
+            double sommeNote = 0;
+            double sommeCoeff = 0;
+            for (Note note : notes) {
+                sommeCoeff += note.getAttributionMatiere().getCoefficient();
+                sommeNote += (note.getNoteExam() * note.getAttributionMatiere().getCoefficient());
+            }
+
+            if (sommeCoeff != 0) {
+                double moyenneTotale = sommeNote / sommeCoeff;
+                moyenneRepository.save(new Moyenne(null,moyenneTotale,inscription.get(),examen.get(),session.get(),null,LocalDate.now()));
+                System.out.println("La moyenne est : " + moyenneTotale);
+            } else {
+                throw new ArithmeticException("\n" + "Erreur de division par zéro : la somme des coefficients est nulle.");
+            }
+        } else {
+            // Gérez le cas où l'une des entités n'existe pas dans la base de données
+            throw new IllegalArgumentException("Invalid session, exam, ou inscription ID.");
+        }
+
+    }
+
+    @Override
+    public void genererMoyenne(Long idExamen, Long idSession){
+        List<Inscription> inscriptions  = inscriptionRepository.listInscPerExam(idExamen);
+        for(Inscription inscription:inscriptions){
+            calculerMoyenne(idExamen,inscription.getId(),idSession);
+        }
+
+
     }
 
 }

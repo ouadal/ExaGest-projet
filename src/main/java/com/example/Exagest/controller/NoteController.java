@@ -4,6 +4,7 @@ import com.example.Exagest.Service.NoteService;
 import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.AttributionMatiere;
 import com.example.Exagest.entities.Note;
+import com.example.Exagest.requests.NoteUpdate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -135,18 +136,31 @@ public class NoteController {
 
 
 
-    @GetMapping("/calculerMoyenne")
-//    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
-//        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
-//    }
-    public ResponseEntity<String> calculemoyenne(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
-        try {
-            noteService.calculerMoyenne(idExamen,  idInscription, idSession);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("moyenne calculé avec succès");
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+
+
+    @PutMapping("/miseAjourDeToutesLesNotes")
+    public ResponseEntity<List<Note>> miseAjourNotes(@RequestBody List<NoteUpdate> listNotes) {
+        List<Note> updatedNotes = noteService.mettreAjourLesNote(listNotes);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedNotes);
     }
+
+
+
+
+
+
+//    @GetMapping("/calculerMoyenne")
+////    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+////        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+////    }
+//    public ResponseEntity<String> calculemoyenne(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
+//        try {
+//            noteService.calculerMoyenne(idExamen,  idInscription, idSession);
+//            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("moyenne calculé avec succès");
+//        }catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//    }
 
 
 

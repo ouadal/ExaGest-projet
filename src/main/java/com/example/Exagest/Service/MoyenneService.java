@@ -21,4 +21,9 @@ public interface MoyenneService {
 
 
     List<Moyenne> moyennePerExamLorsSessforUneEcol(Long idExamen,Long idSession,Long idEcole);
+
+     void calculerMoyenne(Long idExamen, Long idInscription, Long idSession);
+
+
+    void genererMoyenne(Long idExamen, Long idSession);
 }
