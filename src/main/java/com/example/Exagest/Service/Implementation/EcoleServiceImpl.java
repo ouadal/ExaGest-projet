@@ -86,4 +86,9 @@ public class EcoleServiceImpl implements EcoleService {
         return String.format(format, randomNumber);
     }
 
+    @Override
+    public List<Ecole> listeDesEcoleAunExam(Long idEx) {
+        return ecoleRepository.listeDesEcoleAunExam(idEx);
+    }
+
 }

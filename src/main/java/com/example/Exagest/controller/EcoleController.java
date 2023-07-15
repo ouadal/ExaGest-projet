@@ -64,6 +64,18 @@ public class EcoleController {
 
 
 
+    @GetMapping("/listeDesEcolesLorsDunExamen/{id}")
+//    List<Ecole> EcoCyc(){
+//        return ecoleService.listEcolCycle();
+//    }
+    public ResponseEntity<List<Ecole>>  listesDesEcoleAunExamen(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(ecoleService.listeDesEcoleAunExam(id));
+    }
+
+
+
+
+
 
 
 

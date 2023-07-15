@@ -17,6 +17,7 @@ public class EnrolementRequestModel {
     private boolean statut;
 
     private Long  idEcole;
+
     private Long  idCycleTypeExamen;
 
 
