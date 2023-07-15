@@ -26,7 +26,7 @@ public class Ecole implements Serializable {
     @Column(nullable = false,length = 100)
     private String telephone;
 
-    @Column(nullable = false,length = 100,unique = true)
+    @Column(nullable = false,length = 100)
     private String email;
 
     @Column(nullable = false)

@@ -22,7 +22,7 @@ public class Eleve implements Serializable {
     @Column(nullable = false)
     private Date date_naissance;
 
-    @Column(nullable = false,length = 50,unique = true)
+    @Column(nullable = false,length = 50)
     private int contactParent;
 
     @Column(nullable = false)
