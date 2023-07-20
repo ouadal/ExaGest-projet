@@ -22,7 +22,9 @@ private final AnneeRepository anneeRepository;
 
     @Override
     public Annee addAnnee(Annee annee) {
+        annee.setEtat(false);
         annee.setAddDate(LocalDate.now());
+        System.out.println(annee.toString());
         return anneeRepository.save(annee);
     }
 
@@ -45,6 +47,19 @@ private final AnneeRepository anneeRepository;
     @Override
     public List<Annee> listAnne() {
         return anneeRepository.listAnnee();
+    }
+
+    @Override
+    public Annee setCurrentYear(Long id) {
+        Optional <Annee>  an=  anneeRepository.findById(id);
+        if(an.isPresent()){
+            anneeRepository.setCurrentYear();
+            an.get().setEtat(true);
+            return  anneeRepository.save(an.get());
+        }
+        return null;
+
+
     }
 
 

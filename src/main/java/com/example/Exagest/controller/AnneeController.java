@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping(path = "/Annee")
+@CrossOrigin("*")
 public class AnneeController {
     private final AnneeService anneeService;
 
@@ -57,6 +58,16 @@ public class AnneeController {
 //    }
     public ResponseEntity<List<Annee>>  touteslesAnnee(){
         return ResponseEntity.status(HttpStatus.OK).body(anneeService.listAnne());
+    }
+
+
+
+    @PutMapping ("/AnneeEnCours/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Annee>  AnneeEncours(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(anneeService.setCurrentYear( id));
     }
 
 

@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/Cycle")
+@CrossOrigin("*")
 public class CycleController {
     private final CycleService cycleService;
 

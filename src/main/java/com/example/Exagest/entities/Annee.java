@@ -21,6 +21,15 @@ public class Annee implements Serializable {
     @Column(nullable = false)
     private boolean etat;
 
+
+    @Column(nullable = false)
+    private LocalDate dateDebutAcademique;
+
+
+    @Column(nullable = false)
+    private LocalDate dateFinAcademique;
+
+
     @Column(nullable = false)
     private LocalDate addDate;
 

@@ -9,4 +9,6 @@ public interface AnneeService {
     Annee editAnnee( Long id,Annee annee);
     String deleteAnnee(Long id);
     List<Annee> listAnne();
+
+    Annee setCurrentYear(Long id);
 }
