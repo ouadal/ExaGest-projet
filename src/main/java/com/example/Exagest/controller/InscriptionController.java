@@ -1,6 +1,7 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.InscriptionService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
 import com.example.Exagest.requests.InscriptionRequestModel;
@@ -72,6 +73,14 @@ public class InscriptionController {
 
 
 
+
+    @GetMapping("/getUneAttMat/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Inscription>  unInsc(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(inscriptionService.findByIdOfInsc(id));
+    }
 
 
 

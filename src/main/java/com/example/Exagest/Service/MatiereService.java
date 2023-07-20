@@ -14,4 +14,6 @@ public interface MatiereService {
     List<Matiere> listTypMat();
 
     HashMap<String, List<Eleve>> matPerElv  ();
+
+    Matiere findByIdOfMat(Long id);
 }

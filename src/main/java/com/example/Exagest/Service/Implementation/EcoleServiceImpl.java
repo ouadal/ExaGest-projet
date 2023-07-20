@@ -91,4 +91,9 @@ public class EcoleServiceImpl implements EcoleService {
         return ecoleRepository.listeDesEcoleAunExam(idEx);
     }
 
+    @Override
+    public Ecole findByIdOfEcol(Long id) {
+        return ecoleRepository.findById(id).orElseThrow();
+    }
+
 }

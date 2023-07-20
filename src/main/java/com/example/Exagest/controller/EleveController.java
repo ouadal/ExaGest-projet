@@ -2,6 +2,7 @@ package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.EleveService;
 import com.example.Exagest.Service.InscriptionService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
@@ -88,6 +89,16 @@ public class EleveController {
     }
 
 
+
+
+
+    @GetMapping("/getUnElev/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Eleve>  unElev(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(eleveService.findByIdOfElev(id));
+    }
 
 
 

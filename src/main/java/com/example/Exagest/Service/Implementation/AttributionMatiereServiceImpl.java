@@ -118,6 +118,10 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
 
 
 
+    @Override
+    public AttributionMatiere  findByIdOfAttMat(Long id) {
+        return attributionMatiereRepository.findById(id).orElseThrow();
+    }
 
 
 }

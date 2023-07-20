@@ -1,6 +1,7 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.SessionService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
 import com.example.Exagest.entities.Session;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/Session")
+@CrossOrigin("*")
 public class SessionController {
     private final SessionService sessionService;
 
@@ -69,6 +71,18 @@ public class SessionController {
         return ResponseEntity.status(HttpStatus.OK).body(sessionService.listSess());
     }
 
+
+
+
+
+
+    @GetMapping("/getUneSess/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Session>  uneSess(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(sessionService.findByIdOfSess(id));
+    }
 
 
 

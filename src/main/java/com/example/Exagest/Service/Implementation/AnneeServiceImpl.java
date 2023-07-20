@@ -36,6 +36,8 @@ private final AnneeRepository anneeRepository;
         }
         Annee dbAnnee = optionalAnnee.get();
         dbAnnee.setUpdateDate(LocalDate.now());
+        dbAnnee.setDateDebutAcademique(annee.getDateDebutAcademique());
+        dbAnnee.setDateFinAcademique(annee.getDateFinAcademique());
         return anneeRepository.save(dbAnnee);
     }
     @Override
@@ -60,6 +62,11 @@ private final AnneeRepository anneeRepository;
         return null;
 
 
+    }
+
+    @Override
+    public Annee findByIdOfAYear(Long id) {
+        return anneeRepository.findById(id).orElseThrow();
     }
 
 

@@ -62,6 +62,16 @@ public class AnneeController {
 
 
 
+    @GetMapping("/getUneAnnee/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Annee>  uneAnnne(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(anneeService.findByIdOfAYear(id));
+    }
+
+
+
     @PutMapping ("/AnneeEnCours/{id}")
 //    List<Annee> tousEco(){
 //        return anneeService.listAnne();

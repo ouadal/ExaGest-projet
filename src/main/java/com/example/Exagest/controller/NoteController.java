@@ -148,6 +148,16 @@ public class NoteController {
 
 
 
+    @GetMapping("/getUneNot/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Note>  uneNot(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.findByIdOfNot(id));
+    }
+
+
+
 
 //    @GetMapping("/calculerMoyenne")
 ////    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){

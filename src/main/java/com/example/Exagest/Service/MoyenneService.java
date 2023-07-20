@@ -26,4 +26,6 @@ public interface MoyenneService {
 
 
     void genererMoyenne(Long idExamen, Long idSession);
+
+    Moyenne findByIdOfMoy(Long id);
 }

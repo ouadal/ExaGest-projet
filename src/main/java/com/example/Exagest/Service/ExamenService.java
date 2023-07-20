@@ -16,5 +16,5 @@ public interface ExamenService {
     List<Examen> listExameLib();
 
 
-
+    Examen findByIdOfExam(Long id);
 }

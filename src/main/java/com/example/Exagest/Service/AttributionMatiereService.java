@@ -19,6 +19,5 @@ public interface AttributionMatiereService {
     List<AttributionMatiere> listattributionMatMatiere();
 
 
-
-
+    AttributionMatiere findByIdOfAttMat(Long id);
 }

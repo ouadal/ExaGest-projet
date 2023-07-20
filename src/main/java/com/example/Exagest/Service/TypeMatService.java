@@ -12,5 +12,7 @@ public interface TypeMatService {
     String deletetypeMat(Long id);
 
     List<TypeMat> listtypeMatLib();
+
+    TypeMat findByIdOfTypMat(Long id);
 }
 

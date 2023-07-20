@@ -56,4 +56,9 @@ public class TypeExamenServiceImpl implements TypeExamenService {
     public TypeExamen choisirTypeExamen() {
         return null;
     }
+
+    @Override
+    public TypeExamen findByIdOfTypEx(Long id) {
+        return typeExamenRepository.findById(id).orElseThrow();
+    }
 }

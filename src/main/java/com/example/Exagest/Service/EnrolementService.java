@@ -10,4 +10,6 @@ public interface EnrolementService {
     String deleteenrolement(Long id);
     List<Enrolement> listEcol();
     List<Enrolement> listExamen();
+
+    Enrolement findByIdOfEnrol(Long id);
 }

@@ -131,4 +131,9 @@ public class MoyenneServiceImpl implements MoyenneService {
 
     }
 
+    @Override
+    public Moyenne findByIdOfMoy(Long id) {
+        return moyenneRepository.findById(id).orElseThrow();
+    }
+
 }

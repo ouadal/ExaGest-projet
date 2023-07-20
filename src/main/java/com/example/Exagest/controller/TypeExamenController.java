@@ -2,6 +2,7 @@ package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.InscriptionService;
 import com.example.Exagest.Service.TypeExamenService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
 import com.example.Exagest.entities.TypeExamen;
@@ -69,6 +70,18 @@ public class TypeExamenController {
 //    }
     public ResponseEntity<List<TypeExamen>>  tousEco(){
         return ResponseEntity.status(HttpStatus.OK).body(typeExamenService.listtypeExamLib());
+    }
+
+
+
+
+
+    @GetMapping("/getUnTypExam/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<TypeExamen>  unTypExam(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(typeExamenService.findByIdOfTypEx(id));
     }
 
 

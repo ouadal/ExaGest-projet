@@ -28,4 +28,6 @@ public interface NoteService {
     //void calculerMoyenne(Long idExamen, Long idInscription, Long idSession);
 
     List<Note> mettreAjourLesNote(List<NoteUpdate> listNotes);
+
+   Note findByIdOfNot(Long id);
 }

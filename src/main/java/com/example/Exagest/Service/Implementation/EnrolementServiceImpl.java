@@ -71,4 +71,9 @@ public class EnrolementServiceImpl implements EnrolementService {
         return enrolementRepository.listExamen();
     }
 
+    @Override
+    public Enrolement findByIdOfEnrol(Long id) {
+        return enrolementRepository.findById(id).orElseThrow();
+    }
+
 }

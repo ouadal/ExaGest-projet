@@ -1,6 +1,7 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.EnrolementService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Enrolement;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
@@ -67,6 +68,19 @@ public class EnrolementController {
     public ResponseEntity<List<Enrolement>>  toutesLesEnrol(){
         return ResponseEntity.status(HttpStatus.OK).body(enrolementService.listEcol());
     }
+
+
+
+
+    @GetMapping("/getUnEnrol/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Enrolement>  unEnrol(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(enrolementService.findByIdOfEnrol(id));
+    }
+
+
 
 
 

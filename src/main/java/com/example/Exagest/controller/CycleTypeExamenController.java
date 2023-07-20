@@ -2,10 +2,7 @@ package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.CycleTypeExamenService;
 import com.example.Exagest.Service.InscriptionService;
-import com.example.Exagest.entities.Cycle;
-import com.example.Exagest.entities.CycleTypeExamen;
-import com.example.Exagest.entities.Inscription;
-import com.example.Exagest.entities.Note;
+import com.example.Exagest.entities.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -76,6 +73,14 @@ public class CycleTypeExamenController {
 
 
 
+
+    @GetMapping("/getUnCycleTyp/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<CycleTypeExamen>  uneCycTyp(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(cycleTypeExamenService.findByIdOfCycTyp(id));
+    }
 
 
 

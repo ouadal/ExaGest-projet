@@ -20,4 +20,5 @@ public interface EleveService {
     List<Eleve> listElevMat(@Param("id") Long id);
 
 
+    Eleve findByIdOfElev(Long id);
 }

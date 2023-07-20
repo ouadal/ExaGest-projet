@@ -14,4 +14,5 @@ public interface EcoleService {
     public String generateMatricule(int length);
     List<Ecole> listeDesEcoleAunExam(Long idEx);
 
+    Ecole findByIdOfEcol(Long id);
 }

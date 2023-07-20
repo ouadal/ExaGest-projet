@@ -10,4 +10,5 @@ public interface SessionService {
     String deletesession(Long id);
     List<Session> listSess();
 
+    Session findByIdOfSess(Long id);
 }

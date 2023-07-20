@@ -86,5 +86,10 @@ public class MatiereServiceImpl implements MatiereService {
         return  data;
     }
 
+    @Override
+    public Matiere findByIdOfMat(Long id) {
+        return matiereRepository.findById(id).orElseThrow();
+    }
+
 
 }

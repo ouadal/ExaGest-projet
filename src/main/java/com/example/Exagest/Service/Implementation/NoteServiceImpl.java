@@ -118,6 +118,11 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.listNotePerExam(idExamen ,idSession);
     }
 
+    @Override
+    public Note findByIdOfNot(Long id) {
+        return noteRepository.findById(id).orElseThrow();
+    }
+
 
     @Override
     public List<Note>  genererNoteParDefaut(Long idExamen , Long idSession) {

@@ -9,4 +9,6 @@ public interface CycleTypeExamenService {
     CycleTypeExamen editcycleTypeExam( Long id,CycleTypeExamen cycleTypeExamen);
     String deletecycleTypeExam(Long id);
     List<CycleTypeExamen> listcycleTypeExam();
+
+    CycleTypeExamen findByIdOfCycTyp(Long id);
 }

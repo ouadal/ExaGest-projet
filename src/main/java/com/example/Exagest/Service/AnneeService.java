@@ -11,4 +11,6 @@ public interface AnneeService {
     List<Annee> listAnne();
 
     Annee setCurrentYear(Long id);
+
+    Annee findByIdOfAYear(Long id);
 }

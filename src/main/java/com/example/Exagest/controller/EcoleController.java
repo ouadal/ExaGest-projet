@@ -1,6 +1,7 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.EcoleService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Ecole;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
@@ -58,6 +59,17 @@ public class EcoleController {
 //    }
     public ResponseEntity<List<Ecole>>  toutesLesEcolesPerCyc(){
         return ResponseEntity.status(HttpStatus.OK).body(ecoleService.listEcolCycle());
+    }
+
+
+
+
+    @GetMapping("/getUneEcol/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Ecole>  uneEcol(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(ecoleService.findByIdOfEcol(id));
     }
 
 

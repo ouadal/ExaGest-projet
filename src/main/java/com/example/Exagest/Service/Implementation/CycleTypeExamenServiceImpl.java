@@ -66,4 +66,12 @@ private final CycleRepository cycleRepository;
     public List<CycleTypeExamen> listcycleTypeExam() {
         return cycleTypeExamenRepository.findAll();
     }
+
+    @Override
+    public CycleTypeExamen findByIdOfCycTyp(Long id) {
+        return cycleTypeExamenRepository.findById(id).orElseThrow();
+    }
+
+
+
 }

@@ -103,5 +103,10 @@ public class EleveServiceImpl implements EleveService {
         return eleveRepository.listElevMat(id);
     }
 
+    @Override
+    public Eleve findByIdOfElev(Long id) {
+        return eleveRepository.findById(id).orElseThrow();
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.AttributionMatiereService;
 import com.example.Exagest.Service.InscriptionService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.AttributionMatiere;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
@@ -76,6 +77,14 @@ public class AttributionMatiereController {
 
 
 
+
+    @GetMapping("/getUneAttMat/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<AttributionMatiere>  uneAttMat(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(attributionMatiereService.findByIdOfAttMat(id));
+    }
 
 
     @DeleteMapping("/suppAttri/{id}")

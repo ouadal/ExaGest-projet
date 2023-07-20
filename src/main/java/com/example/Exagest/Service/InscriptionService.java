@@ -21,4 +21,5 @@ public interface InscriptionService {
  List<Inscription> listInscPerExam(Long id);
 
 
+    Inscription findByIdOfInsc(Long id);
 }

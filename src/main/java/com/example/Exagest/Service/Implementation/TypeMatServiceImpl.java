@@ -49,6 +49,10 @@ public class TypeMatServiceImpl implements TypeMatService {
         return typeMatRepository.listtypeMatLib();
     }
 
+    @Override
+    public TypeMat findByIdOfTypMat(Long id) {
+        return typeMatRepository.findById(id).orElseThrow();
+    }
 
 
 }

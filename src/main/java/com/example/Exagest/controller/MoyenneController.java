@@ -1,6 +1,7 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.MoyenneService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Moyenne;
 import com.example.Exagest.entities.Note;
@@ -93,6 +94,19 @@ public class MoyenneController {
     public ResponseEntity<List<Moyenne>> moyenUneForEcolRangee(@RequestParam("idExamen") Long idExamen, @RequestParam Long idsession ,@RequestParam Long idEcole ){
         return ResponseEntity.status(HttpStatus.OK).body(moyenneService.moyennePerExamLorsSessforUneEcol(idExamen, idsession,idEcole));
     }
+
+
+
+
+
+    @GetMapping("/getUneMoy/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Moyenne>  uneMoy(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(moyenneService.findByIdOfMoy(id));
+    }
+
 
 
 

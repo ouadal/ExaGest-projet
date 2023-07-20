@@ -50,5 +50,10 @@ public class SessionServiceImpl implements SessionService {
         return sessionRepository.listSess();
     }
 
+    @Override
+    public Session findByIdOfSess(Long id) {
+        return sessionRepository.findById(id).orElseThrow();
+    }
+
 
 }

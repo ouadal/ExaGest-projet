@@ -14,4 +14,6 @@ public interface TypeExamenService {
     List<TypeExamen> listtypeExamLib();
 
     TypeExamen choisirTypeExamen();
+
+    TypeExamen findByIdOfTypEx(Long id);
 }

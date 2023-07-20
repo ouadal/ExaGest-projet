@@ -12,4 +12,5 @@ public interface CycleService {
     List<Cycle> listcycle();
     Cycle choisirCycle();
 
+    Cycle findByIdOfCycle(Long id);
 }

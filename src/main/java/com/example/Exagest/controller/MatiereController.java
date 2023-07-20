@@ -1,6 +1,7 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.MatiereService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Matiere;
 import com.example.Exagest.entities.Note;
@@ -58,7 +59,13 @@ public class MatiereController {
 
 
 
-
+    @GetMapping("/getUneMat/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Matiere>  uneMat(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(matiereService.findByIdOfMat(id));
+    }
 
 
 

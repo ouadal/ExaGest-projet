@@ -1,6 +1,7 @@
 package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.CycleService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Cycle;
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.repository.CycleRepository;
@@ -53,5 +54,11 @@ public class CycleServiceImpl implements CycleService {
     @Override
     public Cycle choisirCycle() {
         return null;
+    }
+
+
+    @Override
+    public Cycle findByIdOfCycle(Long id) {
+        return cycleRepository.findById(id).orElseThrow();
     }
 }

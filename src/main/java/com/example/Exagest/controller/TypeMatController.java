@@ -2,6 +2,7 @@ package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.InscriptionService;
 import com.example.Exagest.Service.TypeMatService;
+import com.example.Exagest.entities.Annee;
 import com.example.Exagest.entities.Inscription;
 import com.example.Exagest.entities.Note;
 import com.example.Exagest.entities.TypeMat;
@@ -52,6 +53,18 @@ public class TypeMatController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+
+
+    @GetMapping("/getUneTypMat/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<TypeMat>  typMat(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(typeMatService.findByIdOfTypMat(id));
+    }
+
+
 
 
 
