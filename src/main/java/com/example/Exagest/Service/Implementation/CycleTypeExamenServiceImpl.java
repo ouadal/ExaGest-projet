@@ -72,6 +72,11 @@ private final CycleRepository cycleRepository;
         return cycleTypeExamenRepository.findById(id).orElseThrow();
     }
 
+    @Override
+    public List<CycleTypeExamen> listtypeExamenPerCycle(Long idEcole) {
+        Cycle cycle = cycleRepository.cycleEnFonctDeEcol(idEcole);
+        return cycleTypeExamenRepository.listtypeExamenPerCycle(cycle.getId());
+    }
 
 
 }

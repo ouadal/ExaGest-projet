@@ -11,4 +11,9 @@ import java.util.List;
 public interface CycleRepository extends JpaRepository<Cycle, Long>  {
     @Query("SELECT c FROM Cycle c ORDER BY c.libele ")
     List<Cycle> listcycle();
+
+
+    @Query("SELECT e.cycle FROM Ecole e WHERE e.id = ?1 ")
+    Cycle cycleEnFonctDeEcol(Long idEcole);
+
 }

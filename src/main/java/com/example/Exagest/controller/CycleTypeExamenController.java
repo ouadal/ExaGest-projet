@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(path = "/CycleType")
 public class CycleTypeExamenController {
     private final CycleTypeExamenService cycleTypeExamenService;
@@ -80,6 +81,15 @@ public class CycleTypeExamenController {
 //    }
     public ResponseEntity<CycleTypeExamen>  uneCycTyp(@PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(cycleTypeExamenService.findByIdOfCycTyp(id));
+    }
+
+
+    @GetMapping("/listtypeExamenPerCycle/{idEcole}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<List<CycleTypeExamen>> listtypeExamenPerCycle(@PathVariable("idEcole") Long idEcole){
+        return ResponseEntity.status(HttpStatus.OK).body(cycleTypeExamenService.listtypeExamenPerCycle(idEcole));
     }
 
 

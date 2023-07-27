@@ -16,4 +16,7 @@ public interface EleveRepository extends JpaRepository<Eleve, Long>  {
 
     @Query("SELECT n.inscription.eleve FROM Note n WHERE n.inscription.eleve.id = n.inscription.eleve.id and n.attributionMatiere.matiere.id= :id")
     List<Eleve> listElevMat(@Param("id") Long id);
+
+    @Query("SELECT i.eleve FROM Inscription i WHERE i.ecole.id = ?1")
+    List<Eleve> getAllElevByEcol(Long idEcole);
 }

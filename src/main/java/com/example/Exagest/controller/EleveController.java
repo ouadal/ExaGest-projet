@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/Eleve")
+@CrossOrigin("*")
 public class EleveController {
     private final EleveService eleveService;
 
@@ -65,14 +66,14 @@ public class EleveController {
 
 
     @GetMapping("/getAllElev")
-//    List<Eleve> tousElev(@RequestBody Eleve eleve){
-//        return eleveService.listNom();
-//    }
-    public ResponseEntity<List<Eleve>>  tousElev(@RequestBody Eleve eleve){
+    public ResponseEntity<List<Eleve>>  tousElev(){
         return ResponseEntity.status(HttpStatus.OK).body(eleveService.listNom());
     }
 
-
+    @GetMapping("/getAllElevByEcol/{idEcole}")
+    public ResponseEntity<List<Eleve>>  getAllElevByEcol(@PathVariable Long idEcole){
+        return ResponseEntity.status(HttpStatus.OK).body(eleveService.getAllElevByEcol(idEcole));
+    }
 
 
 

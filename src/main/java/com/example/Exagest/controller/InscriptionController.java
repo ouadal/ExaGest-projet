@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping(path = "/Inscription")
+@CrossOrigin("*")
 public class InscriptionController {
 
     private final InscriptionService inscriptionService;
@@ -71,10 +72,26 @@ public class InscriptionController {
     }
 
 
+    @GetMapping("/getAllInscrPerElev")
+//    List<Inscription> InscPerEx(@PathVariable("id") Long id){
+//        return inscriptionService.listInscPerExam(id);
+//    }
+
+    public ResponseEntity< List<Inscription>> AllInscPerEle() {
+        return ResponseEntity.status(HttpStatus.OK).body(inscriptionService.listElev());
+    }
+
+    @GetMapping("/listInscPerEcolAndExam")
+    public ResponseEntity< List<Inscription>> listInscPerEcolAndExam(@RequestParam Long idEcole,@RequestParam Long idExamen) {
+        return ResponseEntity.status(HttpStatus.OK).body(inscriptionService.listInscPerEcolAndExam(idEcole,idExamen));
+    }
 
 
 
-    @GetMapping("/getUneAttMat/{id}")
+
+
+
+    @GetMapping("/getUneInsc/{id}")
 //    List<Annee> tousEco(){
 //        return anneeService.listAnne();
 //    }

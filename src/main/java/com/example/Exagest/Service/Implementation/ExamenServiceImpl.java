@@ -115,4 +115,9 @@ public class ExamenServiceImpl implements ExamenService {
         return examenRepository.findById(id).orElseThrow();
     }
 
+    @Override
+    public List<Examen> listExamPerEcol(Long id) {
+        return examenRepository.listExamPerEcol(id);
+    }
+
 }

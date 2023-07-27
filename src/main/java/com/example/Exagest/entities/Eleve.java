@@ -6,8 +6,12 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Setter @Getter @ToString @Table(name = "Eleve")
-@NoArgsConstructor @AllArgsConstructor
+@Setter
+@Getter
+@ToString
+@Table(name = "Eleve")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Eleve implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

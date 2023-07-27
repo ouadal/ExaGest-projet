@@ -17,4 +17,5 @@ public interface ExamenService {
 
 
     Examen findByIdOfExam(Long id);
+    List<Examen> listExamPerEcol(Long id);
 }

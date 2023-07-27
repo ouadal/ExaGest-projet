@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/TypeExamen")
+@CrossOrigin("*")
 public class TypeExamenController {
     private final TypeExamenService typeExamenService;
 

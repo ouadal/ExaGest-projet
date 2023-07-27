@@ -11,4 +11,6 @@ public interface CycleTypeExamenService {
     List<CycleTypeExamen> listcycleTypeExam();
 
     CycleTypeExamen findByIdOfCycTyp(Long id);
+
+    List<CycleTypeExamen> listtypeExamenPerCycle(Long idEcole);
 }

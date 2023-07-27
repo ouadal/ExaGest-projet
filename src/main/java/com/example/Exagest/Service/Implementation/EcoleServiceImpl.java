@@ -29,6 +29,7 @@ public class EcoleServiceImpl implements EcoleService {
     public Ecole addecole(Ecole ecole) {
         ecole.setAddDate(LocalDate.now());
         ecole.setMatricule(generateMatricule(8));
+        ecole.setStatut(false);
         Optional<Cycle> cycle = this.cycleRepository.findById(ecole.getCycle().getId());
         //Je vérifie si cycle ayant l'id saisi dans le postman existe si oui on fait un set de ce cycle et un return du save
         //Sinon on retourne un null

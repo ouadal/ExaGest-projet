@@ -1,10 +1,7 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.EnrolementService;
-import com.example.Exagest.entities.Annee;
-import com.example.Exagest.entities.Enrolement;
-import com.example.Exagest.entities.Inscription;
-import com.example.Exagest.entities.Note;
+import com.example.Exagest.entities.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +10,7 @@ import java.util.List;
 
 @RequestMapping(path = "/Enrolement")
 @RestController
+@CrossOrigin("*")
 public class EnrolementController {
     private final EnrolementService enrolementService;
 
@@ -69,6 +67,10 @@ public class EnrolementController {
         return ResponseEntity.status(HttpStatus.OK).body(enrolementService.listEcol());
     }
 
+    @GetMapping("/getAllEnrollementsByEcol/{idEcole}")
+    public ResponseEntity<List<Enrolement>>  getAllEnrollementsByEcol(@PathVariable Long idEcole){
+        return ResponseEntity.status(HttpStatus.OK).body(enrolementService.getAllEnrollementsByEcol(idEcole));
+    }
 
 
 

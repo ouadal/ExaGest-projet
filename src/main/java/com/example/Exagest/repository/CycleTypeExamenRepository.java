@@ -13,4 +13,7 @@ public interface CycleTypeExamenRepository extends JpaRepository<CycleTypeExamen
 
     @Query("SELECT c FROM CycleTypeExamen c ORDER BY c.typeExamen.libele ")
     List<CycleTypeExamen> listtypeExamen();
+
+    @Query("SELECT c FROM CycleTypeExamen c WHERE c.cycle.id = ?1")
+    List<CycleTypeExamen> listtypeExamenPerCycle(Long idCycle);
 }

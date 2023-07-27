@@ -21,4 +21,6 @@ public interface EleveService {
 
 
     Eleve findByIdOfElev(Long id);
+
+    List<Eleve> getAllElevByEcol(Long idEcole);
 }

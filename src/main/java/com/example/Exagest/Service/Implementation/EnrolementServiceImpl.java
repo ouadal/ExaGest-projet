@@ -76,4 +76,9 @@ public class EnrolementServiceImpl implements EnrolementService {
         return enrolementRepository.findById(id).orElseThrow();
     }
 
+    @Override
+    public List<Enrolement> getAllEnrollementsByEcol(Long idEcole) {
+        return enrolementRepository.getAllEnrollementsByEcol(idEcole);
+    }
+
 }

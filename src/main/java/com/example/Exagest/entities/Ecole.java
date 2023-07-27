@@ -1,4 +1,5 @@
 package com.example.Exagest.entities;
+import com.example.Exagest.security.entities.User;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
@@ -47,6 +48,8 @@ public class Ecole implements Serializable {
 
     @Column(nullable = true)
     private LocalDate updateDate;
+    @ManyToOne
+    private User user;
 
 //public String generateMatricule(int length) {
 //    String format = "%0" + length + "d";

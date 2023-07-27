@@ -25,16 +25,4 @@ public class InscriptionRequestModel {
 
     private Long idEnrolement;
 
-
-
-    //private Long idEcole;
-
-
-
-
-
-
-
-
-
 }
