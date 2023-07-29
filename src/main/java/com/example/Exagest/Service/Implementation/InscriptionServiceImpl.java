@@ -114,6 +114,11 @@ public class InscriptionServiceImpl implements InscriptionService {
     }
 
     @Override
+    public List<Inscription> listInscPerEcolAndExam(Long idEcole, Long idExamen) {
+        return inscriptionRepository.listInscPerEcolAndExam(idEcole,idExamen);
+    }
+
+    @Override
     public Inscription findByIdOfInsc(Long id) {
         return inscriptionRepository.findById(id).orElseThrow();
     }

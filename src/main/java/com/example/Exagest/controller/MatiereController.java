@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/Matiere")
+@CrossOrigin("*")
 public class MatiereController {
   private final MatiereService matiereService;
 
@@ -71,6 +72,29 @@ public class MatiereController {
 
 
 
+    @GetMapping("/getTypeMat")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity< HashMap<String, List<Eleve>> >  uneMat(){
+        return ResponseEntity.status(HttpStatus.OK).body(matiereService.matPerElv());
+    }
+
+
+
+
+
+
+    @GetMapping("/getTypMat")
+
+    public ResponseEntity <List<Matiere>>  touslesMat(){
+        return ResponseEntity.status(HttpStatus.OK).body(matiereService.listTypMat());
+    }
+
+
+
+
+
 
 
 
@@ -84,6 +108,11 @@ public class MatiereController {
     public ResponseEntity< HashMap<String, List<Eleve>>>   matPerElv(){
         return ResponseEntity.status(HttpStatus.OK).body(matiereService.matPerElv());
     }
+
+
+
+
+
 
 
 

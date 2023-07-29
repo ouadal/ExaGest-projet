@@ -24,6 +24,7 @@ public class CycleServiceImpl implements CycleService {
     @Override
     public Cycle addcycle(Cycle cycle) {
         cycle.setAddDate(LocalDate.now());
+
         return cycleRepository.save(cycle);
     }
 

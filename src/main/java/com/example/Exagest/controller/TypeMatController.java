@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/TypeMat")
+@CrossOrigin("*")
 public class TypeMatController {
 
     private final TypeMatService typeMatService;

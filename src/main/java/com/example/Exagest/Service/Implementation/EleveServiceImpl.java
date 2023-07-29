@@ -108,5 +108,10 @@ public class EleveServiceImpl implements EleveService {
         return eleveRepository.findById(id).orElseThrow();
     }
 
+    @Override
+    public List<Eleve> getAllElevByEcol(Long idEcole) {
+        return eleveRepository.getAllElevByEcol(idEcole);
+    }
+
 
 }

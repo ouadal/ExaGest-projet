@@ -74,6 +74,10 @@ public class MatiereServiceImpl implements MatiereService {
         return matiereRepository.listTypMat();
     }
 
+
+
+
+
     @Override
     public HashMap<String, List<Eleve>> matPerElv() {
 

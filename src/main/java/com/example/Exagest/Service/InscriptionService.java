@@ -19,6 +19,7 @@ public interface InscriptionService {
     List<Inscription> listEnrol();
 
  List<Inscription> listInscPerExam(Long id);
+ List<Inscription> listInscPerEcolAndExam(Long idEcole,Long idExamen);
 
 
     Inscription findByIdOfInsc(Long id);

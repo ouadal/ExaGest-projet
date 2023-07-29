@@ -13,4 +13,7 @@ public interface EnrolementRepository extends JpaRepository<Enrolement, Long>  {
 
     @Query("select e from Enrolement e ORDER BY e.ecole.nomEcole ")
     List<Enrolement> listEcol();
+
+    @Query("SELECT e FROM Enrolement e WHERE e.ecole.id = ?1")
+    List<Enrolement> getAllEnrollementsByEcol(Long idEcole);
 }

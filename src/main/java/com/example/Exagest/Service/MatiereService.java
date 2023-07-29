@@ -2,6 +2,7 @@ package com.example.Exagest.Service;
 
 import com.example.Exagest.entities.Eleve;
 import com.example.Exagest.entities.Matiere;
+import com.example.Exagest.entities.TypeMat;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ public interface MatiereService {
     String deleteMatiere(Long id);
     List<Matiere> listMatLib();
     List<Matiere> listTypMat();
+
 
     HashMap<String, List<Eleve>> matPerElv  ();
 

@@ -12,4 +12,6 @@ public interface EnrolementService {
     List<Enrolement> listExamen();
 
     Enrolement findByIdOfEnrol(Long id);
+
+    List<Enrolement> getAllEnrollementsByEcol(Long idEcole);
 }

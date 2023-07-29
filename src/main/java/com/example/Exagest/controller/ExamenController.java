@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/Examen")
+@CrossOrigin("*")
 public class ExamenController {
     private final ExamenService examenService;
 
@@ -87,6 +88,16 @@ public class ExamenController {
 //    }
     public ResponseEntity<Examen>  unExam(@PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(examenService.findByIdOfExam(id));
+    }
+
+
+
+    @GetMapping("/listExamPerEcol/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<List<Examen>>   listExamPerEcol(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(examenService.listExamPerEcol(id));
     }
 
 

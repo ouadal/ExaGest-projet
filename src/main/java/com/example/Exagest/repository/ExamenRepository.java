@@ -15,8 +15,12 @@ public interface ExamenRepository extends JpaRepository<Examen, Long>  {
     @Query("SELECT e FROM Examen e ORDER BY e.annee.id ")
     List<Examen> listAnnee();
 
+
     @Query("SELECT e FROM Examen e ORDER BY e.ecole.nomEcole ")
     List<Examen> listEcol();
+
+    @Query("SELECT e FROM Examen e WHERE e.ecole.id = ?1")
+    List<Examen> listExamPerEcol(Long id);
 
 
 }

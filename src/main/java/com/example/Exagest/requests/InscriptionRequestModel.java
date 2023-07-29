@@ -17,6 +17,7 @@ public class InscriptionRequestModel {
 
     private String prenom;
 
+
     private Date date_naissance;
 
 
@@ -24,17 +25,5 @@ public class InscriptionRequestModel {
 
 
     private Long idEnrolement;
-
-
-
-    //private Long idEcole;
-
-
-
-
-
-
-
-
 
 }

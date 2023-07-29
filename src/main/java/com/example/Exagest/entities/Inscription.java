@@ -42,4 +42,5 @@ public class Inscription implements Serializable {
 
     @Column(nullable = true)
     private LocalDate updateDate;
+
 }
