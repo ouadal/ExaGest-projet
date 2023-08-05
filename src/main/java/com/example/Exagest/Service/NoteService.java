@@ -30,4 +30,10 @@ public interface NoteService {
     List<Note> mettreAjourLesNote(List<NoteUpdate> listNotes);
 
    Note findByIdOfNot(Long id);
+
+    List<Note> listDesElevPerExamenSessionInscription( Long idExamen, Long idEcol, Long idSession);
+
+    List<Note> findNotePerExamAttribSess( Long idExamen, Long idAttrMat, Long idSession);
+
+
 }

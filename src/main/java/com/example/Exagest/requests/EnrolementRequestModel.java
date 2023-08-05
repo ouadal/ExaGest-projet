@@ -14,7 +14,7 @@ public class EnrolementRequestModel {
 
     private String libele;
 
-    private boolean statut;
+    private boolean statut = false;
 
     private Long  idEcole;
 

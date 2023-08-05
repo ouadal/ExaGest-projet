@@ -60,16 +60,18 @@ public class EnrolementController {
 
 
     @GetMapping("/getAllEnrolEcol")
-//    List<Enrolement> EnrolEco(){
-//        return enrolementService.listEcol();
-//    }
     public ResponseEntity<List<Enrolement>>  toutesLesEnrol(){
         return ResponseEntity.status(HttpStatus.OK).body(enrolementService.listEcol());
     }
+    
 
     @GetMapping("/getAllEnrollementsByEcol/{idEcole}")
     public ResponseEntity<List<Enrolement>>  getAllEnrollementsByEcol(@PathVariable Long idEcole){
         return ResponseEntity.status(HttpStatus.OK).body(enrolementService.getAllEnrollementsByEcol(idEcole));
+    }
+    @GetMapping("/getAllEcolThatAreEnrolled/{idExamen}")
+    public ResponseEntity<List<Enrolement>>  getAllEcolThatAreEnrolled(@PathVariable Long idExamen){
+        return ResponseEntity.status(HttpStatus.OK).body(enrolementService.getAllEcolThatAreEnrolled(idExamen));
     }
 
 

@@ -69,6 +69,34 @@ public class NoteController {
 
 
 
+    @GetMapping("/listDesElevPerExamenSessionInscription")
+//    List<Note> NotSess(){
+//        return noteService.listSess();
+//    }
+    public ResponseEntity<List<Note>>  listDesElevPerExamenSessionInscription(@RequestParam("idExamen") Long idExamen, @RequestParam Long idEcol, @RequestParam Long idSession){
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.listDesElevPerExamenSessionInscription(idExamen,idEcol,idSession));
+    }
+
+
+
+
+
+    @GetMapping("/findNotePerExamAttribSess")
+//    List<Note> NotSess(){
+//        return noteService.listSess();
+//    }
+    public ResponseEntity<List<Note>>  findNotePerExamAttribSess(@RequestParam("idExamen") Long idExamen, @RequestParam Long idAttrMat, @RequestParam Long idSession){
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.findNotePerExamAttribSess(idExamen,idAttrMat,idSession));
+    }
+
+
+
+
+
+
+
+
+
     @GetMapping("/getAllNotAttMat")
 //    List<Note> NotAttrMat(){
 //        return noteService.listAttriuMat();

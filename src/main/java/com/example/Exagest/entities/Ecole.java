@@ -48,9 +48,13 @@ public class Ecole implements Serializable {
 
     @Column(nullable = true)
     private LocalDate updateDate;
-
     @ManyToOne
     private User user;
+
+
+
+    public Ecole(Object o, String nom, String adresse, String telephone, String email, String no, boolean b, String s, Cycle cycle, Object o1, Object o2, User user) {
+    }
 
 //public String generateMatricule(int length) {
 //    String format = "%0" + length + "d";

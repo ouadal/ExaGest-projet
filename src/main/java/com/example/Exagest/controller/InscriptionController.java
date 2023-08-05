@@ -91,6 +91,25 @@ public class InscriptionController {
 
 
 
+
+
+
+
+
+    @GetMapping("/listInscDesElevPerExam")
+    public ResponseEntity< List<Inscription>> listInscDesElevPerExam(@RequestParam Long idElev,@RequestParam Long idExamen) {
+        return ResponseEntity.status(HttpStatus.OK).body(inscriptionService.listInscDesElevPerExam(idElev,idExamen));
+    }
+
+
+
+
+
+
+
+
+
+
     @GetMapping("/getUneInsc/{id}")
 //    List<Annee> tousEco(){
 //        return anneeService.listAnne();

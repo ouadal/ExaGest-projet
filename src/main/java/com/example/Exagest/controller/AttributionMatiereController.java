@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/AttributionMat")
+@CrossOrigin("*")
 public class AttributionMatiereController {
     private final AttributionMatiereService attributionMatiereService;
 
@@ -85,6 +86,23 @@ public class AttributionMatiereController {
     public ResponseEntity<AttributionMatiere>  uneAttMat(@PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(attributionMatiereService.findByIdOfAttMat(id));
     }
+
+
+
+
+
+    @GetMapping("/getAttMatByEcolConn/{idEcol}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<List<AttributionMatiere>>  attMatByEcolConn(@PathVariable("idEcol") Long idEcol){
+        return ResponseEntity.status(HttpStatus.OK).body(attributionMatiereService.getAttMatByEcolConn(idEcol));
+    }
+
+
+
+
+
 
 
     @DeleteMapping("/suppAttri/{id}")

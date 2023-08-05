@@ -18,7 +18,7 @@ public interface AnneeRepository extends JpaRepository<Annee , Long> {
 
 
     @Modifying
-      @Query("update Annee a set a.etat = false")
+    @Query("update Annee a set a.etat = false")
     void setCurrentYear();
 
 

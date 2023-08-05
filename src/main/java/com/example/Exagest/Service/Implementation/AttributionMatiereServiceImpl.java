@@ -54,7 +54,7 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
 //            attributionMatiere.setMatiere(mat.get());
 //            return attributionMatiereRepository.save(attributionMatiere);
 //        }
-        Optional<Annee> an = anneeRepository.findById(attributionMatiere.getAnnee().getId());
+        //Optional<Annee> an = anneeRepository.findById(attributionMatiere.getAnnee().getId());
 //        if (an.isPresent()){
 //            attributionMatiere.setAnnee(an.get());
 //            return attributionMatiereRepository.save(attributionMatiere);
@@ -66,9 +66,9 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
 //        }
 
 
-        if(mat.isPresent() && an.isPresent() && ex.isPresent()){
+        if(mat.isPresent() && ex.isPresent()){
             attributionMatiere.setMatiere(mat.get());
-            attributionMatiere.setAnnee(an.get());
+            attributionMatiere.setAnnee(a);
             attributionMatiere.setExamen(ex.get());
             return attributionMatiereRepository.save(attributionMatiere);
 
@@ -122,6 +122,13 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
     public AttributionMatiere  findByIdOfAttMat(Long id) {
         return attributionMatiereRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public List<AttributionMatiere> getAttMatByEcolConn(Long idEcol) {
+        return attributionMatiereRepository.getAttMatByEcolConn(idEcol);
+    }
+
+
 
 
 }

@@ -5,6 +5,7 @@ import com.example.Exagest.security.repositories.RoleRepository;
 import com.example.Exagest.security.repositories.UserRepository;
 import com.example.Exagest.security.requests.AdminRegisterRequest;
 import com.example.Exagest.security.services.UserService;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +20,7 @@ public class ExagestApplication {
 
 	@Bean
 	public CommandLineRunner start(
+
 			RoleRepository roleRepository,
 			UserService userService,
 			UserRepository userRepository
@@ -33,6 +35,7 @@ public class ExagestApplication {
 							.build()
 				);
 			}
+
 			if (roleRepository.findByName("ROLE_ADMIN").isEmpty()) {
 				roleRepository.save(
 						Role
@@ -42,10 +45,10 @@ public class ExagestApplication {
 								.build()
 				);
 			}
+		 	System.out.println("============================================DAM");
 			if (userRepository.findByUsername("admin").isEmpty()) {
 				userService.storeAdmin(new AdminRegisterRequest("admin","1234","ouadalissifou7@gmail.com"));
-
+				System.out.println("============================================DAM");
 			}
-		};
-	}
-}
+
+};}}

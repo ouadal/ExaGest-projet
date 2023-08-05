@@ -80,5 +80,8 @@ public class EnrolementServiceImpl implements EnrolementService {
     public List<Enrolement> getAllEnrollementsByEcol(Long idEcole) {
         return enrolementRepository.getAllEnrollementsByEcol(idEcole);
     }
-
+    @Override
+    public List<Enrolement> getAllEcolThatAreEnrolled(Long idExamen) {
+        return enrolementRepository.getAllEcolThatAreEnrolled(idExamen);
+    }
 }

@@ -50,6 +50,8 @@ public class ExamenServiceImpl implements ExamenService {
         examen1.setStatut(enrolementRequestModel.isStatut());
 
 
+
+
         Examen examenSaved  = examenRepository.save(examen1);
 
         System.out.println(examenSaved.getId());
@@ -119,5 +121,38 @@ public class ExamenServiceImpl implements ExamenService {
     public List<Examen> listExamPerEcol(Long id) {
         return examenRepository.listExamPerEcol(id);
     }
+
+    @Override
+    public boolean setCurrentExamToActif(Long idExamen, Long idEcol) {
+        Optional<Examen> ex = examenRepository.findById(idExamen);
+        Annee annee = anneeRepository.getCurrentYear();
+        if (ex.isPresent()) {
+            examenRepository.setToFalseAllExamDiffOf(idExamen, idEcol,annee.getId());
+            ex.get().setStatut(true);
+            examenRepository.save(ex.get());
+            return true;
+        }
+        return false;
+
+    }
+
+    @Override
+    public Examen setExamFalse(Long id) {
+        Optional <Examen>  ex=  examenRepository.findById(id);
+        if(ex.isPresent()){
+           examenRepository.setExamFalse(id);
+            return  examenRepository.save(ex.get());
+        }
+        return null;
+
+
+    }
+
+    @Override
+    public List<Examen> listExamAucoursDuneAnee(Long idEcol) {
+        return examenRepository.listExamAucoursDuneAnee(idEcol);
+    }
+
+//
 
 }

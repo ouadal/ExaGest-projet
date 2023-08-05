@@ -28,7 +28,9 @@ public class AuthController extends SecurityExceptionsHandler {
     private final String ENTITY_URL_NAME = "auth";
     private final UserService userService;
 
+
     //private static final String ROLE_ADMINISTRATEUR = "ROLE_ADMINISTRATEUR";
+
 
 
     @Autowired
@@ -40,6 +42,8 @@ public class AuthController extends SecurityExceptionsHandler {
             produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public ResponseEntity<HttpSuccessResponse> register(@RequestBody @Valid RegisterRequest request) throws RoleNotFoundException, UserAlreadyExistException, RoleAlreadyExistException, UnsupportedEncodingException {
         HttpSuccessResponse response = userService.storeUser(request);
+
+
 
 
 

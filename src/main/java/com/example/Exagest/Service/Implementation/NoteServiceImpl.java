@@ -101,9 +101,9 @@ public class NoteServiceImpl implements NoteService {
 
 
     @Override
-    public List<Note> listNoteElevPerExamenSession(Long idExamen, Long idInscription, Long idSession)
+    public List<Note> listNoteElevPerExamenSession(Long idExamen, Long idEcol, Long idSession)
     {
-        return noteRepository.listNoteElevPerExamenSession(idExamen,  idInscription, idSession);
+        return noteRepository.listNoteElevPerExamenSession(idExamen,  idEcol, idSession);
     }
 
     @Override
@@ -122,6 +122,21 @@ public class NoteServiceImpl implements NoteService {
     public Note findByIdOfNot(Long id) {
         return noteRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public List<Note> listDesElevPerExamenSessionInscription(Long idExamen, Long idInscription, Long idSession) {
+        return noteRepository.listDesElevPerExamenSessionInscription(idExamen,idInscription,idSession);
+    }
+
+    @Override
+    public List<Note> findNotePerExamAttribSess(Long idExamen, Long idAttrMat, Long idSession) {
+        return noteRepository.findNotePerExamAttribSess(idExamen,idAttrMat,idSession);
+    }
+
+
+
+
+
 
 
     @Override

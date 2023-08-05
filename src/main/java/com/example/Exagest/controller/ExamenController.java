@@ -42,6 +42,29 @@ public class ExamenController {
 
 
 
+    @PutMapping ("/setCurrentExamToActif")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Boolean>  ExamenEncours(@RequestParam Long idExamen,@RequestParam Long idEcole){
+        return ResponseEntity.status(HttpStatus.OK).body(examenService.setCurrentExamToActif( idExamen,idEcole));
+    }
+
+
+
+
+
+
+    @PutMapping ("/ExamToFalse/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<Examen>  ExamenToFalse(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(examenService.setExamFalse(id));
+    }
+
+
+
     @PutMapping("/editexam/{id}")
 //    Examen modifexam(@PathVariable("id") Long id, @RequestBody Examen examen){
 //
@@ -68,6 +91,19 @@ public class ExamenController {
 
     public ResponseEntity<List<Examen>>  toutesLesNExam(){
         return ResponseEntity.status(HttpStatus.OK).body(examenService.listEcol());
+    }
+
+
+
+    @GetMapping("/getExamAuCoursAnneeCourante/{id}")
+//    List<Examen> ExamEco(){
+//        return examenService.listEcol();
+//    }
+
+
+
+    public ResponseEntity<List<Examen>>  ExamAuCoursAnnee(@PathVariable("id") Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(examenService.listExamAucoursDuneAnee(id));
     }
 
 

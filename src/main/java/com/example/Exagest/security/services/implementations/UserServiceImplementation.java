@@ -107,7 +107,6 @@ public class UserServiceImplementation implements UserService {
         if (userAvecMail.isPresent()) {
             throw new UserAlreadyExistException("Un utilisateur avec cette adresse email est deja enregistré");
 
-
         }
         if (userAvecUsername.isPresent()) {
             throw new UserAlreadyExistException("Un utilisateur avec ce nom d'utilisateur est deja enregistré");
@@ -117,8 +116,13 @@ public class UserServiceImplementation implements UserService {
         User user = userRepository.save(javaConverter.AdminRegisterToUser(request));
 
         addRoleToUser("ROLE_ADMIN", user.getUsername());
+
 //        addRoleToUser("ROLE_VALIDATEUR_COMPTE", user.getUsername());
 //        addRoleToUser("ROLE_VALIDATEUR_PUBLICATION", user.getUsername());
+
+//        addRoleToUser("ROLE_VALIDATEUR_COMPTE", user.getUsername());
+//        addRoleToUser("ROLE_VALIDATEUR_PUBLICATION", user.getUsername());
+
         return successResponse(CREATED, "Votre compte a bien été créer.", javaConverter.userToUserResponse(user));
 
     }

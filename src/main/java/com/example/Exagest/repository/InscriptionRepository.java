@@ -28,6 +28,11 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long> 
     @Query("SELECT i FROM Inscription i WHERE i.enrolement.ecole.id = ?1 AND i.enrolement.examen.id = ?2")
     List<Inscription> listInscPerEcolAndExam(Long idEcole,Long idExamen);
 
+    @Query("SELECT i FROM Inscription i WHERE i.eleve.id = ?1 AND i.enrolement.examen.id = ?2")
+    List<Inscription> listInscDesElevPerExam(Long idElev,Long idExamen);
+
+
+
 
 
 }

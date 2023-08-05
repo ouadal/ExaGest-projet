@@ -18,4 +18,12 @@ public interface ExamenService {
 
     Examen findByIdOfExam(Long id);
     List<Examen> listExamPerEcol(Long id);
+
+//    Examen setExamen(Long id);
+
+    boolean setCurrentExamToActif(Long idExamen,Long idEcol);
+
+    Examen setExamFalse(Long id);
+
+    List<Examen> listExamAucoursDuneAnee(Long id);
 }

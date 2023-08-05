@@ -123,5 +123,10 @@ public class InscriptionServiceImpl implements InscriptionService {
         return inscriptionRepository.findById(id).orElseThrow();
     }
 
+    @Override
+    public List<Inscription> listInscDesElevPerExam(Long idElev, Long idExamen) {
+        return inscriptionRepository.listInscPerEcolAndExam(idElev,idExamen);
+    }
+
 
 }
