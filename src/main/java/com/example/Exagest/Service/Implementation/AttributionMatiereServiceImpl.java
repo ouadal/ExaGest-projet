@@ -124,8 +124,12 @@ public class AttributionMatiereServiceImpl implements AttributionMatiereService 
     }
 
     @Override
-    public List<AttributionMatiere> getAttMatByEcolConn(Long idEcol) {
-        return attributionMatiereRepository.getAttMatByEcolConn(idEcol);
+    public List<AttributionMatiere> getAttMatByEcolConnAndExamen(Long idEcole,Long idExamen) {
+        return attributionMatiereRepository.getAttMatByEcolConnAndExamen(idEcole,idExamen);
+    }
+    @Override
+    public List<AttributionMatiere> getAttMatByEcolConn(Long idEcole) {
+        return attributionMatiereRepository.getAttMatByEcolConn(idEcole);
     }
 
 

@@ -21,5 +21,6 @@ public interface AttributionMatiereService {
 
     AttributionMatiere findByIdOfAttMat(Long id);
 
-    List<AttributionMatiere> getAttMatByEcolConn( Long idEcol);
+    List<AttributionMatiere> getAttMatByEcolConnAndExamen( Long idEcole,Long idExamen);
+    List<AttributionMatiere> getAttMatByEcolConn( Long idEcole);
 }

@@ -20,8 +20,10 @@ public interface AttributionMatiereRepository extends JpaRepository<AttributionM
     @Query("SELECT  a FROM AttributionMatiere a WHERE a.examen.id =:idEx")
     List<AttributionMatiere> listAttMAtPereExam(@Param("idEx") Long id);
 
+    @Query("SELECT  a FROM AttributionMatiere a WHERE a.examen.ecole.id = ?1 and a.examen.id = ?2")
+    List<AttributionMatiere> getAttMatByEcolConnAndExamen(Long idEcole,Long idExamen);
     @Query("SELECT  a FROM AttributionMatiere a WHERE a.examen.ecole.id = ?1")
-    List<AttributionMatiere> getAttMatByEcolConn( Long idEcol);
+    List<AttributionMatiere> getAttMatByEcolConn(Long idEcole);
 
 
 }

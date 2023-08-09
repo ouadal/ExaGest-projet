@@ -91,12 +91,19 @@ public class AttributionMatiereController {
 
 
 
-    @GetMapping("/getAttMatByEcolConn/{idEcol}")
+    @GetMapping("/getAttMatByEcolConnAndExamen")
 //    List<Annee> tousEco(){
 //        return anneeService.listAnne();
 //    }
-    public ResponseEntity<List<AttributionMatiere>>  attMatByEcolConn(@PathVariable("idEcol") Long idEcol){
-        return ResponseEntity.status(HttpStatus.OK).body(attributionMatiereService.getAttMatByEcolConn(idEcol));
+    public ResponseEntity<List<AttributionMatiere>>  attMatByEcolConn(@RequestParam("idEcole") Long idEcole,@RequestParam("idExamen")Long idExamen){
+        return ResponseEntity.status(HttpStatus.OK).body(attributionMatiereService.getAttMatByEcolConnAndExamen(idEcole,idExamen));
+    }
+@GetMapping("/getAttMatByEcolConn/{id}")
+//    List<Annee> tousEco(){
+//        return anneeService.listAnne();
+//    }
+    public ResponseEntity<List<AttributionMatiere>>  attMatByEcolConn(@PathVariable("id") Long idEcole){
+        return ResponseEntity.status(HttpStatus.OK).body(attributionMatiereService.getAttMatByEcolConn(idEcole));
     }
 
 

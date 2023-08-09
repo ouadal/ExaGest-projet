@@ -162,6 +162,26 @@ public class NoteController {
 
 
 
+    @GetMapping("/listNotePerExamSesion")
+//    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+//        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+//    }
+    public ResponseEntity< List<Note>> listNotePerExamSesion(@RequestParam("idExamen") Long idExamen, @RequestParam Long idSession) {
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.listNotePerExamSesion(idExamen,idSession));
+
+
+    }
+@GetMapping("/listNotePerExamSesionMat")
+//    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+//        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+//    }
+    public ResponseEntity< List<Note>> listNotePerExamSesionMat(@RequestParam Long idExamen, @RequestParam Long idSession,@RequestParam Long idMat) {
+        return ResponseEntity.status(HttpStatus.OK).body(noteService.listNotePerExamSesionMat(idExamen,idSession,idMat));
+    }
+
+
+
+
 
 
 
@@ -187,18 +207,18 @@ public class NoteController {
 
 
 
-//    @GetMapping("/calculerMoyenne")
-////    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
-////        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
-////    }
-//    public ResponseEntity<String> calculemoyenne(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
-//        try {
-//            noteService.calculerMoyenne(idExamen,  idInscription, idSession);
-//            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("moyenne calculé avec succès");
-//        }catch (Exception e){
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
+    @GetMapping("/calculerMoyenne")
+//    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+//        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
 //    }
+    public ResponseEntity<String> calculemoyenne(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
+        try {
+            noteService.calculerMoyenne(idExamen,  idInscription, idSession);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("moyenne calculé avec succès");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
 
 

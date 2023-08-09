@@ -25,7 +25,7 @@ public interface NoteService {
 
     List<Note> listNoteElevPerExamenSession( Long idExamen, Long idInscription, Long idSession);
 
-    //void calculerMoyenne(Long idExamen, Long idInscription, Long idSession);
+    void calculerMoyenne(Long idExamen, Long idInscription, Long idSession);
 
     List<Note> mettreAjourLesNote(List<NoteUpdate> listNotes);
 
@@ -36,4 +36,8 @@ public interface NoteService {
     List<Note> findNotePerExamAttribSess( Long idExamen, Long idAttrMat, Long idSession);
 
 
+    List<Note> listNotePerExamSesion(Long idExamen,Long idSession);
+
+
+    List<Note> listNotePerExamSesionMat(Long idExamen, Long idSession, Long idMat);
 }
