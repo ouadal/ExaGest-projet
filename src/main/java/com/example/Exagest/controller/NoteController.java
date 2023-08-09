@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/Note")
+@CrossOrigin("*")
 public class NoteController {
     private final NoteService noteService;
 
@@ -44,7 +45,7 @@ public class NoteController {
 //    }
     public ResponseEntity<Note> modifierNot(@RequestBody Note note, @PathVariable("id") Long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(noteService.editnote(note,id));
+            return ResponseEntity.status(HttpStatus.OK).body(noteService.editnote(note, id));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -207,18 +208,18 @@ public class NoteController {
 
 
 
-    @GetMapping("/calculerMoyenne")
-//    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
-//        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+//    @GetMapping("/calculerMoyenne")
+////    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
+////        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
+////    }
+//    public ResponseEntity<String> calculemoyenne(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
+//        try {
+//            noteService.calculerMoyenne(idExamen,  idInscription, idSession);
+//            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("moyenne calculé avec succès");
+//        }catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
 //    }
-    public ResponseEntity<String> calculemoyenne(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession) {
-        try {
-            noteService.calculerMoyenne(idExamen,  idInscription, idSession);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("moyenne calculé avec succès");
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-    }
 
 
 

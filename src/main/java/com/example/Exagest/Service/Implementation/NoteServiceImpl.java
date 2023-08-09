@@ -183,35 +183,35 @@ public class NoteServiceImpl implements NoteService {
 
 
 
-   @Override
-   public void calculerMoyenne(Long idExamen, Long idInscription, Long idSession) {
-       Optional<Session> session = sessionRepository.findById(idSession);
-       Optional<Examen> examen = examenRepository.findById(idExamen);
-       Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
-       double sommeCoeff;
-       if (session.isPresent() && examen.isPresent() && inscription.isPresent()) {
-           List<Note> notes = noteRepository.listNoteElevPerExamenSession(idExamen, idInscription, idSession);
-           double sommeNote = 0;
-           sommeCoeff = 0;
-           for (Note note : notes) {
-               sommeCoeff += note.getAttributionMatiere().getCoefficient();
-               sommeNote += (note.getNoteExam() * note.getAttributionMatiere().getCoefficient());
-           }
-
-           if (sommeCoeff != 0) {
-               double moyenne = sommeNote / sommeCoeff;
-               System.out.println("La moyenne est : " + moyenne);
-           } else {
-               throw new ArithmeticException("Division by zero error: sum of coefficients is zero.");
-           }
-       } else {
-           // Gérez le cas où l'une des entités n'existe pas dans la base de données
-           throw new IllegalArgumentException("Invalid session, exam, or inscription ID.");
-       }
-
-
+//   @Override
+//   public void calculerMoyenne(Long idExamen, Long idInscription, Long idSession) {
+//       Optional<Session> session = sessionRepository.findById(idSession);
+//       Optional<Examen> examen = examenRepository.findById(idExamen);
+//       Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
+//       double sommeCoeff;
+//       if (session.isPresent() && examen.isPresent() && inscription.isPresent()) {
+//           List<Note> notes = noteRepository.listNoteElevPerExamenSession(idExamen, idInscription, idSession);
+//           double sommeNote = 0;
+//           sommeCoeff = 0;
+//           for (Note note : notes) {
+//               sommeCoeff += note.getAttributionMatiere().getCoefficient();
+//               sommeNote += (note.getNoteExam() * note.getAttributionMatiere().getCoefficient());
+//           }
+//
+//           if (sommeCoeff != 0) {
+//               double moyenne = sommeNote / sommeCoeff;
+//               System.out.println("La moyenne est : " + moyenne);
+//           } else {
+//               throw new ArithmeticException("Division by zero error: sum of coefficients is zero.");
+//           }
+//       } else {
+//           // Gérez le cas où l'une des entités n'existe pas dans la base de données
+//           throw new IllegalArgumentException("Invalid session, exam, or inscription ID.");
+//       }
 
 
-    }
+
+
+
 }
 

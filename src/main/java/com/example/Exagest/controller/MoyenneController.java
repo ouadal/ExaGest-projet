@@ -13,6 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/Moyenne")
+@CrossOrigin("*" +
+        "")
 public class MoyenneController {
     private final MoyenneService moyenneService;
 
