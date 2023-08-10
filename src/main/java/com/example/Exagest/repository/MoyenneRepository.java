@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MoyenneRepository extends JpaRepository<Moyenne, Long>  {
     @Query("SELECT m FROM Moyenne m ORDER BY m.inscription.id ASC")
@@ -24,4 +25,6 @@ public interface MoyenneRepository extends JpaRepository<Moyenne, Long>  {
     @Query("SELECT DISTINCT m FROM Moyenne m WHERE m.examen.id =?1 AND m.session.id =?2 AND m.inscription.ecole.id = ?3 ORDER BY m.moyenneTotale DESC")
     List<Moyenne> moyennePerExamLorsSessforUneEcol(Long idExamen,Long idSession,Long idEcole);
 
+    @Query("SELECT m FROM Moyenne m WHERE m.session.id=?1 AND m.inscription.id =?2 AND m.examen.id=?3")
+    Optional<Moyenne> findByIdSessionIdInscriptionAndIdExamen(Long idSession, Long idInscription, Long idExamen);
 }

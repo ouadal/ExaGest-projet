@@ -98,7 +98,9 @@ public class MoyenneServiceImpl implements MoyenneService {
         Optional<Session> session = sessionRepository.findById(idSession);
         Optional<Examen> examen = examenRepository.findById(idExamen);
         Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
+
         if (session.isPresent() && examen.isPresent() && inscription.isPresent()) {
+            Optional<Moyenne> moyenneDeLEleveOptional = moyenneRepository.findByIdSessionIdInscriptionAndIdExamen(idSession,idInscription,idExamen);
             List<Note> notes = noteRepository.listNoteElevPerExamenSession(idExamen, idInscription, idSession);
             double sommeNote = 0;
             double sommeCoeff = 0;
@@ -109,8 +111,14 @@ public class MoyenneServiceImpl implements MoyenneService {
 
             if (sommeCoeff != 0) {
                 double moyenneTotale = sommeNote / sommeCoeff;
-                moyenneRepository.save(new Moyenne(null,moyenneTotale,inscription.get(),examen.get(),session.get(),null,LocalDate.now()));
-                System.out.println("La moyenne est : " + moyenneTotale);
+                if(moyenneDeLEleveOptional.isPresent()){
+                    moyenneDeLEleveOptional.get().setUpdateDate(LocalDate.now());
+                    moyenneDeLEleveOptional.get().setMoyenneTotale(moyenneTotale);
+                    moyenneRepository.save(moyenneDeLEleveOptional.get());
+                }else {
+                    moyenneRepository.save(new Moyenne(null,moyenneTotale,inscription.get(),examen.get(),session.get(),null,LocalDate.now()));
+                    System.out.println("La moyenne est : " + moyenneTotale);
+                }
             } else {
                 throw new ArithmeticException("\n" + "Erreur de division par zéro : la somme des coefficients est nulle.");
             }
@@ -122,14 +130,20 @@ public class MoyenneServiceImpl implements MoyenneService {
     }
 
     @Override
-    public void genererMoyenne(Long idExamen, Long idSession){
-        List<Inscription> inscriptions  = inscriptionRepository.listInscPerExam(idExamen);
-        for(Inscription inscription:inscriptions){
-            calculerMoyenne(idExamen,inscription.getId(),idSession);
+    public void genererMoyenne(Long idExamen, Long idSession) {
+        List<Note> moyenneDejaGeneree = noteRepository.listNotePerExamSesion(idExamen, idSession);
+
+        if (moyenneDejaGeneree.size()>1) {
+            List<Inscription> inscriptions = inscriptionRepository.listInscPerExam(idExamen);
+
+            for (Inscription inscription : inscriptions) {
+                calculerMoyenne(idExamen, inscription.getId(), idSession);
+            }
+        } else {
+            System.out.println("Les moyennes pour cet examen et cette session ont déjà été générées.");
         }
-
-
     }
+
 
     @Override
     public Moyenne findByIdOfMoy(Long id) {
