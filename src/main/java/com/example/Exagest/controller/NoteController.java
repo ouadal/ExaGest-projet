@@ -140,8 +140,9 @@ public class NoteController {
 //    List<Note> genNotPerExam(@PathVariable("idExamen") Long idExamen,@PathVariable("idSession") Long idSession){
 //        return noteService.genererNoteParDefaut(idExamen,idSession);
 //    }
-    public ResponseEntity<List<Note>>  genererNotePerExamen(@PathVariable("idExamen") Long idExamen,@PathVariable("idSession") Long idSession){
-        return ResponseEntity.status(HttpStatus.OK).body(noteService.genererNoteParDefaut(idExamen,idSession));
+    public ResponseEntity<Boolean>  genererNotePerExamen(@PathVariable("idExamen") Long idExamen, @PathVariable("idSession") Long idSession){
+        return ResponseEntity.status(HttpStatus.OK).
+                body(noteService.genererNoteParDefaut(idExamen,idSession));
     }
 
 

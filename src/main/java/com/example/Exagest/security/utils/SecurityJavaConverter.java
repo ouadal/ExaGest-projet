@@ -4,6 +4,7 @@ import com.example.Exagest.entities.Ecole;
 import com.example.Exagest.repository.EcoleRepository;
 import com.example.Exagest.security.entities.User;
 import com.example.Exagest.security.requests.AdminRegisterRequest;
+import com.example.Exagest.security.requests.OperateurRegisterRequest;
 import com.example.Exagest.security.requests.RegisterRequest;
 import com.example.Exagest.security.requests.ValidateurRegisterRequest;
 import com.example.Exagest.security.responses.UserResponse;
@@ -23,6 +24,12 @@ public class SecurityJavaConverter {
     }
 
     public User registerToUser(RegisterRequest request) {
+        User user = new User();
+        BeanUtils.copyProperties(request, user);
+        return user;
+    }
+
+    public User operateurRegisterToUser(OperateurRegisterRequest request) {
         User user = new User();
         BeanUtils.copyProperties(request, user);
         return user;

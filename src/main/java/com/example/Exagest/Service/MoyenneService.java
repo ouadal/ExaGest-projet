@@ -28,4 +28,6 @@ public interface MoyenneService {
     void genererMoyenne(Long idExamen, Long idSession);
 
     Moyenne findByIdOfMoy(Long id);
+
+    List<Moyenne>  listAll(Long id, Long id2);
 }

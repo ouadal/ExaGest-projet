@@ -26,6 +26,17 @@ public class ExagestApplication {
 			UserRepository userRepository
 	) {
 		return args -> {
+			if (roleRepository.findByName("ROLE_OPERATEUR").isEmpty()) {
+				roleRepository.save(
+						Role
+								.builder()
+								.id(null)
+								.name("ROLE_OPERATEUR")
+								.build()
+				);
+			}
+
+
 			if (roleRepository.findByName("ROLE_USER").isEmpty()) {
 				roleRepository.save(
 						Role

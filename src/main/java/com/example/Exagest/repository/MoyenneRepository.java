@@ -1,7 +1,6 @@
 package com.example.Exagest.repository;
 
-import com.example.Exagest.entities.Annee;
-import com.example.Exagest.entities.Matiere;
+import com.example.Exagest.entities.Ecole;
 import com.example.Exagest.entities.Moyenne;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +26,18 @@ public interface MoyenneRepository extends JpaRepository<Moyenne, Long>  {
 
     @Query("SELECT m FROM Moyenne m WHERE m.session.id=?1 AND m.inscription.id =?2 AND m.examen.id=?3")
     Optional<Moyenne> findByIdSessionIdInscriptionAndIdExamen(Long idSession, Long idInscription, Long idExamen);
+
+    @Query("SELECT m.moyenneTotale FROM Moyenne m WHERE   m.examen.id=?1 AND m.session.id=?2 ")
+    Double[] listMoyenneExam(Long idExamen, Long idSession);
+
+    @Query("SELECT m FROM Moyenne m WHERE   m.examen.id=?1 AND m.session.id=?2 ")
+    List<Moyenne>listMoyenneExam2(Long idExamen, Long idSession);
+
+    @Query("SELECT m FROM Moyenne m WHERE   m.examen.id=?1 AND m.session.id=?2 order by m.rangGenerale")
+    List<Moyenne>listMoyenneExamOudal(Long idExamen, Long idSession);
+    @Query("SELECT m FROM Moyenne m WHERE   m.examen.id=?1 AND m.session.id=?2 AND m.inscription.ecole.id=?3 ")
+    List<Moyenne>listMoyenneExamParEcole(Long idExamen, Long idSession,Long ecole);
+
+    @Query("SELECT m.inscription.ecole FROM Moyenne m WHERE   m.examen.id=?1 ")
+    List<Ecole> listeEcole(Long idExamen);
 }

@@ -146,12 +146,13 @@ public class NoteServiceImpl implements NoteService {
 
 
     @Override
-    public List<Note>  genererNoteParDefaut(Long idExamen , Long idSession) {
+    public boolean genererNoteParDefaut(Long idExamen , Long idSession) {
         List<AttributionMatiere> listAttriMat = attributionMatiereRepository.listAttMAtPereExam(idExamen);
         List<Note> listNotePerExamSess = noteRepository.listNotePerExamSesion(idExamen,idSession);
 
+        boolean reponse = false;
        if(listNotePerExamSess.size()>0){
-           return listNotePerExamSess;
+           reponse = false;
        }
        else{
            if (listAttriMat.isEmpty()) {
@@ -172,10 +173,11 @@ public class NoteServiceImpl implements NoteService {
                }
            }
 
-           return noteRepository.listNotePerExamSesion(idExamen,idSession);
+           reponse = true;
 
        }
 
+        return reponse;
     }
 
 

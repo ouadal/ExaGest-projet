@@ -76,6 +76,13 @@ public class MoyenneController {
     }
 
 
+    @GetMapping("/getAllMoyDavibil/{id}/{id2}")
+    public ResponseEntity<List<Moyenne>> allMoyenne(@PathVariable("id") Long id ,@PathVariable("id2") Long id2 ){
+
+        return ResponseEntity.status(HttpStatus.OK).body(moyenneService.listAll(id,id2));
+    }
+
+
 
 
     @GetMapping("/getMoyForAllEcolRang")

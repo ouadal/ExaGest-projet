@@ -19,9 +19,11 @@ public interface UserService extends UserDetailsService {
 
 
 
+
     String authenticate(LoginRequest request) throws UserNotFoundException;
 
     HttpSuccessResponse storeUser(RegisterRequest request) throws RoleNotFoundException, UserAlreadyExistException, RoleAlreadyExistException, UnsupportedEncodingException;
+    HttpSuccessResponse storeOperateur(OperateurRegisterRequest request) throws RoleNotFoundException, UserAlreadyExistException, RoleAlreadyExistException, UnsupportedEncodingException;
 
     HttpSuccessResponse storeAdmin(AdminRegisterRequest request) throws UserAlreadyExistException, RoleNotFoundException, RoleAlreadyExistException;
 

@@ -82,6 +82,7 @@ public class UserServiceImplementation implements UserService {
         System.out.println("**********************************************");
         System.out.println(request.toString());
         System.out.println("**********************************************");
+
         ecoleService.addecole(new Ecole(null,request.getNom(),request.getAdresse(),request.getTelephone(),request.getEmail(),"No",false,"",request.getCycle(),null,null,user));
 
         if (request.getInitRoles() == null) {
@@ -94,6 +95,39 @@ public class UserServiceImplementation implements UserService {
 
 
         return successResponse(CREATED, "Votre compte a bien été créer.", javaConverter.userToUserResponse(user));
+    }
+
+    @Override
+    public HttpSuccessResponse storeOperateur(OperateurRegisterRequest request) throws RoleNotFoundException, UserAlreadyExistException, RoleAlreadyExistException, UnsupportedEncodingException {
+        request.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
+
+
+        Optional<User> userAvecMail = userRepository.findByEmail(request.getEmail());
+        Optional<User> userAvecUsername = userRepository.findByUsername(request.getUsername());
+
+        if (userAvecMail.isPresent()) {
+            throw new UserAlreadyExistException("Un utilisateur avec cette adresse email est deja enregistré");
+        }
+        if (userAvecUsername.isPresent()) {
+            throw new UserAlreadyExistException("Un utilisateur avec ce nom d'utilisateur est deja enregistré");
+        }
+
+
+        User user = userRepository.save(javaConverter.operateurRegisterToUser(request));
+        System.out.println("**********************************************");
+        System.out.println(request.toString());
+        System.out.println("**********************************************");
+
+
+
+        addRoleToUser("ROLE_OPERATEUR", request.getUsername());
+
+
+
+
+
+        return successResponse(CREATED, "Votre compte a bien été créer.", javaConverter.userToUserResponse(user));
+
     }
 
     @Override

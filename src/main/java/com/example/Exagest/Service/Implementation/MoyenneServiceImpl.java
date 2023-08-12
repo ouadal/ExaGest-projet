@@ -8,9 +8,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 @Service
 @Transactional
 public class MoyenneServiceImpl implements MoyenneService {
@@ -127,6 +128,9 @@ public class MoyenneServiceImpl implements MoyenneService {
             throw new IllegalArgumentException("Invalid session, exam, ou inscription ID.");
         }
 
+        this.assigneRang(idExamen,idSession);
+        this.traiter(idExamen,idSession);
+
     }
 
     @Override
@@ -150,4 +154,107 @@ public class MoyenneServiceImpl implements MoyenneService {
         return moyenneRepository.findById(id).orElseThrow();
     }
 
+    @Override
+    public List<Moyenne> listAll(Long id, Long id2) {
+        return moyenneRepository.listMoyenneExam2(id,id2);
+    }
+
+    public void assigneRang(Long idExamen, Long idSession){
+
+        List<Moyenne> moyennes3 = moyenneRepository.listMoyenneExam2(idExamen,idSession);
+
+        Collections.sort(moyennes3, Comparator.comparingDouble(m -> -m.getMoyenneTotale())); // Tri décroissant
+
+        int rangs = 1;
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < moyennes3.size(); i++) {
+            Moyenne moyenne = moyennes3.get(i);
+            if (i > 0 && moyenne.getMoyenneTotale() < moyennes3.get(i - 1).getMoyenneTotale()) {
+                rangs = i + 1;
+            }
+
+            if (rangs == 1) {
+                if (i > 0 && moyenne.getMoyenneTotale() == moyennes3.get(i - 1).getMoyenneTotale()) {
+                    System.out.println("Rang : " + rangs + "er(ère)ex");
+
+                    moyenne.setRangGenerale(rangs + "er(ère)ex");
+
+                } else {
+                    System.out.println("Rang : " + rangs + "er(ère)");
+                    moyenne.setRangGenerale(rangs + "er(ère)");
+                }
+            } else {
+                if (i > 0 && moyenne.getMoyenneTotale() == moyennes3.get(i - 1).getMoyenneTotale()) {
+                    System.out.println("Rang : " + rangs + "èmeEx");
+                    moyenne.setRangGenerale( rangs + "èmeEx");
+                } else {
+                    System.out.println("Rang : " + rangs + "ème");
+                    moyenne.setRangGenerale( rangs + "ème");
+                }
+            }
+
+            moyenneRepository.save(moyenne);
+
+        // Afficher les rangs stockés dans la liste
+
+        }
+
+
+
+
+    }
+
+    public void assigneRangEcole(Long idExamen,Long ecole, Long idSession){
+
+        List<Moyenne> moyennes3 = moyenneRepository.listMoyenneExamParEcole(idExamen,idSession,ecole);
+
+        Collections.sort(moyennes3, Comparator.comparingDouble(m -> -m.getMoyenneTotale())); // Tri décroissant
+
+        int rangs = 1;
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < moyennes3.size(); i++) {
+            Moyenne moyenne = moyennes3.get(i);
+            if (i > 0 && moyenne.getMoyenneTotale() < moyennes3.get(i - 1).getMoyenneTotale()) {
+                rangs = i + 1;
+            }
+
+            if (rangs == 1) {
+                if (i > 0 && moyenne.getMoyenneTotale() == moyennes3.get(i - 1).getMoyenneTotale()) {
+                    System.out.println("Rang : " + rangs + "er(ère)ex");
+
+                    moyenne.setRangEcole(rangs + "er(ère)ex");
+
+                } else {
+                    System.out.println("Rang : " + rangs + "er(ère)");
+                    moyenne.setRangEcole(rangs + "er(ère)");
+                }
+            } else {
+                if (i > 0 && moyenne.getMoyenneTotale() == moyennes3.get(i - 1).getMoyenneTotale()) {
+                    System.out.println("Rang : " + rangs + "èmeEx");
+                    moyenne.setRangEcole( rangs + "èmeEx");
+                } else {
+                    System.out.println("Rang : " + rangs + "ème");
+                    moyenne.setRangEcole( rangs + "ème");
+                }
+            }
+
+            moyenneRepository.save(moyenne);
+
+            // Afficher les rangs stockés dans la liste
+
+        }
+
+
+
+
+    }
+
+    public void traiter(Long idExamen,Long idSession){
+
+        List<Ecole> ecoles = moyenneRepository.listeEcole(idExamen);
+        for (Ecole e : ecoles
+             ) {
+            this.assigneRangEcole(idExamen,e.getId(),idSession);
+        }
+    }
 }

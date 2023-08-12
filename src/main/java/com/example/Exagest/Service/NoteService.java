@@ -21,7 +21,7 @@ public interface NoteService {
 
     List<Note> listeNotElePerAnnSessExam(String anneeID, String sessionID,String examID);
 
-    List<Note>  genererNoteParDefaut(Long idExamen , Long idSession) ;
+    boolean  genererNoteParDefaut(Long idExamen , Long idSession) ;
 
     List<Note> listNoteElevPerExamenSession( Long idExamen, Long idInscription, Long idSession);
 
