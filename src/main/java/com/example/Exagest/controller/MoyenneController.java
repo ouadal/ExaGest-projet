@@ -105,6 +105,23 @@ public class MoyenneController {
 
 
 
+    @GetMapping("/attributionMention")
+
+
+    public ResponseEntity<String> attribuMention(@RequestBody Moyenne moyenne){
+        return ResponseEntity.status(HttpStatus.OK).body(moyenneService.attrMention(moyenne.getMoyenneTotale()));
+    }
+
+
+    @GetMapping("/listMoyenExamPerSessEcol")
+
+
+    public ResponseEntity<List<Moyenne>> listMoyExamSess(@RequestParam("idExamen") Long idExamen, @RequestParam Long idSession ,@RequestParam Long idEcole ){
+        return ResponseEntity.status(HttpStatus.OK).body(moyenneService.listMoyenneExamParEcole(idExamen, idSession,idEcole));
+    }
+
+
+
 
 
     @GetMapping("/getUneMoy/{id}")

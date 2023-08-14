@@ -22,6 +22,9 @@ public class Moyenne implements Serializable {
     @Column(nullable = false,length = 100)
     private double moyenneTotale;
 
+    @Column(nullable = false,length = 100)
+    private String mention;
+
     private String rangGenerale;
 
     private String rangEcole;
@@ -38,6 +41,8 @@ public class Moyenne implements Serializable {
     @JoinColumn(name = "idsession")
     private Session session;
 
+
+
     @Column(nullable = true)
     private LocalDate updateDate;
 
@@ -45,13 +50,16 @@ public class Moyenne implements Serializable {
     private LocalDate addDate;
 
 
-    public Moyenne(Long id, double moyenneTotale, Inscription inscription, Examen examen, Session session, LocalDate updateDate, LocalDate addDate) {
+    public Moyenne(Long id, double moyenneTotale, String mention, Inscription inscription, Examen examen, Session session, LocalDate updateDate, LocalDate addDate) {
         this.id = id;
         this.moyenneTotale = moyenneTotale;
         this.inscription = inscription;
+        this.mention = mention;
         this.examen = examen;
         this.session = session;
         this.updateDate = updateDate;
         this.addDate = addDate;
     }
+
+
 }

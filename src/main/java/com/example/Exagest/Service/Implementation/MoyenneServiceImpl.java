@@ -3,15 +3,12 @@ package com.example.Exagest.Service.Implementation;
 import com.example.Exagest.Service.MoyenneService;
 import com.example.Exagest.entities.*;
 import com.example.Exagest.repository.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
 
-import org.apache.commons.collections4.MultiValuedMap;
-import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 @Service
 @Transactional
 public class MoyenneServiceImpl implements MoyenneService {
@@ -24,13 +21,15 @@ public class MoyenneServiceImpl implements MoyenneService {
     private final SessionRepository sessionRepository;
 
     private final NoteRepository noteRepository;
+    private final EleveRepository eleveRepository;
 
-    public MoyenneServiceImpl(MoyenneRepository moyenneRepository, InscriptionRepository inscriptionRepository, ExamenRepository examenRepository, SessionRepository sessionRepository, NoteRepository noteRepository) {
+    public MoyenneServiceImpl(MoyenneRepository moyenneRepository, InscriptionRepository inscriptionRepository, ExamenRepository examenRepository, SessionRepository sessionRepository, NoteRepository noteRepository, EleveRepository eleveRepository) {
         this.moyenneRepository = moyenneRepository;
         this.inscriptionRepository = inscriptionRepository;
         this.examenRepository = examenRepository;
         this.sessionRepository = sessionRepository;
         this.noteRepository = noteRepository;
+        this.eleveRepository = eleveRepository;
     }
 
     @Override
@@ -115,9 +114,10 @@ public class MoyenneServiceImpl implements MoyenneService {
                 if(moyenneDeLEleveOptional.isPresent()){
                     moyenneDeLEleveOptional.get().setUpdateDate(LocalDate.now());
                     moyenneDeLEleveOptional.get().setMoyenneTotale(moyenneTotale);
+                    moyenneDeLEleveOptional.get().setMention(attrMention(moyenneDeLEleveOptional.get().getMoyenneTotale()));
                     moyenneRepository.save(moyenneDeLEleveOptional.get());
                 }else {
-                    moyenneRepository.save(new Moyenne(null,moyenneTotale,inscription.get(),examen.get(),session.get(),null,LocalDate.now()));
+                    moyenneRepository.save(new Moyenne(null,moyenneTotale,attrMention(moyenneTotale), inscription.get(),examen.get(),session.get(),null,LocalDate.now()));
                     System.out.println("La moyenne est : " + moyenneTotale);
                 }
             } else {
@@ -204,6 +204,10 @@ public class MoyenneServiceImpl implements MoyenneService {
 
     }
 
+
+    // assigner et traiter le rang //
+
+
     public void assigneRangEcole(Long idExamen,Long ecole, Long idSession){
 
         List<Moyenne> moyennes3 = moyenneRepository.listMoyenneExamParEcole(idExamen,idSession,ecole);
@@ -244,9 +248,6 @@ public class MoyenneServiceImpl implements MoyenneService {
 
         }
 
-
-
-
     }
 
     public void traiter(Long idExamen,Long idSession){
@@ -257,4 +258,68 @@ public class MoyenneServiceImpl implements MoyenneService {
             this.assigneRangEcole(idExamen,e.getId(),idSession);
         }
     }
+
+
+
+//    public String attrMention(Moyenne moyenne){
+//        String mention;
+//        List<Eleve> students = eleveRepository.findById(moyenne.getEleve().getId());
+//        //Optional<Eleve> students = eleveRepository.findById(moyenne.getId());
+//
+//        for (Eleve eleve : students) {
+//            double moyenneTotale = eleve.getAverage(); // Get the student's average from their data
+//            student.setMention(mention); // Assign the mention to the student
+//        }
+//
+//        // Now you can save the students' data with their assigned mentions
+//        saveStudentsData(students); // You need to define this function to save data
+//
+//        double moyenneTotale = 0;
+//
+//        if (moyenneTotale >= 0 && moyenneTotale <= 11) {
+//            mention = "Passable";
+//        } else if (moyenneTotale >= 12 && moyenneTotale <= 13) {
+//            mention = "Assez bien";
+//        } else if (moyenneTotale >= 14 && moyenneTotale <= 15) {
+//            mention = "Bien";
+//        } else if (moyenneTotale >= 16 && moyenneTotale <= 18) {
+//            mention = "Très bien";
+//        } else {
+//            mention = "Non défini";
+//        }
+//
+//        return mention;
+//    }
+//
+//
+//
+
+    public String attrMention(Double moyenne){
+        String mention;
+
+        if (moyenne >= 0 && moyenne <= 11) {
+            mention = "Passable";
+        } else if (moyenne >= 12 && moyenne <= 13) {
+            mention = "Assez bien";
+        } else if (moyenne >= 14 && moyenne <= 15) {
+            mention = "Bien";
+        } else if (moyenne >= 16 && moyenne <= 18) {
+            mention = "Très bien";
+        } else {
+            mention = "Non défini";
+        }
+
+        return mention;
+    }
+
+
+
+
+    @Override
+    public List<Moyenne> listMoyenneExamParEcole(Long idExamen, Long idSession, Long ecole) {
+        return moyenneRepository.listMoyenneExamParEcole(idExamen,idSession, ecole);
+    }
 }
+
+
+

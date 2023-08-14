@@ -30,4 +30,10 @@ public interface MoyenneService {
     Moyenne findByIdOfMoy(Long id);
 
     List<Moyenne>  listAll(Long id, Long id2);
+
+    public String attrMention(Double moyenne);
+
+    List<Moyenne>listMoyenneExamParEcole(Long idExamen, Long idSession,Long ecole);
+
+
 }
