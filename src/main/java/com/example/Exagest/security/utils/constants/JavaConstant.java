@@ -15,7 +15,7 @@ public class JavaConstant {
     public static final String FORBIDDEN_MESSAGE = "Vous devez vous connecter pour accéder à cette page";
     public static final String ACCESS_DENIED_MESSAGE = "You do not have permission to access this page";
     public static final String OPTIONS_HTTP_METHOD = "OPTIONS";
-    public static final String[] PUBLIC_URLS = {API_BASE_URL+"auth/login", API_BASE_URL+"auth/register","/Cycle/getAllCycle"};
+    public static final String[] PUBLIC_URLS = {API_BASE_URL+"auth/login",API_BASE_URL+"report/**", API_BASE_URL+"auth/register","/Cycle/getAllCycle"};
 
 
 }

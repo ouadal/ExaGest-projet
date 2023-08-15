@@ -17,8 +17,14 @@ public interface EcoleRepository extends JpaRepository<Ecole, Long>  {
     @Query("SELECT e FROM Ecole e ORDER BY e.cycle.libele ")
     List<Ecole> listEcolCycle();
 
+
+
     @Query("SELECT e.ecole FROM Enrolement e WHERE e.examen.id =?1")
     List<Ecole> listeDesEcoleAunExam(Long idEx);
+
+
+
+
 
     @Query("SELECT e FROM Ecole e WHERE e.user.id = ?1")
     Optional<Ecole> findByUserId(Long id);

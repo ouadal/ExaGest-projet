@@ -6,6 +6,7 @@ import com.example.Exagest.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -113,12 +114,14 @@ public class MoyenneServiceImpl implements MoyenneService {
                 double moyenneTotale = sommeNote / sommeCoeff;
                 if(moyenneDeLEleveOptional.isPresent()){
                     moyenneDeLEleveOptional.get().setUpdateDate(LocalDate.now());
-                    moyenneDeLEleveOptional.get().setMoyenneTotale(moyenneTotale);
-                    moyenneDeLEleveOptional.get().setMention(attrMention(moyenneDeLEleveOptional.get().getMoyenneTotale()));
+                    moyenneDeLEleveOptional.get().setMoyenneTotale( moyenneTotale);
+                    moyenneDeLEleveOptional.get().setMention(attrMention( moyenneDeLEleveOptional.get().getMoyenneTotale()));
                     moyenneRepository.save(moyenneDeLEleveOptional.get());
+                    System.out.println("La moyenne est : " + moyenneTotale);
                 }else {
                     moyenneRepository.save(new Moyenne(null,moyenneTotale,attrMention(moyenneTotale), inscription.get(),examen.get(),session.get(),null,LocalDate.now()));
-                    System.out.println("La moyenne est : " + moyenneTotale);
+
+
                 }
             } else {
                 throw new ArithmeticException("\n" + "Erreur de division par zéro : la somme des coefficients est nulle.");
@@ -156,7 +159,7 @@ public class MoyenneServiceImpl implements MoyenneService {
 
     @Override
     public List<Moyenne> listAll(Long id, Long id2) {
-        return moyenneRepository.listMoyenneExam2(id,id2);
+        return moyenneRepository.listMoyenneExamOudal(id,id2);
     }
 
     public void assigneRang(Long idExamen, Long idSession){
@@ -295,19 +298,24 @@ public class MoyenneServiceImpl implements MoyenneService {
 //
 
     public String attrMention(Double moyenne){
-        String mention;
+        String mention = "echoué";
 
-        if (moyenne >= 0 && moyenne <= 11) {
+        if (moyenne >= 0 && moyenne <= 6.99) {
+            mention = "très insuffisant";
+        } else if (moyenne >= 7 && moyenne <= 9.99) {
+            mention = "Insuffisant";
+        } else if (moyenne >= 10 && moyenne <= 11.99) {
             mention = "Passable";
-        } else if (moyenne >= 12 && moyenne <= 13) {
+        } else if (moyenne >= 12 && moyenne <= 13.99) {
             mention = "Assez bien";
-        } else if (moyenne >= 14 && moyenne <= 15) {
+        } else if(moyenne >= 14 && moyenne <= 15.99){
             mention = "Bien";
-        } else if (moyenne >= 16 && moyenne <= 18) {
-            mention = "Très bien";
-        } else {
-            mention = "Non défini";
+        }else if(moyenne >= 16 && moyenne <= 18.99){
+            mention = "Très Bien";
+        }else if(moyenne >= 19 ){
+            mention = "Excellent";
         }
+        
 
         return mention;
     }
@@ -318,6 +326,20 @@ public class MoyenneServiceImpl implements MoyenneService {
     @Override
     public List<Moyenne> listMoyenneExamParEcole(Long idExamen, Long idSession, Long ecole) {
         return moyenneRepository.listMoyenneExamParEcole(idExamen,idSession, ecole);
+    }
+
+
+    public Double convert(Double d) {
+
+        DecimalFormat df = new DecimalFormat("#,00");
+        df.setMaximumFractionDigits(2); // arrondi à 2 chiffres apres la
+        // virgules
+        df.setMinimumFractionDigits(2);
+        String str = df.format(d);
+        // df.setDecimalSeparatorAlwaysShown ( true ) ;
+        d = Double.parseDouble(str.replace(',', '.'));
+
+        return d;
     }
 }
 
