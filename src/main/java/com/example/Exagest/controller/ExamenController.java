@@ -42,6 +42,15 @@ public class ExamenController {
 
 
 
+
+
+    @GetMapping("/taux-reussite-par-ecole")
+    public List<Object[]> obtenirTauxReussiteParEcole() {
+        return examenService.obtenirTauxReussiteParEcole();
+    }
+
+
+
     @PutMapping ("/setCurrentExamToActif")
 //    List<Annee> tousEco(){
 //        return anneeService.listAnne();
@@ -87,8 +96,6 @@ public class ExamenController {
 //        return examenService.listEcol();
 //    }
 
-
-
     public ResponseEntity<List<Examen>>  toutesLesNExam(){
         return ResponseEntity.status(HttpStatus.OK).body(examenService.listEcol());
     }
@@ -99,8 +106,6 @@ public class ExamenController {
 //    List<Examen> ExamEco(){
 //        return examenService.listEcol();
 //    }
-
-
 
     public ResponseEntity<List<Examen>>  ExamAuCoursAnnee(@PathVariable("id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(examenService.listExamAucoursDuneAnee(id));

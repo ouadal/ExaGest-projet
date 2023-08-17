@@ -26,7 +26,7 @@ public interface NoteRepository extends JpaRepository<Note, Long>  {
 
     @Query("SELECT DISTINCT n FROM Note n  WHERE n.examen.id=?1 AND n.session.id = ?2")
     List<Note> listNotePerExamSesion(Long idExamen,Long idSession);
-    @Query("SELECT DISTINCT n FROM Note n  WHERE n.examen.id=?1 AND n.session.id = ?2 AND n.attributionMatiere.id = ?3")
+    @Query("SELECT n FROM Note n  WHERE n.examen.id=?1 AND n.session.id = ?2 AND n.attributionMatiere.id = ?3")
     List<Note> listNotePerExamSesionMat(Long idExamen,Long idSession,Long idMat);
 
     @Query("SELECT n FROM Note n WHERE n.examen.id =?1 AND n.inscription.id =?2 AND n.session.id=?3 ")
@@ -35,4 +35,6 @@ public interface NoteRepository extends JpaRepository<Note, Long>  {
     List<Note> listDesElevPerExamenSessionInscription( Long idExamen, Long idEcol, Long idSession);
     @Query("SELECT n FROM Note n WHERE n.attributionMatiere.id =?1 AND n.session.id =?2 AND n.examen.id=?3 ")
     List<Note> findNotePerExamAttribSess( Long idExamen, Long idAttrMat, Long idSession);
+
+
 }

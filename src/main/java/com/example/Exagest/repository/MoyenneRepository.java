@@ -35,7 +35,7 @@ public interface MoyenneRepository extends JpaRepository<Moyenne, Long>  {
     @Query("SELECT m FROM Moyenne m WHERE   m.examen.id=?1 AND m.session.id=?2 ")
     List<Moyenne>listMoyenneExam2(Long idExamen, Long idSession);
 
-    @Query("SELECT m FROM Moyenne m WHERE   m.examen.id=?1 AND m.session.id=?2 order by m.inscription.ecole.nomEcole,m.rangGenerale")
+    @Query("SELECT m FROM Moyenne m WHERE   m.examen.id=?1 AND m.session.id=?2 order by m.inscription.ecole.nomEcole,m.rangGenerale ASC,m.rangEcole")
     List<Moyenne>listMoyenneExamOudal(Long idExamen, Long idSession);
     @Query("SELECT m FROM Moyenne m WHERE   m.examen.id=?1 AND m.session.id=?2 AND m.inscription.ecole.id=?3 ")
     List<Moyenne>listMoyenneExamParEcole(Long idExamen, Long idSession,Long ecole);

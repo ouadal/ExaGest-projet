@@ -59,7 +59,7 @@ public class CycleTypeExamenController {
 
 
 
-    @GetMapping("/getAllCycle")
+    @GetMapping("/getAllCycleTypeExamen")
 //    List<CycleTypeExamen> tousEco(){
 //        return cycleTypeExamenService.listcycleTypeExam();
 //    }

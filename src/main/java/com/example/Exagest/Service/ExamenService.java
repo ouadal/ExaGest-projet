@@ -26,4 +26,6 @@ public interface ExamenService {
     Examen setExamFalse(Long id);
 
     List<Examen> listExamAucoursDuneAnee(Long id);
+
+    List<Object[]>  obtenirTauxReussiteParEcole();
 }

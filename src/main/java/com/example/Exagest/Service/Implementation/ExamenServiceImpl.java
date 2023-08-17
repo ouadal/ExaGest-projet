@@ -153,6 +153,20 @@ public class ExamenServiceImpl implements ExamenService {
         return examenRepository.listExamAucoursDuneAnee(idEcol);
     }
 
+    @Override
+    public List<Object[]>  obtenirTauxReussiteParEcole() {
+        return  examenRepository.calculateTauxReussiteByEcole();
+    }
+
+//    public void afficherTauxReussiteParEcole() {
+//        List<Object[]> results = examenRepository. obtenirTauxReussiteParEcole();
 //
+//        for (Object[] result : results) {
+//            Ecole ecole = (Ecole) result[0];
+//            Double tauxReussite = (Double) result[1];
+//
+//            System.out.println("École : " + ecole.getNomEcole() + ", Taux de réussite : " + tauxReussite + "%");
+//        }
+//    }
 
 }

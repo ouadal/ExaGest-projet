@@ -177,10 +177,9 @@ public class NoteController {
 //    List<Note> listNotElevPerExamSession(@RequestParam("idExamen") Long idExamen, @RequestParam Long idInscription, @RequestParam Long idSession){
 //        return noteService.listNoteElevPerExamenSession(idExamen,idInscription,idSession);
 //    }
-    public ResponseEntity< List<Note>> listNotePerExamSesionMat(@RequestParam Long idExamen, @RequestParam Long idSession,@RequestParam Long idMat) {
+    public ResponseEntity<List<Note>> listNotePerExamSesionMat(@RequestParam Long idExamen, @RequestParam Long idSession,@RequestParam Long idMat) {
         return ResponseEntity.status(HttpStatus.OK).body(noteService.listNotePerExamSesionMat(idExamen,idSession,idMat));
     }
-
 
 
 
