@@ -128,5 +128,10 @@ public class InscriptionServiceImpl implements InscriptionService {
         return inscriptionRepository.listInscPerEcolAndExam(idElev,idExamen);
     }
 
+//    @Override
+//    public Long calculateTotalInscribedAndPassed(Long idsession, Long idexamen) {
+//        return inscriptionRepository.calculateTotalInscribedAndPassed(idsession,idexamen);
+//    }
+
 
 }

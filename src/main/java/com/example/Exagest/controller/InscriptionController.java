@@ -57,6 +57,16 @@ public class InscriptionController {
 
 
 
+//    @GetMapping("/taux-reussite-par-ecole")
+//    public Long obtenirTauxReussiteParEcole(@RequestParam Long idsession,@RequestParam Long idexamen) {
+//        return inscriptionService.calculateTotalInscribedAndPassed(idsession,idexamen);
+//    }
+
+
+
+
+
+
 
 
 

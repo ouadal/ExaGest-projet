@@ -2,12 +2,15 @@ package com.example.Exagest.Service.Implementation;
 
 import com.example.Exagest.Service.ExamenService;
 import com.example.Exagest.entities.*;
+import com.example.Exagest.models.TauxReussiteParEcole;
 import com.example.Exagest.repository.*;
 import com.example.Exagest.requests.EnrolementRequestModel;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -154,9 +157,24 @@ public class ExamenServiceImpl implements ExamenService {
     }
 
     @Override
-    public List<Object[]>  obtenirTauxReussiteParEcole() {
-        return  examenRepository.calculateTauxReussiteByEcole();
+    public List<TauxReussiteParEcole> calculateTotalInscribedAndPassed(Long idsession, Long idexamen) {
+        List<TauxReussiteParEcole> tauxReussiteParEcoleList = new ArrayList<>();
+        List<Ecole> listeEcole = ecoleRepository.listeDesEcoleAunExam(idexamen);
+        //HashMap<Ecole, Double> map = new HashMap<>();
+        for (Ecole ecole : listeEcole){
+            //map.put(ecole, examenRepository.calculateTotalInscribedAndPassed(idsession, idexamen, ecole.getId()));
+            tauxReussiteParEcoleList.add(new TauxReussiteParEcole(ecole,examenRepository.calculateTotalInscribedAndPassed(idsession, idexamen, ecole.getId())));
+        }
+
+
+
+        return tauxReussiteParEcoleList;
     }
+
+//    @Override
+//    public List<Object[]>  obtenirTauxReussiteParEcole() {
+//        return  examenRepository.calculateTauxReussiteByEcole();
+//    }
 
 //    public void afficherTauxReussiteParEcole() {
 //        List<Object[]> results = examenRepository. obtenirTauxReussiteParEcole();

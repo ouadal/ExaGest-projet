@@ -99,7 +99,7 @@ public class MoyenneServiceImpl implements MoyenneService {
         Optional<Session> session = sessionRepository.findById(idSession);
         Optional<Examen> examen = examenRepository.findById(idExamen);
         Optional<Inscription> inscription = inscriptionRepository.findById(idInscription);
-
+        System.out.println("---------------"+idInscription);
         if (session.isPresent() && examen.isPresent() && inscription.isPresent()) {
             Optional<Moyenne> moyenneDeLEleveOptional = moyenneRepository.findByIdSessionIdInscriptionAndIdExamen(idSession,idInscription,idExamen);
             List<Note> notes = noteRepository.listNoteElevPerExamenSession(idExamen, idInscription, idSession);

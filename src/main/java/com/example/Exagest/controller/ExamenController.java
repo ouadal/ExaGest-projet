@@ -1,15 +1,14 @@
 package com.example.Exagest.controller;
 
 import com.example.Exagest.Service.ExamenService;
-import com.example.Exagest.entities.Annee;
-import com.example.Exagest.entities.Examen;
-import com.example.Exagest.entities.Inscription;
-import com.example.Exagest.entities.Note;
+import com.example.Exagest.entities.*;
+import com.example.Exagest.models.TauxReussiteParEcole;
 import com.example.Exagest.requests.EnrolementRequestModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -45,9 +44,18 @@ public class ExamenController {
 
 
     @GetMapping("/taux-reussite-par-ecole")
-    public List<Object[]> obtenirTauxReussiteParEcole() {
-        return examenService.obtenirTauxReussiteParEcole();
+    public List<TauxReussiteParEcole> obtenirTauxReussiteParEcole(@RequestParam("idsession") Long idsession, @RequestParam ("idexamen") Long idexamen) {
+        return examenService.calculateTotalInscribedAndPassed(idsession,idexamen);
     }
+
+
+
+
+
+//    @GetMapping("/taux-reussite-par-ecole")
+//    public List<Object[]> obtenirTauxReussiteParEcole() {
+//        return examenService.obtenirTauxReussiteParEcole();
+//    }
 
 
 
