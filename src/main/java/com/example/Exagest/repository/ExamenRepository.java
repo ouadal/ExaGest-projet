@@ -6,6 +6,7 @@ import com.example.Exagest.entities.Examen;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -54,11 +55,18 @@ public interface ExamenRepository extends JpaRepository<Examen, Long>  {
 //    //List<Examen> calculateTauxReussiteByEcole();
 
     @Query("SELECT " +
-            "(COUNT(CASE WHEN m.moyenneTotale >= 10 THEN 1 ELSE NULL END) * COUNT(DISTINCT i.eleve) * 1.0 / 100) " +
+            "(COUNT(CASE WHEN m.moyenneTotale >= 10 THEN 1 ELSE NULL END) / COUNT(DISTINCT i.eleve) *  100) " +
             "FROM Moyenne m " +
             "JOIN m.inscription i " +
             "WHERE m.examen.id = ?1 AND m.session.id = ?2 AND m.inscription.ecole.id=?3")
     Double calculateTotalInscribedAndPassed(Long idsession,Long idexamen,Long ecole);
+    @Query("SELECT " +
+            "(COUNT(CASE WHEN m.moyenneTotale >= 10 THEN 1 ELSE NULL END) * COUNT(DISTINCT i.eleve) * 1.0 / COUNT(DISTINCT CASE WHEN e.sexe = :sexe THEN i.eleve ELSE NULL END)) " +
+            "FROM Moyenne m " +
+            "JOIN m.inscription i " +
+            "JOIN i.eleve e " +
+            "WHERE m.examen.id = :examenId AND m.session.id = :sessionId AND i.ecole.id = :ecoleId")
+    Double calculateTauxReussiteBySexe(@Param("sessionId") Long sessionId, @Param("examenId") Long examenId, @Param("ecoleId") Long ecoleId, @Param("sexe") String sexe);
 
 
 

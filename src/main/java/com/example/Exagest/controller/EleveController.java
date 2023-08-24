@@ -60,7 +60,10 @@ public class EleveController {
 
 
 
-
+    @GetMapping("/getAllElevPerSex")
+    public ResponseEntity<List<Eleve>>  listElevPersex(@RequestParam String sexe){
+        return ResponseEntity.status(HttpStatus.OK).body(eleveService.listElevePerSex(sexe));
+    }
 
 
 

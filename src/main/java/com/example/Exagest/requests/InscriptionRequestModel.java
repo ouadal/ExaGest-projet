@@ -20,6 +20,8 @@ public class InscriptionRequestModel {
 
     private Date date_naissance;
 
+    private String sexe;
+
 
     private int contactParent;
 

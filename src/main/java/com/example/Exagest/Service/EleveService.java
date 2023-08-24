@@ -23,4 +23,6 @@ public interface EleveService {
     Eleve findByIdOfElev(Long id);
 
     List<Eleve> getAllElevByEcol(Long idEcole);
+
+    List<Eleve> listElevePerSex(String sexe);
 }

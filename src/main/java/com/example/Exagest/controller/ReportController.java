@@ -2,16 +2,14 @@ package com.example.Exagest.controller;
 
 
 import com.example.Exagest.entities.ConvertierMontantEnLettre;
+import com.example.Exagest.entities.Ecole;
 import com.example.Exagest.entities.Moyenne;
 import com.example.Exagest.entities.Note;
-import com.example.Exagest.repository.AnneeRepository;
-import com.example.Exagest.repository.MoyenneRepository;
+import com.example.Exagest.models.TauxReussiteParEcole;
+import com.example.Exagest.repository.*;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -36,6 +34,8 @@ import static com.example.Exagest.security.utils.constants.JavaConstant.API_BASE
 public class ReportController {
 
     private final MoyenneRepository moyenneRepository;
+    private final EcoleRepository ecoleRepository;
+    private final ExamenRepository examenRepository;
     private final AnneeRepository anneeRepository;
 
     @Value("${images.dir}")
@@ -205,6 +205,87 @@ public class ReportController {
         dataSource = new JRBeanCollectionDataSource(collection);
 
         InputStream jrxmlInput = new FileInputStream(new File(reportDir+"report_releve.jrxml"));
+
+        JasperDesign design = JRXmlLoader.load(jrxmlInput);
+        JasperReport jasperReport = JasperCompileManager.compileReport(design);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null,dataSource);
+
+        JRPdfExporter pdfExporter = new JRPdfExporter();
+        pdfExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        ByteArrayOutputStream pdfReportStream = new ByteArrayOutputStream();
+        pdfExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(pdfReportStream));
+        pdfExporter.exportReport();
+
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Length", String.valueOf(pdfReportStream.size()));
+        response.addHeader("Content-Disposition", "inline; filename=jasper.pdf;");
+
+        OutputStream responseOutputStream = response.getOutputStream();
+        responseOutputStream.write(pdfReportStream.toByteArray());
+        responseOutputStream.close();
+        pdfReportStream.close();
+    }
+
+
+    @RequestMapping(value = "listeEleveParSexe/{idexamen}/{idsession}",method = RequestMethod.GET)
+    public void reportListeEleveParSexe(HttpServletResponse response,@PathVariable("idexamen")Long idexamen,@PathVariable("idsession")Long idsession) throws IOException, JRException {
+
+        List<Ecole> listeEcole = ecoleRepository.listeDesEcoleAunExam(idexamen);
+        Double pourcentageGarconReussi = 0D;
+        Double pourcentageFilleReussi = 0D;
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(null);
+        Vector collection = new Vector();
+        //HashMap<Ecole, Double> map = new HashMap<>();
+        for (Ecole ecole : listeEcole){
+
+            HashMap<String,Object> param = new HashMap<>();
+
+            System.err.println(ecole.getNomEcole());
+            System.err.println(examenRepository.calculateTotalInscribedAndPassed(idsession,idexamen,ecole.getId()));
+            //System.err.println(examenRepository.calculateTauxReussiteBySexe(idSession,idExamen,ecole.getId(),"Masculin"));
+            List<Moyenne> listMoyenneGarcon = moyenneRepository.listMoyenneExamParEcoleEtParSexe(idexamen,idsession,ecole.getId(),"Masculin");
+            List<Moyenne> listMoyenneFille = moyenneRepository.listMoyenneExamParEcoleEtParSexe(idexamen,idsession,ecole.getId(),"Feminin");
+            Double totalGarconReussi = 0D;
+            Double totalFilleReussi = 0D;
+            for (Moyenne moyenne : listMoyenneGarcon){
+                if(moyenne.getMoyenneTotale()>=10){
+                    totalGarconReussi+=1L;
+                }
+            }
+            for (Moyenne moyenne : listMoyenneFille){
+                if(moyenne.getMoyenneTotale()>=10){
+                    totalFilleReussi+=1L;
+                }
+            }
+            System.err.println("Fille réussi :"+totalFilleReussi);
+            System.err.println("Garçon réussi :"+totalGarconReussi);
+            if(listMoyenneFille.size() == 0){
+                pourcentageFilleReussi = 0D;
+            }else {
+                pourcentageFilleReussi = totalFilleReussi/listMoyenneFille.size();
+            }
+            if(listMoyenneGarcon.size() == 0){
+                System.err.println("!OKAYYYYYY");
+                pourcentageGarconReussi = 0D;
+            }else {
+                System.err.println("OKAYYYYYY");
+                System.err.println(totalGarconReussi);
+                System.err.println(listMoyenneGarcon.size());
+                pourcentageGarconReussi = totalGarconReussi/listMoyenneGarcon.size();
+                System.err.println(totalGarconReussi/listMoyenneGarcon.size());
+            }
+            System.err.println("Pourcentage Fille réussi :"+pourcentageFilleReussi*100+"%");
+            System.err.println("Pourcentage Garçon réussi :"+pourcentageGarconReussi*100+"%");
+
+            param.put("ecole",ecole.getNomEcole());
+            param.put("pourcentageG",""+pourcentageGarconReussi*100+"%");
+            param.put("pourcentageF",""+pourcentageFilleReussi*100+"%");
+            param.put("pourcentageT",""+examenRepository.calculateTotalInscribedAndPassed(idsession,idexamen,ecole.getId())*100+"%");
+            collection.add(param);
+        }
+        dataSource = new JRBeanCollectionDataSource(collection);
+
+        InputStream jrxmlInput = new FileInputStream(new File(reportDir+"report_taux_reussite_persex.jrxml"));
 
         JasperDesign design = JRXmlLoader.load(jrxmlInput);
         JasperReport jasperReport = JasperCompileManager.compileReport(design);

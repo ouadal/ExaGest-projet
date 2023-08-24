@@ -1,6 +1,7 @@
 package com.example.Exagest.repository;
 
 import com.example.Exagest.entities.Annee;
+import com.example.Exagest.entities.Ecole;
 import com.example.Exagest.entities.Moyenne;
 import com.example.Exagest.entities.Note;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -35,6 +36,10 @@ public interface NoteRepository extends JpaRepository<Note, Long>  {
     List<Note> listDesElevPerExamenSessionInscription( Long idExamen, Long idEcol, Long idSession);
     @Query("SELECT n FROM Note n WHERE n.attributionMatiere.id =?1 AND n.session.id =?2 AND n.examen.id=?3 ")
     List<Note> findNotePerExamAttribSess( Long idExamen, Long idAttrMat, Long idSession);
+
+    @Query("SELECT n.inscription.enrolement.ecole FROM Note n WHERE n.examen.id =?1 and n.session.id=?2 ")
+    List<Ecole> listeDesEcoleAunExamSess(Long idExamen,Long idSession);
+
 
 
 }

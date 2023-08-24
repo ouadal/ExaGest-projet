@@ -48,6 +48,7 @@ public class EleveServiceImpl implements EleveService {
         eleve1.setPrenom(inscriptionRM.getPrenom());
         eleve1.setContactParent(inscriptionRM.getContactParent());
         eleve1.setDate_naissance(inscriptionRM.getDate_naissance());
+        eleve1.setSexe(inscriptionRM.getSexe());
 
          Eleve eleveSaved = eleveRepository.save(eleve1);
 
@@ -82,6 +83,7 @@ public class EleveServiceImpl implements EleveService {
         dbEleve.setContactParent(eleve.getContactParent());
         dbEleve.setNom(eleve.getNom());
         dbEleve.setDate_naissance(eleve.getDate_naissance());
+        dbEleve.setSexe(eleve.getSexe());
         dbEleve.setPrenom(eleve.getPrenom());
 
         return eleveRepository.save(dbEleve);
@@ -111,6 +113,11 @@ public class EleveServiceImpl implements EleveService {
     @Override
     public List<Eleve> getAllElevByEcol(Long idEcole) {
         return eleveRepository.getAllElevByEcol(idEcole);
+    }
+
+    @Override
+    public List<Eleve> listElevePerSex(String sexe) {
+        return eleveRepository.listElevePerSex(sexe);
     }
 
 
