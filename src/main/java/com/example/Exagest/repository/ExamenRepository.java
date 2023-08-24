@@ -55,7 +55,7 @@ public interface ExamenRepository extends JpaRepository<Examen, Long>  {
 //    //List<Examen> calculateTauxReussiteByEcole();
 
     @Query("SELECT " +
-            "(COUNT(CASE WHEN m.moyenneTotale >= 10 THEN 1 ELSE NULL END) / COUNT(DISTINCT i.eleve) *  100) " +
+            "((COUNT(CASE WHEN m.moyenneTotale >= 10 THEN 1 ELSE NULL END) / COUNT(DISTINCT i.eleve) )*  100) " +
             "FROM Moyenne m " +
             "JOIN m.inscription i " +
             "WHERE m.examen.id = ?1 AND m.session.id = ?2 AND m.inscription.ecole.id=?3")

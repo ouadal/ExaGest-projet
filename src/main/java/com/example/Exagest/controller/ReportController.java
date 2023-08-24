@@ -235,12 +235,14 @@ public class ReportController {
         Double pourcentageFilleReussi = 0D;
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(null);
         Vector collection = new Vector();
+
         //HashMap<Ecole, Double> map = new HashMap<>();
         for (Ecole ecole : listeEcole){
 
             HashMap<String,Object> param = new HashMap<>();
 
             System.err.println(ecole.getNomEcole());
+
             System.err.println(examenRepository.calculateTotalInscribedAndPassed(idsession,idexamen,ecole.getId()));
             //System.err.println(examenRepository.calculateTauxReussiteBySexe(idSession,idExamen,ecole.getId(),"Masculin"));
             List<Moyenne> listMoyenneGarcon = moyenneRepository.listMoyenneExamParEcoleEtParSexe(idexamen,idsession,ecole.getId(),"Masculin");
@@ -280,7 +282,7 @@ public class ReportController {
             param.put("ecole",ecole.getNomEcole());
             param.put("pourcentageG",""+pourcentageGarconReussi*100+"%");
             param.put("pourcentageF",""+pourcentageFilleReussi*100+"%");
-            param.put("pourcentageT",""+examenRepository.calculateTotalInscribedAndPassed(idsession,idexamen,ecole.getId())*100+"%");
+            param.put("pourcentageT",""+examenRepository.calculateTotalInscribedAndPassed(idsession,idexamen,ecole.getId())+"%");
             collection.add(param);
         }
         dataSource = new JRBeanCollectionDataSource(collection);
