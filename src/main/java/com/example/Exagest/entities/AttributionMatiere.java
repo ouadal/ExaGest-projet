@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 
+
 public class AttributionMatiere implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

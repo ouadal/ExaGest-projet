@@ -13,4 +13,7 @@ public interface AnneeService {
     Annee setCurrentYear(Long id);
 
     Annee findByIdOfAYear(Long id);
+
+    Annee getCurrentYear();
+
 }

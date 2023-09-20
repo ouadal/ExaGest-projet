@@ -34,6 +34,12 @@ public class AnneeController {
 }
 
 
+    @GetMapping("/getCurrentAnnee")
+    public ResponseEntity<Annee>  currentAnnee(){
+        return ResponseEntity.status(HttpStatus.OK).body(anneeService.getCurrentYear());
+    }
+
+
 
     @PutMapping("/editAnnee/{id}")
 //    Annee modifann(@PathVariable("id") Long id, @RequestBody Annee annee){

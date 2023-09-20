@@ -4,9 +4,15 @@ import com.example.Exagest.Service.EleveService;
 import com.example.Exagest.entities.*;
 import com.example.Exagest.repository.*;
 import com.example.Exagest.requests.InscriptionRequestModel;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -112,6 +118,7 @@ public class EleveServiceImpl implements EleveService {
 
     @Override
     public List<Eleve> getAllElevByEcol(Long idEcole) {
+
         return eleveRepository.getAllElevByEcol(idEcole);
     }
 
@@ -119,6 +126,42 @@ public class EleveServiceImpl implements EleveService {
     public List<Eleve> listElevePerSex(String sexe) {
         return eleveRepository.listElevePerSex(sexe);
     }
+
+    @Override
+    public void generateExcel(HttpServletResponse response) throws IOException {
+        List<Eleve> eleves = eleveRepository.findAll();
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Eleves");
+        HSSFRow row = sheet.createRow(0);
+
+        row.createCell(0).setCellValue("id");
+        row.createCell(1).setCellValue("Nom");
+        row.createCell(2).setCellValue("Prenom");
+        row.createCell(3).setCellValue("Date de Naissance");
+        row.createCell(4).setCellValue("Contact Parent");
+        row.createCell(5).setCellValue("Sexe");
+
+        int dataRowIndex = 1;
+
+        for (Eleve eleve : eleves) {
+            HSSFRow dataRow = sheet.createRow(dataRowIndex);
+            dataRow.createCell(0).setCellValue( eleve.getId());
+            dataRow.createCell(1).setCellValue( eleve.getNom());
+            dataRow.createCell(2).setCellValue( eleve.getPrenom());
+            dataRow.createCell(3).setCellValue( eleve.getDate_naissance());
+            dataRow.createCell(4).setCellValue( eleve.getContactParent());
+            dataRow.createCell(5).setCellValue( eleve.getSexe());
+            dataRowIndex++;
+        }
+
+        ServletOutputStream ops = response.getOutputStream();
+        workbook.write(ops);
+        workbook.close();
+        ops.close();
+
+    }
+
 
 
 }

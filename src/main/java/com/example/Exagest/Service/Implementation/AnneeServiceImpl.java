@@ -70,4 +70,10 @@ private final AnneeRepository anneeRepository;
     }
 
 
+    @Override
+    public Annee getCurrentYear() {
+        Annee annee = anneeRepository.getCurrentYear();
+        return annee;
+
+    }
 }
